@@ -129,18 +129,18 @@ export function HomePage() {
 
   return (
     <>
-      <section className="sketch-texture overflow-hidden px-6 py-6 md:px-10 md:py-8 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-2 lg:grid-cols-12 lg:grid-rows-[210px_145px_145px]">
-          <Reveal className="lg:col-span-5 lg:row-span-3">
+      <section className="sketch-texture overflow-hidden px-6 py-5 md:px-10 md:py-7 lg:px-12">
+        <div className="mx-auto grid max-w-7xl gap-3 lg:h-[540px] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-stretch">
+          <Reveal className="min-w-0">
             <div className="flex h-full min-h-[500px] flex-col justify-between rounded-[32px] bg-white/90 p-6 md:p-8 lg:min-h-0">
               <div>
-                <p className="mb-3 text-sm font-bold uppercase text-[#E10909]">
+                <p className="mb-3 text-xs font-bold uppercase text-[#E10909] md:text-sm">
                   Custom ordering for growing F&B chains
                 </p>
-                <h1 className="max-w-3xl text-5xl font-semibold leading-[1.04] text-black md:text-6xl lg:text-6xl">
+                <h1 className="max-w-3xl text-4xl font-semibold leading-[1.04] text-black md:text-5xl lg:text-[54px]">
                   Scale your F&B brand without generic tech.
                 </h1>
-                <p className="mt-4 max-w-3xl text-base leading-7 text-[#33332e]">
+                <p className="mt-4 max-w-2xl text-base leading-7 text-[#33332e]">
                   Custom ordering, regional menus, loyalty, POS integrations,
                   and rollout systems for newer restaurant chains going
                   regional or global.
@@ -168,7 +168,7 @@ export function HomePage() {
                     ),
                   )}
                 </div>
-                <div className="mt-4 grid gap-2 sm:grid-cols-3">
+                <div className="mt-4 grid gap-2 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
                   {conversionStats.map((stat, index) => (
                     <Reveal key={stat.value} delay={index * 0.06}>
                       <div className="rounded-2xl bg-[#f6f6f3] p-3">
@@ -186,56 +186,51 @@ export function HomePage() {
             </div>
           </Reveal>
 
-          <Reveal className="overflow-hidden rounded-[32px] bg-[#f6f6f3] lg:col-span-7 lg:row-span-1">
-            <Image
-              src={homePins[0].image}
-              alt={homePins[0].title}
-              width={1000}
-              height={620}
-              priority
-              className="h-full min-h-[240px] w-full object-cover lg:min-h-0"
-            />
-          </Reveal>
+          <Reveal className="min-w-0">
+            <div className="grid h-full min-h-[560px] grid-cols-2 gap-3 lg:min-h-0 lg:grid-cols-7 lg:grid-rows-[1.35fr_1fr_0.95fr]">
+              <div className="col-span-2 overflow-hidden rounded-[32px] bg-[#f6f6f3] lg:col-span-7">
+                <Image
+                  src={homePins[0].image}
+                  alt={homePins[0].title}
+                  width={1000}
+                  height={620}
+                  priority
+                  className="h-full min-h-[220px] w-full object-cover lg:min-h-0"
+                />
+              </div>
 
-          <Reveal
-            delay={0.08}
-            className="rounded-[32px] bg-[#262622] p-5 text-white lg:col-span-3 lg:row-start-2"
-          >
-            <p className="text-sm font-bold text-white/70">Best fit</p>
-            <p className="mt-3 text-3xl font-bold">10 to 500</p>
-            <p className="mt-2 leading-6 text-white/70">
-              outlet F&B chains expanding across regions.
-            </p>
-          </Reveal>
-
-          <Reveal
-            delay={0.14}
-            className="overflow-hidden rounded-[32px] bg-[#f6f6f3] lg:col-span-4 lg:row-start-2"
-          >
-            <Image
-              src={homePins[1].image}
-              alt={homePins[1].title}
-              width={900}
-              height={600}
-              className="h-full min-h-[210px] w-full object-cover lg:min-h-0"
-            />
-          </Reveal>
-
-          <Reveal
-            delay={0.2}
-            className="grid gap-2 lg:col-span-7 lg:row-start-3 lg:grid-cols-4"
-          >
-            {heroCards.map((card) => (
-              <div key={card.label} className="rounded-2xl bg-white p-4">
-                <IconBubble icon={card.icon} />
-                <p className="mt-3 text-sm font-bold text-[#62625b]">
-                  {card.label}
-                </p>
-                <p className="mt-1 text-lg font-bold leading-snug text-black">
-                  {card.value}
+              <div className="col-span-2 rounded-[32px] bg-[#262622] p-5 text-white sm:col-span-1 lg:col-span-3">
+                <p className="text-sm font-bold text-white/70">Best fit</p>
+                <p className="mt-3 text-3xl font-bold">10 to 500</p>
+                <p className="mt-2 leading-6 text-white/70">
+                  outlet F&B chains expanding across regions.
                 </p>
               </div>
-            ))}
+
+              <div className="col-span-2 overflow-hidden rounded-[32px] bg-[#f6f6f3] sm:col-span-1 lg:col-span-4">
+                <Image
+                  src={homePins[1].image}
+                  alt={homePins[1].title}
+                  width={900}
+                  height={600}
+                  className="h-full min-h-[210px] w-full object-cover lg:min-h-0"
+                />
+              </div>
+
+              <div className="col-span-2 grid grid-cols-2 gap-3 lg:col-span-7 lg:grid-cols-4">
+                {heroCards.map((card) => (
+                  <div key={card.label} className="rounded-2xl bg-white p-4">
+                    <IconBubble icon={card.icon} />
+                    <p className="mt-3 text-sm font-bold text-[#62625b]">
+                      {card.label}
+                    </p>
+                    <p className="mt-1 text-lg font-bold leading-snug text-black">
+                      {card.value}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>
