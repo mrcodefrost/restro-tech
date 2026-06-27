@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { caseStudies } from "@/core/site";
+import { publicAsset } from "@/core/paths";
 
 export function CaseStudiesPage() {
   return (
@@ -31,7 +32,7 @@ export function CaseStudiesPage() {
             >
               <div className="h-24 overflow-hidden bg-[#f6f6f3]">
                 <Image
-                  src={study.image}
+                  src={publicAsset(study.image)}
                   alt={study.title}
                   width={420}
                   height={300}

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CalendarDays, Clock, UserRound } from "lucide-react";
 import { blogPosts } from "@/core/site";
+import { publicAsset } from "@/core/paths";
 import { PageHero } from "../shared/components/page-hero";
 
 export function BlogsPage() {
@@ -21,7 +22,7 @@ export function BlogsPage() {
           >
             <div className="aspect-[16/10]">
               <Image
-                src={post.image}
+                src={publicAsset(post.image)}
                 alt={post.title}
                 width={1100}
                 height={700}

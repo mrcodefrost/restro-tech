@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import type { CaseStudy } from "@/core/site";
+import { publicAsset } from "@/core/paths";
 import { ButtonLink } from "../shared/components/button-link";
 
 type CaseStudyDetailPageProps = {
@@ -58,7 +59,7 @@ export function CaseStudyDetailPage({ study }: CaseStudyDetailPageProps) {
         <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
           <div className="overflow-hidden rounded-[32px] bg-[#f6f6f3]">
             <Image
-              src={study.image}
+              src={publicAsset(study.image)}
               alt={study.title}
               width={1400}
               height={900}
@@ -222,7 +223,7 @@ export function CaseStudyDetailPage({ study }: CaseStudyDetailPageProps) {
 
               <div className="mt-10 overflow-hidden rounded-2xl bg-[#f6f6f3]">
                 <Image
-                  src={study.infographicImage}
+                  src={publicAsset(study.infographicImage)}
                   alt={`${study.title} before and after infographic`}
                   width={1400}
                   height={900}

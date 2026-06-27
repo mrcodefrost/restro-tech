@@ -34,6 +34,7 @@ import {
   restaurantFormats,
   testimonials,
 } from "@/core/site";
+import { publicAsset } from "@/core/paths";
 import { ButtonLink } from "../shared/components/button-link";
 
 const reveal = {
@@ -181,7 +182,7 @@ function PhotoPanel({
       className={`relative overflow-hidden ${large ? "rounded-[32px]" : "rounded-2xl"} bg-[#f6f6f3] ${className}`}
     >
       <Image
-        src={photo.src}
+        src={publicAsset(photo.src)}
         alt={photo.alt}
         width={1600}
         height={1000}
@@ -311,7 +312,7 @@ function HomeHero() {
         <div className="grid min-w-0 gap-3 lg:grid-rows-[250px_124px_108px] xl:grid-rows-[310px_150px_130px]">
           <div className="relative h-[160px] overflow-hidden rounded-[32px] bg-[#f6f6f3] sm:h-[210px] lg:h-auto">
             <Image
-              src={landingPhotos.operations.src}
+              src={publicAsset(landingPhotos.operations.src)}
               alt={landingPhotos.operations.alt}
               width={1000}
               height={620}
@@ -339,7 +340,7 @@ function HomeHero() {
 
             <div className="relative col-span-3 min-h-[96px] overflow-hidden rounded-2xl bg-[#f6f6f3] sm:min-h-0">
               <Image
-                src={landingPhotos.guest.src}
+                src={publicAsset(landingPhotos.guest.src)}
                 alt={landingPhotos.guest.alt}
                 width={900}
                 height={600}

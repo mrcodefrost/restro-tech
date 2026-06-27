@@ -9,6 +9,7 @@ import {
   UserRound,
 } from "lucide-react";
 import type { BlogPost } from "@/core/site";
+import { publicAsset } from "@/core/paths";
 import { ButtonLink } from "../shared/components/button-link";
 import { ReadingProgress } from "./reading-progress";
 
@@ -54,7 +55,7 @@ export function BlogDetailPage({ post }: BlogDetailPageProps) {
               </div>
               <div className="overflow-hidden rounded-[32px] bg-[#f6f6f3]">
                 <Image
-                  src={post.image}
+                  src={publicAsset(post.image)}
                   alt={post.title}
                   width={1400}
                   height={900}
