@@ -1,49 +1,85 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { caseStudies } from "@/core/site";
-import { PageHero } from "../shared/components/page-hero";
 
 export function CaseStudiesPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Case studies"
-        title="Sample stories for the kind of restaurant work this agency will pursue."
-        summary="These are temporary examples to complete the design pass. They should be replaced with real projects as soon as permission and outcomes are available."
-        ctaLabel="Book a Discovery Call"
-        ctaHref="mailto:hello@restro.tech"
-      />
-      <section className="mx-auto grid max-w-7xl gap-2 px-6 py-16 md:grid-cols-3 md:px-10 lg:px-12">
-        {caseStudies.map((study) => (
-          <Link
-            key={study.title}
-            href={`/case-studies/${study.slug}`}
-            className="overflow-hidden rounded-[32px] bg-[#f6f6f3] transition-transform hover:-translate-y-1"
-          >
-            <div className="aspect-[4/5]">
-              <Image
-                src={study.image}
-                alt={study.title}
-                width={900}
-                height={1125}
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="p-6">
-              <span className="rounded-full bg-white px-3 py-2 text-xs font-bold text-black">
-                {study.result}
-              </span>
-              <h2 className="mt-5 text-2xl font-bold text-black">
-                {study.title}
-              </h2>
-              <div className="mt-4 grid grid-cols-2 gap-2 text-xs font-bold text-[#62625b]">
-                <span>{study.outletCount}</span>
-                <span>{study.region}</span>
+      <section className="border-b border-[#e5e5e0] bg-white px-6 py-8 md:px-10 lg:px-12">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-sm font-bold uppercase text-[#e60023]">
+            Case studies
+          </p>
+          <h1 className="mt-3 max-w-4xl text-3xl font-semibold leading-tight text-black md:text-[40px]">
+            Project reports for restaurant brands with expansion complexity.
+          </h1>
+          <p className="mt-3 max-w-3xl text-base leading-7 text-[#33332e]">
+            A concise look at the situation, operating constraints, decisions,
+            and measurable outcomes behind each engagement.
+          </p>
+        </div>
+      </section>
+
+      <section className="bg-[#fbfbf9] px-6 py-8 md:px-10 lg:px-12">
+        <div className="mx-auto grid max-w-7xl auto-rows-fr gap-3 md:grid-cols-3">
+          {caseStudies.map((study, index) => (
+            <Link
+              key={study.slug}
+              href={`/case-studies/${study.slug}`}
+              className="group flex h-full min-h-[304px] flex-col overflow-hidden rounded-2xl border border-[#dadad3] bg-white transition-colors hover:bg-[#f6f6f3]"
+            >
+              <div className="h-24 overflow-hidden bg-[#f6f6f3]">
+                <Image
+                  src={study.image}
+                  alt={study.title}
+                  width={420}
+                  height={300}
+                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                />
               </div>
-              <p className="mt-3 leading-7 text-[#33332e]">{study.summary}</p>
-            </div>
-          </Link>
-        ))}
+
+              <div className="flex flex-1 flex-col p-4">
+                <div className="flex min-h-5 flex-wrap items-center gap-x-2 gap-y-1 text-[10px] font-bold uppercase leading-none text-[#62625b]">
+                  <span className="text-[#e60023]">0{index + 1}</span>
+                  <span>{study.category}</span>
+                </div>
+
+                <h2 className="mt-3 min-h-[52px] text-xl font-bold leading-tight text-black">
+                  {study.title}
+                </h2>
+
+                <p className="mt-2 overflow-hidden text-sm leading-6 text-[#33332e] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
+                  {study.summary}
+                </p>
+
+                <div className="mt-3 grid grid-cols-2 gap-2">
+                  <span className="rounded-full bg-[#f6f6f3] px-2.5 py-1.5 text-[11px] font-bold text-black">
+                    {study.outletCount}
+                  </span>
+                  <span className="rounded-full bg-[#f6f6f3] px-2.5 py-1.5 text-[11px] font-bold text-black">
+                    {study.timeline}
+                  </span>
+                  <span className="col-span-2 truncate rounded-full bg-[#f6f6f3] px-2.5 py-1.5 text-[11px] font-bold text-black">
+                    {study.region}
+                  </span>
+                </div>
+
+                <div className="mt-auto pt-3">
+                  <div className="border-t border-[#e5e5e0] pt-3">
+                    <p className="overflow-hidden text-sm font-bold leading-5 text-black [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
+                      {study.result}
+                    </p>
+                    <span className="mt-3 inline-flex items-center gap-2 text-sm font-bold text-[#e60023]">
+                      Read report
+                      <ArrowUpRight size={16} />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
       </section>
     </>
   );
