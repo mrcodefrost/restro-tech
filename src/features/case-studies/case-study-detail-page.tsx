@@ -1,9 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import type { CaseStudy } from "@/core/site";
-import { publicAsset } from "@/core/paths";
 import { ButtonLink } from "../shared/components/button-link";
+import { Placeholder } from "../shared/components/placeholder";
 
 type CaseStudyDetailPageProps = {
   study: CaseStudy;
@@ -19,12 +18,12 @@ export function CaseStudyDetailPage({ study }: CaseStudyDetailPageProps) {
   ];
 
   return (
-    <article className="bg-[#fbfbf9]">
-      <header className="border-b border-[#e5e5e0] bg-white px-6 py-8 md:px-10 lg:px-12">
+    <article className="bg-white">
+      <header className="border-b border-[#eef0f3] px-6 py-8 md:px-10 lg:px-12">
         <div className="mx-auto max-w-7xl">
           <Link
             href="/case-studies"
-            className="inline-flex items-center gap-2 rounded-2xl bg-[#f6f6f3] px-4 py-3 text-sm font-bold text-black"
+            className="inline-flex items-center gap-2 rounded-full bg-[#f7f8fa] px-4 py-2.5 text-sm font-medium text-[#1c1c1e]"
           >
             <ArrowLeft size={16} />
             Case studies
@@ -32,22 +31,22 @@ export function CaseStudyDetailPage({ study }: CaseStudyDetailPageProps) {
 
           <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
             <div className="max-w-4xl">
-              <p className="text-sm font-bold uppercase text-[#e60023]">
+              <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
                 {study.category}
               </p>
-              <h1 className="mt-4 text-4xl font-semibold leading-[1.04] text-black md:text-5xl lg:text-6xl">
+              <h1 className="mt-4 text-4xl font-medium leading-[1.1] tracking-tight text-[#1c1c1e] md:text-5xl lg:text-6xl">
                 {study.title}
               </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-[#33332e]">
+              <p className="mt-5 max-w-3xl text-lg leading-8 text-[#555a6a]">
                 {study.executiveSummary}
               </p>
             </div>
 
-            <aside className="rounded-2xl bg-[#262622] p-6 text-white">
-              <p className="text-xs font-bold uppercase text-white/60">
+            <aside className="rounded-2xl bg-[#1c1c1e] p-6 text-white">
+              <p className="text-xs font-medium text-white/60">
                 Outcome
               </p>
-              <p className="mt-3 text-2xl font-bold leading-tight">
+              <p className="mt-3 text-2xl font-medium leading-tight">
                 {study.result}
               </p>
             </aside>
@@ -57,29 +56,26 @@ export function CaseStudyDetailPage({ study }: CaseStudyDetailPageProps) {
 
       <section className="px-6 py-8 md:px-10 lg:px-12">
         <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
-          <div className="overflow-hidden rounded-[32px] bg-[#f6f6f3]">
-            <Image
-              src={publicAsset(study.image)}
-              alt={study.title}
-              width={1400}
-              height={900}
-              priority
-              className="h-[320px] w-full object-cover md:h-[420px]"
-            />
-          </div>
+          <Placeholder
+            src={study.image}
+            alt={`${study.client} website homepage snapshot`}
+            className="h-[260px] w-full md:h-[340px] lg:h-[380px]"
+            rounded="2xl"
+            imageClassName="object-top"
+          />
 
-          <aside className="rounded-2xl border border-[#dadad3] bg-white p-6">
-            <h2 className="text-xl font-bold text-black">Project brief</h2>
-            <dl className="mt-5 divide-y divide-[#e5e5e0]">
+          <aside className="rounded-2xl border border-[#eef0f3] bg-white p-6">
+            <h2 className="text-xl font-medium text-[#1c1c1e]">Project brief</h2>
+            <dl className="mt-5 divide-y divide-[#eef0f3]">
               {brief.map((item) => (
                 <div
                   key={item.label}
                   className="grid grid-cols-[96px_minmax(0,1fr)] gap-4 py-3 first:pt-0 last:pb-0"
                 >
-                  <dt className="text-xs font-bold uppercase text-[#62625b]">
+                  <dt className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
                     {item.label}
                   </dt>
-                  <dd className="text-sm font-bold leading-5 text-black">
+                  <dd className="text-sm font-medium leading-5 text-[#1c1c1e]">
                     {item.value}
                   </dd>
                 </div>
@@ -90,16 +86,16 @@ export function CaseStudyDetailPage({ study }: CaseStudyDetailPageProps) {
       </section>
 
       <section className="px-6 pb-8 md:px-10 lg:px-12">
-        <div className="mx-auto grid max-w-7xl divide-y divide-[#e5e5e0] rounded-2xl border border-[#e5e5e0] bg-white md:grid-cols-4 md:divide-x md:divide-y-0">
+        <div className="mx-auto grid max-w-7xl divide-y divide-[#eef0f3] rounded-2xl border border-[#eef0f3] bg-white md:grid-cols-4 md:divide-x md:divide-y-0">
           {study.metrics.map((metric) => (
             <div key={metric.label} className="p-5">
-              <p className="text-3xl font-bold leading-none text-black">
+              <p className="text-3xl font-medium leading-none text-[#1c1c1e]">
                 {metric.value}
               </p>
-              <p className="mt-3 text-sm font-bold leading-5 text-black">
+              <p className="mt-3 text-sm font-medium leading-5 text-[#1c1c1e]">
                 {metric.label}
               </p>
-              <p className="mt-2 text-sm leading-6 text-[#62625b]">
+              <p className="mt-2 text-sm leading-6 text-[#6b6f7e]">
                 {metric.context}
               </p>
             </div>
@@ -110,11 +106,11 @@ export function CaseStudyDetailPage({ study }: CaseStudyDetailPageProps) {
       <main className="px-6 pb-16 md:px-10 lg:px-12">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[240px_minmax(0,1fr)]">
           <aside className="hidden lg:block">
-            <div className="sticky top-24 border-l border-[#dadad3] pl-5">
-              <p className="text-xs font-bold uppercase text-[#62625b]">
+            <div className="sticky top-24 border-l border-[#eef0f3] pl-5">
+              <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
                 Report
               </p>
-              <nav className="mt-4 grid gap-3 text-sm font-bold text-black">
+              <nav className="mt-4 grid gap-3 text-sm font-medium text-[#1c1c1e]">
                 <a href="#context">Context</a>
                 <a href="#diagnosis">Diagnosis</a>
                 <a href="#work">Workstreams</a>
@@ -124,7 +120,7 @@ export function CaseStudyDetailPage({ study }: CaseStudyDetailPageProps) {
             </div>
           </aside>
 
-          <div className="max-w-4xl bg-white px-6 py-2 md:px-10">
+          <div className="max-w-4xl">
             <ReportSection
               id="context"
               eyebrow="01 / Context"
@@ -141,16 +137,16 @@ export function CaseStudyDetailPage({ study }: CaseStudyDetailPageProps) {
               title="The real constraint was operational clarity"
             >
               <Lead>{study.diagnosis}</Lead>
-              <div className="mt-8 divide-y divide-[#e5e5e0] border-y border-[#e5e5e0]">
+              <div className="mt-8 divide-y divide-[#eef0f3] border-y border-[#eef0f3]">
                 {study.problems.map((problem, index) => (
                   <div
                     key={problem}
                     className="grid gap-3 py-4 md:grid-cols-[56px_minmax(0,1fr)]"
                   >
-                    <span className="text-sm font-bold text-[#e60023]">
+                    <span className="text-sm font-medium text-[#4262ff]">
                       0{index + 1}
                     </span>
-                    <p className="font-semibold leading-7 text-black">
+                    <p className="font-medium leading-7 text-[#1c1c1e]">
                       {problem}
                     </p>
                   </div>
@@ -168,22 +164,22 @@ export function CaseStudyDetailPage({ study }: CaseStudyDetailPageProps) {
                 {study.solution.map((solution, index) => (
                   <section
                     key={solution.title}
-                    className="border-t border-[#e5e5e0] pt-6"
+                    className="border-t border-[#eef0f3] pt-6"
                   >
-                    <p className="text-sm font-bold text-[#e60023]">
+                    <p className="text-sm font-medium text-[#4262ff]">
                       Workstream {index + 1}
                     </p>
-                    <h3 className="mt-2 text-2xl font-bold text-black">
+                    <h3 className="mt-2 text-2xl font-medium text-[#1c1c1e]">
                       {solution.title}
                     </h3>
                     <ul className="mt-4 grid gap-3">
                       {solution.bullets.map((bullet) => (
                         <li
                           key={bullet}
-                          className="flex gap-3 text-sm font-semibold leading-6 text-[#33332e]"
+                          className="flex gap-3 text-sm font-medium leading-6 text-[#555a6a]"
                         >
                           <CheckCircle2
-                            className="mt-0.5 shrink-0 text-[#e60023]"
+                            className="mt-0.5 shrink-0 text-[#4262ff]"
                             size={18}
                           />
                           <span>{bullet}</span>
@@ -204,16 +200,16 @@ export function CaseStudyDetailPage({ study }: CaseStudyDetailPageProps) {
                 {study.rationale.map((item, index) => (
                   <div
                     key={item.title}
-                    className="grid gap-3 border-t border-[#e5e5e0] pt-5 md:grid-cols-[56px_minmax(0,1fr)]"
+                    className="grid gap-3 border-t border-[#eef0f3] pt-5 md:grid-cols-[56px_minmax(0,1fr)]"
                   >
-                    <span className="text-sm font-bold text-[#62625b]">
+                    <span className="text-sm font-medium text-[#6b6f7e]">
                       0{index + 1}
                     </span>
                     <div>
-                      <h3 className="text-xl font-bold text-black">
+                      <h3 className="text-xl font-medium text-[#1c1c1e]">
                         {item.title}
                       </h3>
-                      <p className="mt-2 leading-7 text-[#33332e]">
+                      <p className="mt-2 leading-7 text-[#555a6a]">
                         {item.summary}
                       </p>
                     </div>
@@ -221,23 +217,21 @@ export function CaseStudyDetailPage({ study }: CaseStudyDetailPageProps) {
                 ))}
               </div>
 
-              <div className="mt-10 overflow-hidden rounded-2xl bg-[#f6f6f3]">
-                <Image
-                  src={publicAsset(study.infographicImage)}
-                  alt={`${study.title} before and after infographic`}
-                  width={1400}
-                  height={900}
-                  className="h-auto w-full object-cover"
-                />
-              </div>
+              <Placeholder
+                src={study.infographicImage}
+                alt={`${study.client} before and after operating model visual`}
+                className="mt-10 aspect-[16/7] w-full"
+                rounded="xl"
+                imageClassName="object-center"
+              />
 
-              <div className="mt-8 overflow-hidden rounded-2xl border border-[#dadad3]">
+              <div className="mt-8 overflow-hidden rounded-2xl border border-[#eef0f3]">
                 {study.infographic.map((item) => (
                   <div
                     key={item.label}
-                    className="grid gap-0 border-b border-[#dadad3] last:border-b-0 md:grid-cols-[180px_1fr_1fr]"
+                    className="grid gap-0 border-b border-[#eef0f3] last:border-b-0 md:grid-cols-[180px_1fr_1fr]"
                   >
-                    <p className="bg-[#f6f6f3] p-4 font-bold text-black">
+                    <p className="bg-[#f7f8fa] p-4 font-medium text-[#1c1c1e]">
                       {item.label}
                     </p>
                     <BeforeAfter label="Before" value={item.before} />
@@ -253,18 +247,18 @@ export function CaseStudyDetailPage({ study }: CaseStudyDetailPageProps) {
               title="The result after the pilot"
             >
               <Lead>{study.impactNarrative}</Lead>
-              <div className="mt-8 divide-y divide-[#e5e5e0] border-y border-[#e5e5e0]">
+              <div className="mt-8 divide-y divide-[#eef0f3] border-y border-[#eef0f3]">
                 {study.impact.map((impact) => (
                   <div
-                    key={impact.label}
+                    key={`${impact.label}-${impact.value}`}
                     className="grid gap-3 py-5 md:grid-cols-[140px_minmax(0,1fr)]"
                   >
-                    <p className="text-3xl font-bold text-[#e60023]">
+                    <p className="text-3xl font-medium text-[#4262ff]">
                       {impact.value}
                     </p>
                     <div>
-                      <h3 className="font-bold text-black">{impact.label}</h3>
-                      <p className="mt-2 leading-7 text-[#33332e]">
+                      <h3 className="font-medium text-[#1c1c1e]">{impact.label}</h3>
+                      <p className="mt-2 leading-7 text-[#555a6a]">
                         {impact.detail}
                       </p>
                     </div>
@@ -272,33 +266,35 @@ export function CaseStudyDetailPage({ study }: CaseStudyDetailPageProps) {
                 ))}
               </div>
 
-              <blockquote className="mt-10 border-l-4 border-[#e60023] pl-6">
-                <p className="text-2xl font-bold leading-9 text-black">
-                  &quot;{study.quote.text}&quot;
-                </p>
-                <footer className="mt-6">
-                  <p className="font-bold text-black">{study.quote.person}</p>
-                  <p className="mt-1 text-sm font-semibold text-[#62625b]">
-                    {study.quote.role}
+              {study.quote ? (
+                <blockquote className="mt-10 border-l-4 border-[#4262ff] pl-6">
+                  <p className="text-2xl font-medium leading-9 text-[#1c1c1e]">
+                    &quot;{study.quote.text}&quot;
                   </p>
-                </footer>
-              </blockquote>
+                  <footer className="mt-6">
+                    <p className="font-medium text-[#1c1c1e]">{study.quote.person}</p>
+                    <p className="mt-1 text-sm font-medium text-[#6b6f7e]">
+                      {study.quote.role}
+                    </p>
+                  </footer>
+                </blockquote>
+              ) : null}
             </ReportSection>
           </div>
         </div>
       </main>
 
-      <section className="border-t border-[#e5e5e0] bg-white px-6 py-10 md:px-10 lg:px-12">
+      <section className="border-t border-[#eef0f3] bg-[#f7f8fa] px-6 py-10 md:px-10 lg:px-12">
         <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-[1fr_auto] md:items-center">
           <div>
-            <p className="text-sm font-bold uppercase text-[#62625b]">
+            <p className="text-sm font-medium text-[#6b6f7e]">
               Discuss a similar project
             </p>
-            <h2 className="mt-2 text-3xl font-bold leading-tight text-black">
+            <h2 className="mt-2 text-3xl font-medium leading-tight text-[#1c1c1e]">
               Bring one restaurant expansion problem to the table.
             </h2>
           </div>
-          <ButtonLink href="mailto:hello@restro.tech">
+          <ButtonLink href="/contact">
             Book a Discovery Call
           </ButtonLink>
         </div>
@@ -319,12 +315,12 @@ function ReportSection({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="border-t border-[#dadad3] py-10 first:border-t-0">
-      <p className="text-sm font-bold uppercase text-[#e60023]">{eyebrow}</p>
-      <h2 className="mt-3 text-3xl font-bold leading-tight text-black md:text-4xl">
+    <section id={id} className="border-t border-[#eef0f3] py-10 first:border-t-0">
+      <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">{eyebrow}</p>
+      <h2 className="mt-3 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
         {title}
       </h2>
-      <div className="mt-6 grid gap-5 text-base leading-7 text-[#33332e]">
+      <div className="mt-6 grid gap-5 text-base leading-7 text-[#555a6a]">
         {children}
       </div>
     </section>
@@ -333,7 +329,7 @@ function ReportSection({
 
 function Lead({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-xl font-semibold leading-8 text-black">{children}</p>
+    <p className="text-xl font-medium leading-8 text-[#1c1c1e]">{children}</p>
   );
 }
 
@@ -345,9 +341,9 @@ function Callout({
   children: React.ReactNode;
 }) {
   return (
-    <aside className="border-l-4 border-[#e60023] bg-[#f6f6f3] p-5">
-      <p className="text-sm font-bold uppercase text-[#62625b]">{title}</p>
-      <p className="mt-3 font-semibold leading-7 text-black">{children}</p>
+    <aside className="border-l-4 border-[#4262ff] bg-[#f7f8fa] p-5">
+      <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">{title}</p>
+      <p className="mt-3 font-medium leading-7 text-[#1c1c1e]">{children}</p>
     </aside>
   );
 }
@@ -362,15 +358,15 @@ function BeforeAfter({
   isAfter?: boolean;
 }) {
   return (
-    <div className={`p-4 ${isAfter ? "bg-[#262622] text-white" : "bg-white"}`}>
+    <div className={`p-4 ${isAfter ? "bg-[#1c1c1e] text-white" : "bg-white"}`}>
       <p
-        className={`text-xs font-bold uppercase ${
-          isAfter ? "text-white/60" : "text-[#62625b]"
+        className={`text-xs font-semibold uppercase tracking-wide ${
+          isAfter ? "text-white/60" : "text-[#6b6f7e]"
         }`}
       >
         {label}
       </p>
-      <p className="mt-2 font-semibold leading-6">{value}</p>
+      <p className="mt-2 font-medium leading-6">{value}</p>
     </div>
   );
 }

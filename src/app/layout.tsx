@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
-import type { CSSProperties } from "react";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import { SiteShell } from "@/features/shared/components/site-shell";
 import "./globals.css";
 
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-jakarta",
+});
+
 export const metadata: Metadata = {
-  title: "Restro Tech | Restaurant Chain Digital Commerce Agency",
+  title: "RestroScale | Paperwork, Tech, Marketing & Production for F&B Brands",
   description:
-    "Custom ordering, menu, rewards, and integration systems for restaurant and cafe franchise brands scaling across regions.",
+    "Paperwork, tech, marketing, and production for food & beverage (F&B) brands at every stage of the franchise journey, plus standalone products for queueing, feedback, loyalty, and complaint tracking.",
 };
 
 export default function RootLayout({
@@ -14,19 +20,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-  const textureImage = `url("${basePath}/assets/restaurant-sketch-texture.png")`;
-
   return (
-    <html lang="en" className="h-full antialiased">
-      <body
-        className="flex min-h-full flex-col"
-        style={
-          {
-            "--sketch-texture-image": textureImage,
-          } as CSSProperties
-        }
-      >
+    <html lang="en" className={`h-full antialiased ${jakarta.variable}`}>
+      <body className="flex min-h-full flex-col bg-white font-sans text-[#1c1c1e]">
         <SiteShell>{children}</SiteShell>
       </body>
     </html>

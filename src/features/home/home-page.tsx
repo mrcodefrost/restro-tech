@@ -1,134 +1,192 @@
 "use client";
 
-import Image from "next/image";
+import { useCallback, useRef } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import {
+  ArrowUpRight,
   BadgeCheck,
   BarChart3,
-  Building2,
   ClipboardCheck,
-  CreditCard,
-  Gift,
-  Globe2,
-  Languages,
-  MapPinned,
-  PlugZap,
+  ClipboardList,
+  MapPin,
+  MessageSquareText,
   Rocket,
-  Smartphone,
+  Star,
   Store,
   TriangleAlert,
-  Utensils,
 } from "lucide-react";
 import {
+  clientProof,
   conversionProblems,
-  conversionStats,
   discoveryAgenda,
   expertiseSignals,
-  fakeBrands,
   faqItems,
-  integrationAreas,
-  platformPillars,
-  positioningPoints,
-  proofMetrics,
+  products,
   processSteps,
-  restaurantFormats,
-  testimonials,
 } from "@/core/site";
-import { publicAsset } from "@/core/paths";
 import { ButtonLink } from "../shared/components/button-link";
+import { FaqAccordion } from "../shared/components/faq-accordion";
+import {
+  FloatingElement,
+  ParallaxFloating,
+} from "../shared/components/parallax-floating";
+import SplitText from "../shared/components/split-text";
 
 const reveal = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0 },
 };
 
-const heroCards = [
-  { icon: Utensils, label: "Menu rules", value: "City-wise pricing" },
-  { icon: Smartphone, label: "Ordering", value: "Web and app" },
-  { icon: PlugZap, label: "POS sync", value: "Mapped before build" },
-  { icon: MapPinned, label: "Store logic", value: "Hours and availability" },
-];
-
-const landingPhotos = {
-  operations: {
-    src: "/assets/home/operations-counter.png",
-    alt: "Cafe team preparing digital pickup orders beside an ordering tablet.",
-    label: "Outlet operations",
-  },
-  guest: {
-    src: "/assets/home/guest-ordering.png",
-    alt: "Guest ordering food on a phone at a bright cafe table.",
-    label: "Guest ordering",
-  },
-  pos: {
-    src: "/assets/home/pos-integration.png",
-    alt: "Restaurant POS, payment terminal, and kitchen pass in operation.",
-    label: "POS and kitchen sync",
-  },
-  rollout: {
-    src: "/assets/home/rollout-planning.png",
-    alt: "Restaurant leadership team planning a regional rollout around a table.",
-    label: "Pilot to rollout",
-  },
-  menu: {
-    src: "/assets/home/regional-menu.png",
-    alt: "Restaurant menu planning table with food cards, tablets, and ingredients.",
-    label: "Regional menus",
-  },
-  analytics: {
-    src: "/assets/home/analytics-review.png",
-    alt: "Restaurant expansion analytics reviewed on laptop and tablet.",
-    label: "Expansion visibility",
-  },
-  formats: {
-    src: "/assets/home/format-mix.png",
-    alt: "Modern restaurant with bakery display, pickup shelf, and kitchen pass.",
-    label: "F&B formats",
-  },
-};
-
-const solutionCards = [
-  {
-    icon: Smartphone,
-    title: "Branded ordering layer",
-    summary: "For customers placing orders across web and app.",
-    bullets: [
-      "Pickup, takeaway, delivery, and scheduled orders",
-      "Combos, modifiers, upsells, and guest checkout",
-      "Store-specific availability and fulfillment rules",
-    ],
-  },
-  {
-    icon: Utensils,
-    title: "Regional menu engine",
-    summary: "For brands expanding city by city or country by country.",
-    bullets: [
-      "Local pricing, taxes, languages, and currency",
-      "Outlet overrides for hours, stock, and kitchen status",
-      "Menu structure that stays consistent across markets",
-    ],
-  },
-  {
-    icon: PlugZap,
-    title: "Restaurant stack integration",
-    summary: "For operators who need systems to work together.",
-    bullets: [
-      "POS, loyalty, CRM, payments, and delivery partners",
-      "Clean customer, order, rewards, and reporting events",
-      "Pilot-first rollout before full franchise expansion",
-    ],
-  },
-];
-
-const pillarIcons = [Smartphone, Languages, PlugZap, Rocket];
-const positioningIcons = [Building2, Utensils, Globe2];
-const problemIcons = [TriangleAlert, Store, CreditCard];
-const integrationIcons = [CreditCard, Gift, Rocket, BarChart3];
-const proofIcons = [Store, LayersIcon, BadgeCheck, ClipboardCheck];
+const problemIcons = [TriangleAlert, ClipboardList, Star, ClipboardCheck];
 const expertiseIcons = [ClipboardCheck, Store, BadgeCheck, Rocket];
 
-function LayersIcon(props: React.ComponentProps<typeof Building2>) {
-  return <Building2 {...props} />;
+function FloatingMetricCard({
+  label,
+  value,
+  tone,
+  icon: Icon,
+}: {
+  label: string;
+  value: string;
+  tone: "yellow" | "teal" | "coral" | "blue";
+  icon: typeof BarChart3;
+}) {
+  const tones = {
+    yellow: "bg-[#fff8e0] text-[#746019]",
+    teal: "bg-[#c3faf5] text-[#187574]",
+    coral: "bg-[#ffc6c6] text-[#600000]",
+    blue: "bg-[#f5f3ff] text-[#2a41b6]",
+  };
+
+  return (
+    <div className="rounded-2xl border border-white/80 bg-white/90 p-4 shadow-[0_18px_48px_-24px_rgba(5,0,56,0.32)] backdrop-blur">
+      <div
+        className={`inline-grid size-9 place-items-center rounded-full ${tones[tone]}`}
+      >
+        <Icon size={18} strokeWidth={2} />
+      </div>
+      <p className="mt-3 text-2xl font-medium leading-none text-[#1c1c1e]">
+        {value}
+      </p>
+      <p className="mt-1 text-xs font-medium leading-5 text-[#555a6a]">
+        {label}
+      </p>
+    </div>
+  );
+}
+
+function HeroFloatingBackground() {
+  // The source art is one wide 1536x1024 collage (natural aspect 1.5:1).
+  // Rather than centering it behind the headline, each side crops a slice
+  // of it via background-position so the two clusters flank the text
+  // column and the center of the hero, where the title sits, stays clear.
+  // Now that the hero fills the viewport height, size the clusters off a
+  // taller crop so the art flows further down into that extra space.
+  const clusterHeight = 384;
+  const scale = clusterHeight / 208;
+  const clusterWidth = Math.round(260 * scale);
+  const collageWidth = Math.round(620 * scale);
+  const collageHeight = collageWidth / 1.5;
+  const cropTop = Math.round(20 * scale);
+
+  return (
+    <ParallaxFloating
+      sensitivity={60}
+      className="pointer-events-none absolute inset-0 overflow-hidden"
+    >
+      <FloatingElement
+        depth={0.18}
+        className="absolute left-2 top-1/2 hidden -translate-y-1/2 opacity-80 xl:block"
+        style={{ width: clusterWidth, height: clusterHeight }}
+      >
+        <div
+          className="h-full w-full"
+          style={{
+            backgroundImage: "url(/assets/home/hero-floating-polaroids.png)",
+            backgroundSize: `${collageWidth}px ${collageHeight}px`,
+            backgroundPosition: `0px -${cropTop}px`,
+            backgroundRepeat: "no-repeat",
+            maskImage:
+              "linear-gradient(to right, black 50%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to right, black 50%, transparent 100%)",
+          }}
+        />
+      </FloatingElement>
+      <FloatingElement
+        depth={0.18}
+        className="absolute right-2 top-1/2 hidden -translate-y-1/2 opacity-80 xl:block"
+        style={{ width: clusterWidth, height: clusterHeight }}
+      >
+        <div
+          className="h-full w-full"
+          style={{
+            backgroundImage: "url(/assets/home/hero-floating-polaroids.png)",
+            backgroundSize: `${collageWidth}px ${collageHeight}px`,
+            backgroundPosition: `-${collageWidth - clusterWidth}px -${cropTop}px`,
+            backgroundRepeat: "no-repeat",
+            maskImage:
+              "linear-gradient(to left, black 50%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to left, black 50%, transparent 100%)",
+          }}
+        />
+      </FloatingElement>
+      <FloatingElement
+        depth={0.42}
+        className="absolute left-[3%] top-[10%] hidden w-44 lg:block"
+      >
+        <div style={{ transform: "rotate(-7deg)" }}>
+          <FloatingMetricCard
+            icon={MapPin}
+            tone="yellow"
+            value="60+"
+            label="cities mapped for franchise rollout"
+          />
+        </div>
+      </FloatingElement>
+      <FloatingElement
+        depth={0.6}
+        className="absolute right-[4%] top-[15%] hidden w-44 lg:block"
+      >
+        <div style={{ transform: "rotate(6deg)" }}>
+          <FloatingMetricCard
+            icon={BarChart3}
+            tone="teal"
+            value="4.8"
+            label="direct feedback signal per outlet"
+          />
+        </div>
+      </FloatingElement>
+      <FloatingElement
+        depth={0.5}
+        className="absolute bottom-[10%] left-[7%] hidden w-48 md:block"
+      >
+        <div style={{ transform: "rotate(5deg)" }}>
+          <FloatingMetricCard
+            icon={MessageSquareText}
+            tone="coral"
+            value="Q"
+            label="wait-time alerts over WhatsApp"
+          />
+        </div>
+      </FloatingElement>
+      <FloatingElement
+        depth={0.35}
+        className="absolute bottom-[15%] right-[8%] hidden w-48 md:block"
+      >
+        <div style={{ transform: "rotate(-5deg)" }}>
+          <FloatingMetricCard
+            icon={Store}
+            tone="blue"
+            value="200"
+            label="outlet operations without generic tooling"
+          />
+        </div>
+      </FloatingElement>
+    </ParallaxFloating>
+  );
 }
 
 function Reveal({
@@ -146,7 +204,7 @@ function Reveal({
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.18 }}
-      transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay }}
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay }}
       className={className}
     >
       {children}
@@ -154,410 +212,138 @@ function Reveal({
   );
 }
 
-function IconBubble({ icon: Icon }: { icon: React.ElementType }) {
-  return (
-    <div className="grid size-11 place-items-center rounded-full bg-[#e60023] text-white">
-      <Icon size={20} strokeWidth={2.4} />
-    </div>
-  );
-}
+// A hand-drawn-looking marker stroke (wavy top/bottom, rounded uneven ends)
+// used as the highlight's background instead of a strict rectangle block.
+const brushStrokeUrl = (color: string) =>
+  `url("data:image/svg+xml,${encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 60" preserveAspectRatio="none">` +
+      `<path d="M6,42 C3,30 2,16 8,5 C55,-3 130,4 205,1 C248,-1 282,5 295,12 C298,22 297,35 292,47 ` +
+      `C245,55 165,50 105,53 C58,55 18,52 6,42 Z" fill="${color}"/></svg>`,
+  )}")`;
 
-function PhotoPanel({
-  photo,
-  className = "",
-  imageClassName = "",
-  priority = false,
-  sizes = "(min-width: 1024px) 45vw, 100vw",
-  large = false,
-}: {
-  photo: (typeof landingPhotos)[keyof typeof landingPhotos];
-  className?: string;
-  imageClassName?: string;
-  priority?: boolean;
-  sizes?: string;
-  large?: boolean;
-}) {
-  return (
-    <div
-      className={`relative overflow-hidden ${large ? "rounded-[32px]" : "rounded-2xl"} bg-[#f6f6f3] ${className}`}
-    >
-      <Image
-        src={publicAsset(photo.src)}
-        alt={photo.alt}
-        width={1600}
-        height={1000}
-        priority={priority}
-        sizes={sizes}
-        className={`h-full w-full object-cover ${imageClassName}`}
-      />
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent p-4">
-        <span className="inline-flex rounded-full bg-white px-3 py-2 text-xs font-bold leading-none text-black">
-          {photo.label}
-        </span>
-      </div>
-    </div>
-  );
-}
+// A non-breaking space between "F&B" and "brand" in the hero title (below)
+// makes GSAP's word-splitter treat the phrase as a single `.split-word`
+// token instead of two — so the highlight below paints one continuous
+// stroke with no gap, rather than two separate strokes that have to be
+// stretched into each other's space (which either leaves a seam or, if
+// stretched too far, bleeds onto neighboring letters).
+const HERO_TITLE = "Scale your F&B brand without the generic parts.";
 
-function VisualAside({
-  photo,
-  metricValue,
-  metricLabel,
-  note,
-  icon: Icon,
-  dark = false,
-  className = "",
-}: {
-  photo: (typeof landingPhotos)[keyof typeof landingPhotos];
-  metricValue: string;
-  metricLabel: string;
-  note: string;
-  icon: React.ElementType;
-  dark?: boolean;
-  className?: string;
-}) {
-  const tileClass = dark
-    ? "bg-white/10 text-white"
-    : "border border-[#e5e5e0] bg-white text-black";
-  const muteClass = dark ? "text-white/70" : "text-[#62625b]";
+function Hero() {
+  const titleWrapRef = useRef<HTMLDivElement>(null);
+
+  // SplitText renders "F&B brand" as its own `.split-word` span once the
+  // GSAP split runs. There's no way to hand it pre-marked JSX (it owns the
+  // DOM split), so once the word's own entrance animation finishes, find
+  // that span and sweep a brush-stroke highlight across it.
+  const highlightBrandWords = useCallback(() => {
+    const container = titleWrapRef.current;
+    if (!container) return;
+    const word = Array.from(
+      container.querySelectorAll<HTMLElement>(".split-word"),
+    ).find((el) => el.textContent?.replace(/ /g, " ").trim() === "F&B brand");
+    if (!word) return;
+
+    word.style.backgroundImage = brushStrokeUrl("#ffd02f");
+    word.style.backgroundSize = "100% 100%";
+    word.style.backgroundRepeat = "no-repeat";
+    word.style.paddingInline = "0.18em";
+    word.style.paddingTop = "0.1em";
+    word.style.paddingBottom = "0.16em";
+    word.style.marginInline = "-0.18em";
+    word.style.marginTop = "-0.1em";
+    word.style.marginBottom = "-0.16em";
+    word.style.boxDecorationBreak = "clone";
+    word.style.setProperty("-webkit-box-decoration-break", "clone");
+    word.style.clipPath = "inset(0 100% 0 0)";
+    word.style.transition = "clip-path 0.6s cubic-bezier(0.22, 1, 0.36, 1)";
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        word.style.clipPath = "inset(0 0% 0 0)";
+      });
+    });
+  }, []);
 
   return (
-    <div className={`grid gap-2 ${className}`}>
-      <PhotoPanel
-        photo={photo}
-        className="aspect-[16/10] max-h-[260px] lg:max-h-[280px]"
-        sizes="(min-width: 1024px) 34vw, 100vw"
-      />
-      <div className="grid gap-2 sm:grid-cols-2">
-        <div className={`rounded-2xl p-5 ${tileClass}`}>
-          <p className="text-3xl font-bold leading-none text-[#e60023]">
-            {metricValue}
-          </p>
-          <p className={`mt-2 text-sm font-semibold leading-6 ${muteClass}`}>
-            {metricLabel}
-          </p>
+    <section className="relative flex min-h-[calc(100dvh-4rem)] items-center overflow-hidden px-6 py-10 md:px-10 lg:px-12">
+      <HeroFloatingBackground />
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 mx-auto w-full max-w-3xl text-center"
+      >
+        <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+          Paperwork, tech, marketing, and production for food &amp; beverage brands
+        </p>
+        <div ref={titleWrapRef}>
+          <SplitText
+            tag="h1"
+            text={HERO_TITLE}
+            splitType="words"
+            duration={0.7}
+            delay={60}
+            from={{ opacity: 0, y: 24 }}
+            to={{ opacity: 1, y: 0 }}
+            textAlign="center"
+            className="mt-5 text-4xl font-medium leading-[1.1] tracking-tight text-[#1c1c1e] sm:text-5xl lg:text-[64px]"
+            onLetterAnimationComplete={highlightBrandWords}
+          />
         </div>
-        <div className={`rounded-2xl p-5 ${tileClass}`}>
-          <div className="grid size-10 place-items-center rounded-full bg-[#f6f6f3] text-[#262622]">
-            <Icon size={20} strokeWidth={2.4} />
-          </div>
-          <p className={`mt-4 text-sm font-semibold leading-6 ${muteClass}`}>
-            {note}
-          </p>
+        <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-[#555a6a]">
+          Custom ordering, regional menus, FSSAI and franchise paperwork,
+          marketing, and production, for brands going from one outlet to
+          two hundred.
+        </p>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <ButtonLink href="/contact">Book a Discovery Call</ButtonLink>
+          <ButtonLink href="/services" variant="secondary">
+            See our services
+          </ButtonLink>
+          <ButtonLink href="/products" variant="secondary">
+            Explore products
+          </ButtonLink>
         </div>
-      </div>
-    </div>
-  );
-}
-
-function HomeHero() {
-  return (
-    <section className="sketch-texture bg-[#fbfbf9] px-4 py-5 sm:px-6 md:px-10 lg:flex lg:min-h-[calc(100svh-4rem)] lg:items-center lg:px-12 lg:py-4">
-      <div className="mx-auto grid w-full max-w-7xl gap-3 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-stretch">
-        <div className="flex min-w-0 flex-col justify-between rounded-2xl bg-white p-5 sm:p-6 lg:p-7 xl:p-9">
-          <div>
-            <p className="text-xs font-bold uppercase leading-none text-[#62625b]">
-              Custom ordering for growing F&B chains
-            </p>
-            <h1 className="mt-3 max-w-3xl text-[34px] font-semibold leading-[1.04] text-black sm:text-[42px] lg:text-[48px] xl:text-[58px]">
-              Scale your F&B brand without generic tech.
-            </h1>
-            <p className="mt-4 max-w-2xl text-sm font-medium leading-6 text-[#33332e] lg:text-base lg:leading-7">
-              Custom ordering, regional menus, loyalty, POS integrations, and
-              rollout systems for newer restaurant chains going regional or
-              global.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-2">
-              <ButtonLink href="mailto:hello@restro.tech">
-                Book a Discovery Call
-              </ButtonLink>
-              <ButtonLink href="#solution" variant="secondary">
-                See the solution
-              </ButtonLink>
-            </div>
-          </div>
-
-          <div className="mt-7">
-            <div className="flex flex-wrap gap-2">
-              {["Not SaaS", "F&B only", "Custom build", "Pilot first"].map(
-                (item) => (
-                  <span
-                    key={item}
-                    className="rounded-full bg-[#f6f6f3] px-3 py-2 text-center text-xs font-bold leading-none text-black xl:text-sm"
-                  >
-                    {item}
-                  </span>
-                ),
-              )}
-            </div>
-
-            <div className="mt-3 hidden gap-2 sm:grid sm:grid-cols-3">
-              {conversionStats.map((stat) => (
-                <div
-                  key={stat.value}
-                  className="rounded-2xl bg-[#f6f6f3] p-3 xl:p-4"
-                >
-                  <p className="text-lg font-bold leading-tight text-black xl:text-xl">
-                    {stat.value}
-                  </p>
-                  <p className="mt-1 text-xs font-semibold leading-5 text-[#62625b]">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="grid min-w-0 gap-3 lg:grid-rows-[250px_124px_108px] xl:grid-rows-[310px_150px_130px]">
-          <div className="relative h-[160px] overflow-hidden rounded-[32px] bg-[#f6f6f3] sm:h-[210px] lg:h-auto">
-            <Image
-              src={publicAsset(landingPhotos.operations.src)}
-              alt={landingPhotos.operations.alt}
-              width={1000}
-              height={620}
-              priority
-              sizes="(min-width: 1024px) 56vw, 100vw"
-              className="h-full w-full object-cover"
-            />
-            <span className="absolute bottom-4 left-4 rounded-full bg-white px-4 py-2 text-sm font-bold leading-none text-black">
-              {landingPhotos.operations.label}
-            </span>
-          </div>
-
-          <div className="grid grid-cols-5 gap-3">
-            <div className="col-span-2 flex min-h-[96px] flex-col justify-center rounded-2xl bg-[#262622] p-4 text-white sm:min-h-0 xl:p-5">
-              <p className="text-xs font-bold uppercase leading-none text-white/65">
-                Best fit
-              </p>
-              <p className="mt-2 text-2xl font-bold leading-none xl:text-3xl">
-                10 to 500
-              </p>
-              <p className="mt-2 text-xs font-semibold leading-5 text-white/70 xl:text-sm">
-                outlet F&B chains expanding across regions.
-              </p>
-            </div>
-
-            <div className="relative col-span-3 min-h-[96px] overflow-hidden rounded-2xl bg-[#f6f6f3] sm:min-h-0">
-              <Image
-                src={publicAsset(landingPhotos.guest.src)}
-                alt={landingPhotos.guest.alt}
-                width={900}
-                height={600}
-                sizes="(min-width: 1024px) 34vw, 60vw"
-                className="h-full w-full object-cover"
-              />
-              <span className="absolute bottom-3 left-3 rounded-full bg-white px-3 py-2 text-xs font-bold leading-none text-black">
-                {landingPhotos.guest.label}
-              </span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {heroCards.map((card) => (
-              <div
-                key={card.label}
-                className="min-w-0 rounded-2xl bg-white p-4"
-              >
-                <div className="grid size-8 shrink-0 place-items-center rounded-full bg-[#f6f6f3] text-[#262622] xl:size-10">
-                  <card.icon className="size-4" strokeWidth={2.35} />
-                </div>
-                <p className="mt-3 text-[10px] font-bold uppercase leading-none text-[#62625b]">
-                  {card.label}
-                </p>
-                <p className="mt-1.5 text-sm font-bold leading-tight text-black">
-                  {card.value}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
 
 export function HomePage() {
-  const marqueeGroups = [fakeBrands, fakeBrands];
-
   return (
     <>
-      <HomeHero />
+      <Hero />
 
-      <section
-        className="w-full overflow-hidden border-y border-[#e5e5e0] bg-white py-4"
-        aria-label="Restaurant brand examples"
-      >
-        <motion.div
-          className="flex w-max items-center"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 28, ease: "linear", repeat: Infinity }}
-        >
-          {marqueeGroups.map((brands, groupIndex) => (
-            <div
-              key={groupIndex}
-              className="flex min-w-[100vw] shrink-0 items-center justify-around gap-3 px-2 sm:gap-4 sm:px-3"
-            >
-              {brands.map((brand) => (
-                <div
-                  key={`${brand}-${groupIndex}`}
-                  className="inline-flex h-10 shrink-0 items-center rounded-full bg-[#f6f6f3] px-5 text-sm font-bold leading-none text-black"
-                >
-                  {brand}
-                </div>
-              ))}
-            </div>
-          ))}
-        </motion.div>
-      </section>
-
-      <section className="bg-[#fbfbf9] px-6 py-12 md:px-10 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
-          <div className="grid gap-2">
-            <Reveal className="rounded-[32px] bg-white p-6 md:p-8">
-              <p className="text-sm font-bold uppercase text-[#e60023]">
-                What we focus on
-              </p>
-              <h2 className="mt-4 text-3xl font-bold leading-tight text-black md:text-4xl">
-                Restaurant expansion needs fewer claims and clearer operating
-                pictures.
-              </h2>
-              <p className="mt-4 max-w-2xl leading-7 text-[#33332e]">
-                We design around the outlets, menus, systems, and markets that
-                make a growing F&B brand hard to scale.
-              </p>
-            </Reveal>
-
-            <div className="grid gap-2 md:grid-cols-3 lg:grid-cols-1">
-              {positioningPoints.map((point, index) => {
-                const Icon = positioningIcons[index];
-                return (
-                  <Reveal key={point.title} delay={index * 0.06}>
-                    <article className="flex h-full gap-4 rounded-2xl bg-white p-5">
-                      <IconBubble icon={Icon} />
-                      <div>
-                        <p className="text-xs font-bold uppercase text-[#e60023]">
-                          {point.label}
-                        </p>
-                        <h3 className="mt-2 text-lg font-bold leading-tight text-black">
-                          {point.title}
-                        </h3>
-                        <p className="mt-2 text-sm leading-6 text-[#33332e]">
-                          {point.summary}
-                        </p>
-                      </div>
-                    </article>
-                  </Reveal>
-                );
-              })}
-            </div>
-          </div>
-
+      <section className="border-t border-[#eef0f3] bg-[#f7f8fa] px-6 py-20 md:px-10 lg:px-12 lg:py-24">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <Reveal>
-            <VisualAside
-              photo={landingPhotos.rollout}
-              metricValue="10-500"
-              metricLabel="outlet brands with regional complexity"
-              note="Expansion is mapped before the build, so the website does not carry every operational surprise."
-              icon={MapPinned}
-            />
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="px-6 py-12 md:px-10 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
-          <Reveal className="grid gap-5">
-            <div>
-              <p className="text-sm font-bold uppercase text-[#e60023]">
-                Customer problems
-              </p>
-              <h2 className="mt-4 text-3xl font-bold leading-tight text-black md:text-4xl">
-                Expansion breaks when tech treats every outlet the same.
-              </h2>
-              <p className="mt-4 text-lg leading-8 text-[#33332e]">
-                One brand experience. Many local operating rules behind it.
-              </p>
-            </div>
-            <VisualAside
-              photo={landingPhotos.operations}
-              metricValue="1 brand"
-              metricLabel="many outlet rules behind the scenes"
-              note="Outlet differences should be planned as product logic, not patched after launch."
-              icon={TriangleAlert}
-            />
+            <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+              The problem
+            </p>
+            <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
+              Expansion breaks when tech treats every outlet the same.
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-[#555a6a]">
+              One brand, many local rules, plus paperwork and marketing that
+              generic tech never touches.
+            </p>
           </Reveal>
 
-          <div className="grid gap-2">
+          <div className="grid gap-3 sm:grid-cols-2">
             {conversionProblems.map((problem, index) => {
               const Icon = problemIcons[index];
               return (
-                <Reveal key={problem.title} delay={index * 0.06}>
-                  <article className="flex gap-4 rounded-2xl bg-[#262622] p-5 text-white md:p-6">
-                    <IconBubble icon={Icon} />
-                    <div>
-                      <h3 className="text-xl font-bold leading-tight">
-                        {problem.title}
-                      </h3>
-                      <p className="mt-2 leading-7 text-white/70">
-                        {problem.summary}
-                      </p>
-                    </div>
-                  </article>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section id="solution" className="bg-white px-6 py-12 md:px-10 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
-          <Reveal className="grid gap-5">
-            <div>
-              <p className="text-sm font-bold uppercase text-[#e60023]">
-                Our position
-              </p>
-              <h2 className="mt-4 text-3xl font-bold leading-tight text-black md:text-4xl">
-                Custom digital commerce for growing F&B chains.
-              </h2>
-              <p className="mt-4 leading-7 text-[#33332e]">
-                We build the branded layer customers, outlet teams, and
-                leadership depend on during expansion.
-              </p>
-            </div>
-            <VisualAside
-              photo={landingPhotos.guest}
-              metricValue="4 layers"
-              metricLabel="guest, menu, stack, and rollout"
-              note="The customer journey stays branded while outlet complexity stays structured."
-              icon={Smartphone}
-            />
-          </Reveal>
-
-          <div className="grid gap-2 sm:grid-cols-2">
-            {platformPillars.map((pillar, index) => {
-              const Icon = pillarIcons[index];
-              return (
-                <Reveal key={pillar.title} delay={index * 0.05}>
-                  <article className="h-full rounded-2xl bg-[#f6f6f3] p-5">
-                    <IconBubble icon={Icon} />
-                    <h3 className="mt-4 text-xl font-bold text-black">
-                      {pillar.title}
+                <Reveal key={problem.title} delay={index * 0.06} className="h-full">
+                  <article className="relative h-full overflow-hidden rounded-2xl border border-[#eef0f3] bg-white p-6">
+                    <Icon className="relative text-[#4262ff]" size={24} strokeWidth={2} />
+                    <h3 className="mt-4 text-lg font-medium leading-tight text-[#1c1c1e]">
+                      {problem.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-6 text-[#33332e]">
-                      {pillar.summary}
+                    <p className="mt-2 text-sm leading-6 text-[#555a6a]">
+                      {problem.summary}
                     </p>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {pillar.items.slice(0, 3).map((item) => (
-                        <span
-                          key={item}
-                          className="rounded-full bg-white px-3 py-2 text-xs font-bold leading-none text-black"
-                        >
-                          {item}
-                        </span>
-                      ))}
-                    </div>
                   </article>
                 </Reveal>
               );
@@ -566,56 +352,33 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#262622] px-6 py-12 text-white md:px-10 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
-          <Reveal className="grid gap-5">
-            <div>
-              <p className="text-sm font-bold uppercase text-white/70">
-                Our solution
-              </p>
-              <h2 className="mt-4 text-3xl font-bold leading-tight md:text-4xl">
-                Three layers your F&B expansion actually needs.
-              </h2>
-              <p className="mt-4 leading-7 text-white/70">
-                Customer experience, restaurant rules, and integrations planned
-                as one operating system.
-              </p>
-            </div>
-            <PhotoPanel
-              photo={landingPhotos.pos}
-              className="aspect-[16/9] max-h-[260px] lg:max-h-[280px]"
-            />
+      <section className="px-6 py-20 md:px-10 lg:px-12 lg:py-24">
+        <div className="mx-auto max-w-7xl">
+          <Reveal className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+              Why RestroScale
+            </p>
+            <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
+              F&amp;B expansion is not ecommerce with food photos.
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-[#555a6a]">
+              Prep time, outlet downtime, packaging, tax, kitchen capacity,
+              and franchise reality shape the product.
+            </p>
           </Reveal>
-
-          <div className="grid gap-2">
-            {solutionCards.map((card, index) => {
-              const Icon = card.icon;
+          <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+            {expertiseSignals.map((signal, index) => {
+              const Icon = expertiseIcons[index];
               return (
-                <Reveal key={card.title} delay={index * 0.06}>
-                  <article className="rounded-2xl bg-white p-5 text-black md:p-6">
-                    <div className="flex gap-4">
-                      <IconBubble icon={Icon} />
-                      <div>
-                        <h3 className="text-xl font-bold">{card.title}</h3>
-                        <p className="mt-2 text-sm font-semibold leading-6 text-[#62625b]">
-                          {card.summary}
-                        </p>
-                      </div>
-                    </div>
-                    <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-                      {card.bullets.slice(0, 2).map((bullet) => (
-                        <li
-                          key={bullet}
-                          className="flex gap-2 text-sm font-semibold leading-6 text-[#33332e]"
-                        >
-                          <BadgeCheck
-                            className="mt-0.5 shrink-0 text-[#e60023]"
-                            size={18}
-                          />
-                          <span>{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
+                <Reveal key={signal.title} delay={index * 0.05} className="h-full">
+                  <article className="h-full rounded-2xl border border-[#eef0f3] bg-white p-6">
+                    <Icon className="text-[#4262ff]" size={24} strokeWidth={2} />
+                    <h3 className="mt-4 text-lg font-medium text-[#1c1c1e]">
+                      {signal.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-[#555a6a]">
+                      {signal.summary}
+                    </p>
                   </article>
                 </Reveal>
               );
@@ -624,174 +387,65 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#fbfbf9] px-6 py-14 md:px-10 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1.08fr_0.92fr] lg:items-stretch">
-          <div>
-            <Reveal>
-              <p className="text-sm font-bold uppercase text-[#e60023]">
-                Restaurant expertise
-              </p>
-              <h2 className="mt-4 text-3xl font-bold leading-tight text-black md:text-4xl">
-                F&B expansion is not ecommerce with food photos.
-              </h2>
-              <p className="mt-4 text-lg leading-8 text-[#33332e]">
-                Prep time, outlet downtime, packaging, tax, kitchen capacity,
-                and franchise reality shape the product.
-              </p>
-            </Reveal>
-            <div className="mt-6 grid gap-2 md:grid-cols-2">
-              {expertiseSignals.map((signal, index) => {
-                const Icon = expertiseIcons[index];
-                return (
-                  <Reveal key={signal.title} delay={index * 0.05}>
-                    <article className="h-full rounded-2xl bg-white p-5">
-                      <Icon className="text-[#e60023]" size={26} />
-                      <h3 className="mt-4 text-lg font-bold text-black">
-                        {signal.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-6 text-[#33332e]">
-                        {signal.summary}
-                      </p>
-                    </article>
-                  </Reveal>
-                );
-              })}
-            </div>
-          </div>
-
+      <section className="bg-[#f7f8fa] px-6 py-16 md:px-10 lg:px-12">
+        <div className="mx-auto grid max-w-7xl gap-8 rounded-3xl border border-[#eef0f3] bg-white p-6 md:grid-cols-[1fr_0.85fr] md:p-8 lg:p-10">
           <Reveal>
-            <VisualAside
-              photo={landingPhotos.menu}
-              metricValue="F&B only"
-              metricLabel="restaurant constraints treated as product rules"
-              note="Kitchen capacity, packaging, prep time, and franchise ownership stay visible in the plan."
-              icon={Utensils}
-            />
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="bg-white px-6 py-12 md:px-10 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
-          <Reveal className="grid gap-5">
-            <div>
-              <p className="text-sm font-bold uppercase text-[#e60023]">
-                Integration planning
-              </p>
-              <h2 className="mt-4 text-3xl font-bold leading-tight text-black md:text-4xl">
-                The expensive mistakes usually hide between systems.
-              </h2>
+            <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+              Not sure where to start?
+            </p>
+            <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
+              Tell us what you are trying to open, fix, or scale.
+            </h2>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-[#555a6a]">
+              A few plain details are enough. Share where the brand is today,
+              what feels stuck, and what needs to happen next. We will take it
+              from there.
+            </p>
+            <div className="mt-6">
+              <ButtonLink href="/contact">Start the conversation</ButtonLink>
             </div>
-            <VisualAside
-              photo={landingPhotos.pos}
-              metricValue="Before build"
-              metricLabel="map every handoff and exception"
-              note="POS, loyalty, delivery, payments, and reporting need one rollout view."
-              icon={PlugZap}
-            />
           </Reveal>
 
-          <div>
-            <div className="grid gap-2 md:grid-cols-2">
-              {integrationAreas.map((area, index) => {
-                const Icon = integrationIcons[index];
-                return (
-                  <Reveal key={area.title} delay={index * 0.05}>
-                    <article className="h-full rounded-2xl border border-[#dadad3] bg-white p-5">
-                      <Icon className="text-[#e60023]" size={26} />
-                      <h3 className="mt-4 text-xl font-bold text-black">
-                        {area.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-6 text-[#33332e]">
-                        {area.summary}
-                      </p>
-                    </article>
-                  </Reveal>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-[#fbfbf9] px-6 py-14 md:px-10 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1fr_0.92fr] lg:items-center">
-          <div>
-            <Reveal>
-              <p className="text-sm font-bold uppercase text-[#e60023]">
-                Discovery call
-              </p>
-              <h2 className="mt-4 text-3xl font-bold leading-tight text-black md:text-4xl">
-                Leave with a restaurant scale-readiness map.
-              </h2>
-              <p className="mt-4 leading-7 text-[#33332e]">
-                The first call finds the smallest useful pilot across ordering,
-                regional menus, rewards, POS, and rollout.
-              </p>
-            </Reveal>
-            <div className="mt-6 grid gap-2">
-              {discoveryAgenda.map((item, index) => (
-                <Reveal key={item} delay={index * 0.05}>
-                  <div className="flex gap-4 rounded-2xl bg-white p-5">
-                    <span className="grid size-10 shrink-0 place-items-center rounded-full bg-[#e60023] text-sm font-bold text-white">
-                      {index + 1}
-                    </span>
-                    <p className="self-center font-semibold leading-6 text-black">
-                      {item}
-                    </p>
-                  </div>
-                </Reveal>
+          <Reveal delay={0.08}>
+            <div className="grid gap-2 rounded-2xl bg-[#1c1c1e] p-5 text-white">
+              {[
+                "What are you building toward?",
+                "What is getting in the way?",
+                "What would make the next step easier?",
+                "When do you want to move?",
+              ].map((item, index) => (
+                <div key={item} className="flex items-center gap-3 rounded-xl bg-white/5 p-3">
+                  <span className="grid size-7 shrink-0 place-items-center rounded-full bg-[#ffd02f] text-xs font-semibold text-[#1c1c1e]">
+                    {index + 1}
+                  </span>
+                  <p className="text-sm font-medium leading-5">{item}</p>
+                </div>
               ))}
             </div>
-            <Reveal className="mt-6">
-              <ButtonLink href="mailto:hello@restro.tech">
-                Book a Discovery Call
-              </ButtonLink>
-            </Reveal>
-          </div>
-
-          <Reveal>
-            <VisualAside
-              photo={landingPhotos.rollout}
-              metricValue="Pilot first"
-              metricLabel="small enough to learn, real enough to matter"
-              note="The discovery output is a scoped route from first outlets to wider rollout."
-              icon={ClipboardCheck}
-            />
           </Reveal>
         </div>
       </section>
 
-      <section className="bg-[#262622] px-6 py-14 text-white md:px-10 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <Reveal className="grid gap-5">
-            <div>
-              <p className="text-sm font-bold uppercase text-white/70">
-                How we work
-              </p>
-              <h2 className="mt-4 text-3xl font-bold leading-tight md:text-4xl">
-                Pilot first. Then expand region by region.
-              </h2>
-            </div>
-            <VisualAside
-              photo={landingPhotos.rollout}
-              metricValue="4 steps"
-              metricLabel="audit, prototype, implement, expand"
-              note="Each rollout stage has a visible operating checkpoint before the next region."
-              icon={Rocket}
-              dark
-            />
+      <section className="bg-[#1c1c1e] px-6 py-20 text-white md:px-10 lg:px-12 lg:py-24">
+        <div className="mx-auto max-w-7xl">
+          <Reveal className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-wide text-white/50">
+              How we work
+            </p>
+            <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight md:text-4xl">
+              Pilot first. Then expand region by region.
+            </h2>
           </Reveal>
 
-          <div className="grid gap-2 md:grid-cols-2">
+          <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
             {processSteps.map((step, index) => (
-              <Reveal key={step.title} delay={index * 0.05}>
-                <article className="h-full rounded-2xl bg-white p-5 text-black">
-                  <span className="text-sm font-bold text-[#e60023]">
+              <Reveal key={step.title} delay={index * 0.05} className="h-full">
+                <article className="h-full rounded-2xl bg-white/5 p-6">
+                  <span className="text-sm font-medium text-[#ffd02f]">
                     0{index + 1}
                   </span>
-                  <h3 className="mt-3 text-xl font-bold">{step.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-[#33332e]">
+                  <h3 className="mt-3 text-lg font-medium">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-white/70">
                     {step.summary}
                   </p>
                 </article>
@@ -801,178 +455,150 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="bg-white px-6 py-14 md:px-10 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
-          <Reveal className="grid gap-5">
-            <div>
-              <p className="text-sm font-bold uppercase text-[#e60023]">
-                Proof points
-              </p>
-              <h2 className="mt-4 text-3xl font-bold leading-tight text-black md:text-4xl">
-                The offer is narrow on purpose.
-              </h2>
-            </div>
-            <VisualAside
-              photo={landingPhotos.analytics}
-              metricValue="1 team"
-              metricLabel="focused on restaurant expansion technology"
-              note="A narrow offer makes the proof easier to scan and the engagement easier to judge."
-              icon={BarChart3}
-            />
+      <section className="px-6 py-20 md:px-10 lg:px-12 lg:py-24">
+        <div className="mx-auto max-w-7xl">
+          <Reveal className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+              Products
+            </p>
+            <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
+              Standalone tools, built from real franchise work.
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-[#555a6a]">
+              Four products inside one software suite. A client can activate
+              any one product, use the same account, pay only for what is
+              active, and cancel anytime.
+            </p>
           </Reveal>
-
-          <div className="grid gap-2 sm:grid-cols-2">
-            {proofMetrics.map((metric, index) => {
-              const Icon = proofIcons[index];
-              return (
-                <Reveal key={metric.label} delay={index * 0.05}>
-                  <article className="h-full rounded-2xl bg-[#f6f6f3] p-6">
-                    <Icon className="text-[#e60023]" size={28} />
-                    <p className="mt-5 text-3xl font-bold text-[#e60023]">
-                      {metric.value}
-                    </p>
-                    <p className="mt-2 font-semibold leading-6 text-black">
-                      {metric.label}
-                    </p>
-                  </article>
-                </Reveal>
-              );
-            })}
+          <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {products.map((product, index) => (
+              <Reveal key={product.slug} delay={index * 0.05} className="h-full">
+                <Link
+                  href={`/products/${product.slug}`}
+                  className="group relative block h-full overflow-hidden rounded-3xl p-6 text-[#1c1c1e] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_42px_-28px_rgba(5,0,56,0.45)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4262ff]"
+                  style={{ backgroundColor: product.color.soft }}
+                >
+                  <ArrowUpRight
+                    className="absolute right-5 top-5 text-[#1c1c1e] opacity-45 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100"
+                    size={20}
+                  />
+                  <p
+                    className="max-w-[calc(100%-32px)] text-xs font-semibold uppercase tracking-wide"
+                    style={{ color: product.color.text }}
+                  >
+                    {product.tagline}
+                  </p>
+                  <h3 className="mt-4 inline-flex rounded-full bg-white px-3 py-1.5 text-xl font-semibold shadow-sm">
+                    {product.name}
+                  </h3>
+                  <p className="mt-4 text-sm leading-6 text-[#2c2c34]">
+                    {product.summary}
+                  </p>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+          <div className="mt-6">
+            <ButtonLink href="/products" variant="secondary">
+              See all products
+            </ButtonLink>
           </div>
         </div>
       </section>
 
-      <section className="bg-[#fbfbf9] px-6 py-14 md:px-10 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
-          <Reveal className="grid gap-5">
-            <div>
-              <p className="text-sm font-bold uppercase text-[#e60023]">
-                Operator proof
-              </p>
-              <h2 className="mt-4 text-3xl font-bold leading-tight text-black md:text-4xl">
-                Operators want restaurant fluency before they trust the build.
-              </h2>
-            </div>
-            <PhotoPanel
-              photo={landingPhotos.operations}
-              className="aspect-[16/10] max-h-[260px] lg:max-h-[280px]"
-            />
+      <section className="bg-[#f7f8fa] px-6 py-20 md:px-10 lg:px-12 lg:py-24">
+        <div className="mx-auto max-w-7xl">
+          <Reveal className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+              Clients
+            </p>
+            <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
+              Real F&amp;B brands, real websites, from one outlet to two hundred.
+            </h2>
           </Reveal>
 
-          <div className="grid gap-2">
-            {testimonials.map((testimonial, index) => (
-              <Reveal key={testimonial.name} delay={index * 0.06}>
-                <article className="rounded-2xl bg-white p-5 md:p-6">
-                  <p className="text-lg font-semibold leading-8 text-black">
-                    &quot;{testimonial.quote}&quot;
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {clientProof.map((proof, index) => (
+              <Reveal key={proof.brand} delay={index * 0.06} className="h-full">
+                <a
+                  href={proof.href}
+                  className="group flex h-full flex-col rounded-2xl border border-[#eef0f3] bg-white p-6"
+                >
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[#4262ff]">
+                    {proof.highlight}
                   </p>
-                  <div className="mt-5">
-                    <p className="font-bold text-black">{testimonial.name}</p>
-                    <p className="mt-1 text-sm font-semibold text-[#62625b]">
-                      {testimonial.role}, {testimonial.brand}
-                    </p>
-                  </div>
-                </article>
+                  <h3 className="mt-3 text-xl font-medium text-[#1c1c1e]">
+                    {proof.brand}
+                  </h3>
+                  <p className="mt-2 flex-1 text-sm leading-6 text-[#555a6a]">
+                    {proof.detail}
+                  </p>
+                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[#4262ff]">
+                    Read case study
+                    <ArrowUpRight
+                      size={16}
+                      className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    />
+                  </span>
+                </a>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-white px-6 py-14 md:px-10 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1fr_0.9fr] lg:items-center">
-          <Reveal>
-            <PhotoPanel
-              photo={landingPhotos.formats}
-              className="aspect-[16/10] max-h-[280px] lg:max-h-[320px]"
-            />
-          </Reveal>
-
-          <div>
-            <Reveal>
-              <p className="text-sm font-bold uppercase text-[#e60023]">
-                Formats we understand
-              </p>
-              <h2 className="mt-4 text-3xl font-bold leading-tight text-black md:text-4xl">
-                Every outlet is similar, but never identical.
-              </h2>
-            </Reveal>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {restaurantFormats.map((format, index) => (
-                <Reveal key={format} delay={index * 0.03}>
-                  <span className="block rounded-full bg-[#f6f6f3] px-4 py-3 text-sm font-bold text-black">
-                    {format}
-                  </span>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-[#fbfbf9] px-6 py-12 md:px-10 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1.14fr_0.86fr] lg:items-start">
-          <div>
-            <Reveal>
-              <p className="text-sm font-bold uppercase text-[#e60023]">
-                Questions
-              </p>
-              <h2 className="mt-4 text-3xl font-bold leading-tight text-black md:text-4xl">
-                Clear answers before a discovery call.
-              </h2>
-            </Reveal>
-
-            <div className="mt-6 grid gap-2 md:grid-cols-2">
-              {faqItems.map((item, index) => (
-                <Reveal key={item.question} delay={index * 0.04}>
-                  <article className="h-full rounded-2xl bg-white p-5">
-                    <h3 className="text-lg font-bold text-black">
-                      {item.question}
-                    </h3>
-                    <p className="mt-2 text-sm leading-6 text-[#33332e]">
-                      {item.answer}
-                    </p>
-                  </article>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-
-          <Reveal className="grid gap-5">
-            <VisualAside
-              photo={landingPhotos.analytics}
-              metricValue="0 SaaS"
-              metricLabel="custom implementation, not software resale"
-              note="The first conversation clarifies fit, scope, and rollout risk before any proposal."
-              icon={ClipboardCheck}
-            />
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="bg-[#262622] px-6 py-14 text-white md:px-10 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-[1.05fr_0.95fr] md:items-center">
-          <Reveal>
-            <p className="text-sm font-bold uppercase text-white/70">
-              Final CTA
+      <section className="px-6 py-20 md:px-10 lg:px-12 lg:py-24">
+        <div className="mx-auto max-w-7xl">
+          <Reveal className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+              Questions
             </p>
-            <h2 className="mt-4 max-w-3xl text-3xl font-bold leading-tight md:text-4xl">
-              Bring one messy restaurant expansion problem. Leave with a pilot
-              path.
+            <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
+              Clear answers before a discovery call.
             </h2>
-            <div className="mt-6">
-              <ButtonLink href="mailto:hello@restro.tech">
-                Book a Discovery Call
-              </ButtonLink>
-            </div>
           </Reveal>
 
-          <Reveal>
-            <PhotoPanel
-              photo={landingPhotos.operations}
-              className="aspect-[16/10] max-h-[260px] lg:max-h-[300px]"
-            />
+          <Reveal className="mt-8 max-w-4xl">
+            <FaqAccordion items={faqItems} />
           </Reveal>
+        </div>
+      </section>
+
+      <section className="px-6 pb-20 md:px-10 lg:px-12">
+        <div className="mx-auto max-w-7xl rounded-3xl bg-[#1c1c1e] px-6 py-14 text-white md:px-12">
+          <div className="mx-auto grid max-w-5xl gap-10 md:grid-cols-2 md:items-center">
+            <Reveal>
+              <p className="text-xs font-semibold uppercase tracking-wide text-white/50">
+                Start here
+              </p>
+              <h2 className="mt-4 text-3xl font-medium leading-tight md:text-4xl">
+                Bring one messy restaurant expansion problem. Leave with a
+                pilot path.
+              </h2>
+              <p className="mt-4 leading-7 text-white/70">
+                The first call maps your outlets, menus, and integrations,
+                then finds the smallest useful pilot.
+              </p>
+              <div className="mt-6">
+                <ButtonLink href="/contact" variant="on-dark">
+                  Book a Discovery Call
+                </ButtonLink>
+              </div>
+            </Reveal>
+
+            <Reveal className="grid gap-2">
+              {discoveryAgenda.map((item, index) => (
+                <div key={item} className="flex gap-3 rounded-xl bg-white/5 p-4">
+                  <span className="grid size-7 shrink-0 place-items-center rounded-full bg-[#ffd02f] text-xs font-semibold text-[#1c1c1e]">
+                    {index + 1}
+                  </span>
+                  <p className="self-center text-sm font-medium leading-6">
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </Reveal>
+          </div>
         </div>
       </section>
     </>
