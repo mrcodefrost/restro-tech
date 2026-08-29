@@ -2,6 +2,7 @@
 
 import { useCallback, useRef } from "react";
 import Link from "next/link";
+import { publicAsset } from "@/core/paths";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
@@ -103,7 +104,7 @@ function HeroFloatingBackground() {
         <div
           className="h-full w-full"
           style={{
-            backgroundImage: "url(/assets/home/hero-floating-polaroids.png)",
+            backgroundImage: `url(${publicAsset("/assets/home/hero-floating-polaroids.png")})`,
             backgroundSize: `${collageWidth}px ${collageHeight}px`,
             backgroundPosition: `0px -${cropTop}px`,
             backgroundRepeat: "no-repeat",
@@ -122,7 +123,7 @@ function HeroFloatingBackground() {
         <div
           className="h-full w-full"
           style={{
-            backgroundImage: "url(/assets/home/hero-floating-polaroids.png)",
+            backgroundImage: `url(${publicAsset("/assets/home/hero-floating-polaroids.png")})`,
             backgroundSize: `${collageWidth}px ${collageHeight}px`,
             backgroundPosition: `-${collageWidth - clusterWidth}px -${cropTop}px`,
             backgroundRepeat: "no-repeat",

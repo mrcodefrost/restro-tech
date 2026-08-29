@@ -1,4 +1,5 @@
 import { ImageIcon } from "lucide-react";
+import { publicAsset } from "@/core/paths";
 
 type PlaceholderProps = {
   label?: string;
@@ -29,7 +30,7 @@ export function Placeholder({
     >
       {src ? (
         <img
-          src={src}
+          src={publicAsset(src)}
           alt={alt}
           className={`h-full w-full object-cover ${imageClassName}`}
         />
