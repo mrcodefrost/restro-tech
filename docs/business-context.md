@@ -75,3 +75,4 @@ Preference is clearly for **"restro" + coined suffix** combos over words borrowe
 - **No case-study imagery for the real clients yet** — `public/assets/case-studies/` currently only has art for the retired fictional brands.
 - **Careers page was placeholder content** for the first site version — needs a real rewrite once there's an actual hiring plan.
 - **No products/services pages existed** before this pass — `/products` and `/services` are new routes; content on them should be revisited as the four SaaS products mature past MVP.
+- **No demo video for any of the four SaaS products yet.** The product detail page (`product-detail-page.tsx`) has a demo-video section built and ready but gated behind a `SHOW_DEMO_VIDEO` flag since there's nothing real to show. Record one per product and flip it on once ready.

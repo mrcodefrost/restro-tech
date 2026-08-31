@@ -20,6 +20,9 @@ import { StepFlow } from "../shared/components/step-flow";
 
 const featureIcons = [Lightning, ShieldCheck, DeviceMobile, Bell, Users, ChartBar, GearSix, Sparkle];
 
+// No demo video exists for any product yet. Flip on per-product once one is ready.
+const SHOW_DEMO_VIDEO = false;
+
 type ProductDetailPageProps = {
   product: Product;
 };
@@ -168,28 +171,30 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
         </div>
       </section>
 
-      <section className="px-6 pb-16 md:px-10 lg:px-12">
-        <div className="mx-auto max-w-7xl">
-          <button
-            type="button"
-            aria-label={`Play ${product.name} demo video`}
-            className="group relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-3xl border border-[#e0e2e8] bg-[#1c1c1e]"
-          >
-            <div
-              className="absolute inset-0 opacity-20"
-              style={{ backgroundColor: product.color.accent }}
-            />
-            <span className="relative flex flex-col items-center gap-3 text-white">
-              <span className="grid size-16 place-items-center rounded-full bg-white/10 backdrop-blur-sm transition-transform group-hover:scale-105">
-                <PlayCircle size={40} weight="duotone" />
+      {SHOW_DEMO_VIDEO && (
+        <section className="px-6 pb-16 md:px-10 lg:px-12">
+          <div className="mx-auto max-w-7xl">
+            <button
+              type="button"
+              aria-label={`Play ${product.name} demo video`}
+              className="group relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-3xl border border-[#e0e2e8] bg-[#1c1c1e]"
+            >
+              <div
+                className="absolute inset-0 opacity-20"
+                style={{ backgroundColor: product.color.accent }}
+              />
+              <span className="relative flex flex-col items-center gap-3 text-white">
+                <span className="grid size-16 place-items-center rounded-full bg-white/10 backdrop-blur-sm transition-transform group-hover:scale-105">
+                  <PlayCircle size={40} weight="duotone" />
+                </span>
+                <span className="text-sm font-medium text-white/80">
+                  See {product.name} in action
+                </span>
               </span>
-              <span className="text-sm font-medium text-white/80">
-                See {product.name} in action
-              </span>
-            </span>
-          </button>
-        </div>
-      </section>
+            </button>
+          </div>
+        </section>
+      )}
 
       <section className="px-6 pb-16 md:px-10 lg:px-12">
         <div className="mx-auto max-w-4xl">
