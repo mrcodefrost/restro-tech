@@ -33,5 +33,28 @@
       </select>
       <textarea name="message" minlength="20" required></textarea>
     </form>
+
+    <form
+      name="career-application"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      hidden
+    >
+      <input name="form-name" type="hidden" value="career-application" />
+      <p>
+        <label>
+          Do not fill this out if you are human:
+          <input name="bot-field" type="text" />
+        </label>
+      </p>
+      <input name="role" type="text" required />
+      <input name="name" type="text" minlength="2" required />
+      <input name="email" type="email" required />
+      <input name="phone" type="tel" pattern="^[+()0-9\s-]{7,18}$" required />
+      <input name="profile" type="url" />
+      <input name="resume" type="url" required />
+      <textarea name="message" minlength="40" required></textarea>
+    </form>
   </body>
 </html>

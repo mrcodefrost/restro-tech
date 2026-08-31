@@ -1,12 +1,26 @@
-export function SiteLogo({ className = "" }: { className?: string }) {
+import Image from "next/image";
+
+type SiteLogoProps = {
+  className?: string;
+  tone?: "light" | "dark";
+};
+
+export function SiteLogo({ className = "", tone = "light" }: SiteLogoProps) {
+  const src =
+    tone === "dark"
+      ? "/assets/brand/restrovate-logo-on-dark.svg"
+      : "/assets/brand/restrovate-logo.svg";
+
   return (
-    <span className={`inline-flex items-center gap-2 ${className}`}>
-      <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-[#1c1c1e] sm:size-8">
-        <span className="size-2.5 rounded-full bg-[#ffd02f]" />
-      </span>
-      <span className="truncate text-lg font-semibold tracking-tight text-[#1c1c1e] sm:text-xl">
-        Restrovate
-      </span>
+    <span className={`inline-flex items-center ${className}`}>
+      <Image
+        src={src}
+        alt="Restrovate"
+        width={214}
+        height={47}
+        priority
+        className="h-11 w-auto sm:h-12"
+      />
     </span>
   );
 }

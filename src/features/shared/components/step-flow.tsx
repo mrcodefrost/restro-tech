@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { ArrowDown, ArrowRight } from "@phosphor-icons/react/ssr";
+import { CaretDoubleDown, CaretDoubleRight } from "@phosphor-icons/react/ssr";
 
 type Step = {
   title: string;
@@ -18,13 +18,13 @@ type StepFlowProps = {
   direction?: "vertical" | "horizontal";
 };
 
-function Chip({ accentColor, icon: Icon }: { accentColor: string; icon: typeof ArrowRight }) {
+function Chip({ accentColor, icon: Icon }: { accentColor: string; icon: typeof CaretDoubleRight }) {
   return (
     <span
-      className="grid size-7 shrink-0 place-items-center rounded-full border bg-white"
-      style={{ borderColor: accentColor }}
+      className="grid size-7 shrink-0 place-items-center rounded-full"
+      style={{ backgroundColor: accentColor }}
     >
-      <Icon size={14} weight="duotone" style={{ color: accentColor }} />
+      <Icon size={14} weight="bold" className="text-[#1c1c1e]" />
     </span>
   );
 }
@@ -55,7 +55,7 @@ export function StepFlow({
             <>
               {direction === "horizontal" ? (
                 <div className="hidden shrink-0 items-center justify-center md:flex md:w-10">
-                  <Chip accentColor={accentColor} icon={ArrowRight} />
+                  <Chip accentColor={accentColor} icon={CaretDoubleRight} />
                 </div>
               ) : null}
               <div
@@ -63,7 +63,7 @@ export function StepFlow({
                   direction === "horizontal" ? "md:hidden" : ""
                 }`}
               >
-                <Chip accentColor={accentColor} icon={ArrowDown} />
+                <Chip accentColor={accentColor} icon={CaretDoubleDown} />
               </div>
             </>
           ) : null}

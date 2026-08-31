@@ -305,7 +305,7 @@ function NavTrigger({
       <CaretDown
         size={14}
         weight="duotone"
-        className={`relative z-10 transition-transform duration-300 ${active ? "rotate-180" : ""}`}
+        className={`relative z-10 transition-all duration-300 ${active ? "rotate-180 text-[#ffd02f]" : ""}`}
       />
       {active ? (
         <motion.span
@@ -538,7 +538,7 @@ function MobileGroup({
         <CaretDown
           size={16}
           weight="duotone"
-          className={`transition-transform duration-300 ${expanded ? "rotate-180" : ""}`}
+          className={`transition-all duration-300 ${expanded ? "rotate-180 text-[#ffd02f]" : ""}`}
         />
       </button>
       <AnimatePresence>

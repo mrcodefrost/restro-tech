@@ -6,6 +6,7 @@ import {
   services,
   siteConfig,
 } from "@/core/site";
+import { SiteLogo } from "./site-logo";
 import { SocialLinks } from "./social-links";
 
 const footerServiceColumns = servicePillars.map((pillar) => ({
@@ -42,10 +43,7 @@ export function SiteFooter() {
         <div className="flex flex-col gap-6 border-b border-white/10 pb-10 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <Link href="/" className="inline-flex items-center gap-2">
-              <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-white/10">
-                <span className="size-2.5 rounded-full bg-[#ffd02f]" />
-              </span>
-              <span className="text-lg font-semibold text-white">Restrovate</span>
+              <SiteLogo tone="dark" />
             </Link>
             <p className="mt-3 max-w-sm leading-6">{siteConfig.tagline}</p>
           </div>

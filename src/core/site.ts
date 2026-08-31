@@ -139,9 +139,19 @@ export type CaseStudy = {
 };
 
 export type Role = {
+  slug: string;
   title: string;
   location: string;
+  workMode: string;
+  team: string;
+  type: string;
+  experience: string;
   summary: string;
+  intro: string;
+  responsibilities: string[];
+  requirements: string[];
+  niceToHave: string[];
+  highlights: string[];
 };
 
 export type ClientProof = {
@@ -553,32 +563,6 @@ export const services: Service[] = [
     ],
   },
   {
-    slug: "pos-crm-integration",
-    pillar: "tech",
-    title: "POS & CRM Integration",
-    summary:
-      "Integration planning and implementation that connects your website, app, and loyalty system to the POS and CRM you already run.",
-    tags: ["POS integration", "CRM", "Payments"],
-    overview:
-      "POS integration fails operationally more often than it fails technically, when menu sync, payment methods, refunds, and loyalty points aren't mapped before the build starts. We plan the integration around your actual operating rules first, then implement it, so orders, rewards, and reporting all add up cleanly.",
-    deliverables: [
-      "Integration planning across menu sync, tenders, and refunds",
-      "POS integration for order flow and reconciliation",
-      "CRM and loyalty system connection for guest history and rewards",
-      "Payment gateway integration and reconciliation reporting",
-    ],
-    process: [
-      { title: "Technical audit", summary: "We map your current stack, POS, and integration points before writing a line of code." },
-      { title: "Integration plan", summary: "Menu sync, payment methods, refund behavior, and loyalty logic are agreed before build begins." },
-      { title: "Build and test", summary: "Integration is implemented and tested against real order and refund scenarios." },
-      { title: "Pilot verification", summary: "A pilot outlet validates reconciliation before rolling out network-wide." },
-    ],
-    faqs: [
-      { question: "Which POS systems can you integrate with?", answer: "We've worked with major restaurant POS platforms including Petpooja and Restroworks, and evaluate custom integration for others case by case." },
-      { question: "What happens if an item is available online but not in-store?", answer: "This is exactly the kind of edge case we map during planning, so availability sync prevents the mismatch before it reaches a guest." },
-    ],
-  },
-  {
     slug: "store-locator-franchise-enquiry",
     pillar: "tech",
     title: "Store Locator & Franchise Enquiry Systems",
@@ -874,7 +858,7 @@ export const products: Product[] = [
   {
     slug: "queue-reservations",
     name: "Q",
-    tagline: "Skip the clipboard",
+    tagline: "Queue Management System",
     summary:
       "Queue and reservation management for the software suite. A guest gives their name and phone number, gets a WhatsApp wait estimate, then a table-ready alert.",
     audience:
@@ -913,7 +897,7 @@ export const products: Product[] = [
   {
     slug: "feedback-analytics",
     name: "Feedbackly",
-    tagline: "Know what guests actually think, per outlet",
+    tagline: "Feedback & Analytics System",
     summary:
       "Feedback and outlet analytics for the software suite, so a franchise can see guest sentiment per location instead of relying on aggregator reviews alone.",
     audience:
@@ -952,7 +936,7 @@ export const products: Product[] = [
   {
     slug: "loyalty",
     name: "Loyalty",
-    tagline: "Give first-time guests a reason to come back",
+    tagline: "Customer Loyalty System",
     summary:
       "Loyalty and rewards for the software suite, built to work across every outlet instead of being reinvented per brand or franchise partner.",
     audience:
@@ -989,7 +973,7 @@ export const products: Product[] = [
   {
     slug: "franchise-complaint-tracking",
     name: "Resolve",
-    tagline: "Complaints that don't disappear into a WhatsApp group",
+    tagline: "Franchise Complaint Tracking System",
     summary:
       "Complaint tracking for the software suite, with store-level logs and resolution status visible to both franchisor and franchisee.",
     audience:
@@ -1293,22 +1277,115 @@ export const values = [
 
 export const roles: Role[] = [
   {
-    title: "Product Designer",
-    location: "Remote, India",
-    summary:
-      "Design ordering and operator workflows for restaurant chains with strong visual identities.",
-  },
-  {
+    slug: "full-stack-engineer",
     title: "Full Stack Engineer",
-    location: "Remote, India",
+    location: "Delhi",
+    workMode: "On-site / hybrid",
+    team: "Tech",
+    type: "Full-time",
+    experience: "2+ years",
     summary:
       "Build Next.js, React Native, and integration-heavy systems for multi-outlet restaurant brands.",
+    intro:
+      "You will help build the web, app, and admin systems behind Restrovate's client work and standalone SaaS products: queueing, feedback, loyalty, complaint tracking, ordering, and franchise enquiry flows.",
+    responsibilities: [
+      "Build production-grade interfaces in Next.js, React, and TypeScript.",
+      "Design clean data models and APIs for restaurant operations workflows.",
+      "Integrate third-party systems such as POS, CRM, messaging, analytics, and payment tools.",
+      "Work with implementation and design teammates to convert outlet realities into reliable product behavior.",
+      "Own features from scope and architecture through build, QA, launch, and iteration.",
+    ],
+    requirements: [
+      "Strong TypeScript, React, and modern web fundamentals.",
+      "Comfort building server-rendered or statically exported web apps.",
+      "Experience with databases, API design, authentication, and production debugging.",
+      "Ability to write clear code and make practical tradeoffs without overbuilding.",
+      "Based in or able to work from Delhi.",
+    ],
+    niceToHave: [
+      "React Native or mobile app experience.",
+      "Experience integrating POS, CRM, WhatsApp, payments, or analytics platforms.",
+      "Interest in food, hospitality, franchise operations, or local commerce.",
+    ],
+    highlights: [
+      "Build tools that operators use in real outlets.",
+      "Work across client systems and productized SaaS.",
+      "Small team, high ownership, practical engineering culture.",
+    ],
   },
   {
-    title: "Implementation Specialist",
-    location: "Hybrid, Mumbai",
+    slug: "brand-content-producer",
+    title: "Brand & Content Producer",
+    location: "Delhi",
+    workMode: "On-site / field shoots",
+    team: "Production",
+    type: "Full-time",
+    experience: "1+ years",
     summary:
-      "Coordinate pilot rollouts, document outlet requirements, and support launch operations.",
+      "Plan and produce restaurant, chef, menu, and launch content for F&B brands preparing to scale.",
+    intro:
+      "You will help shape the production side of Restrovate: shoots, content calendars, chef-led brand assets, outlet launch material, and practical creative output that supports growth.",
+    responsibilities: [
+      "Plan shoot days for restaurants, private chefs, menus, launches, and founder-led brands.",
+      "Coordinate briefs, shot lists, locations, props, schedules, and delivery timelines.",
+      "Work with designers, marketers, editors, and client teams to turn strategy into usable content.",
+      "Maintain production checklists so shoots run cleanly and assets are easy to publish.",
+      "Support social, website, campaign, and case-study content needs after production.",
+    ],
+    requirements: [
+      "Experience planning or coordinating photo, video, social, or brand content.",
+      "Strong taste for food, hospitality, composition, and visual storytelling.",
+      "Organized enough to manage details before, during, and after a shoot.",
+      "Comfort working directly with founders, chefs, outlet teams, and vendors.",
+      "Based in or able to work from Delhi.",
+    ],
+    niceToHave: [
+      "Hands-on photography, videography, or editing experience.",
+      "Experience with food styling, restaurant shoots, or social-first campaigns.",
+      "Working knowledge of Instagram, YouTube Shorts, Reels, and basic content analytics.",
+    ],
+    highlights: [
+      "Work on real culinary brands, not generic stock campaigns.",
+      "Blend production with brand, marketing, and website work.",
+      "Help define the production playbook for a growing agency.",
+    ],
+  },
+  {
+    slug: "implementation-specialist",
+    title: "Implementation Specialist",
+    location: "Delhi",
+    workMode: "On-site / client visits",
+    team: "Operations",
+    type: "Full-time",
+    experience: "1+ years",
+    summary:
+      "Coordinate pilots, document outlet requirements, and support rollouts for restaurant operators.",
+    intro:
+      "You will sit close to the practical work: mapping outlet requirements, coordinating pilots, collecting operational details, and helping client teams adopt the systems Restrovate builds.",
+    responsibilities: [
+      "Document client requirements across outlets, menus, queues, complaints, loyalty, and franchise workflows.",
+      "Coordinate internal handoffs between legal, tech, marketing, and production workstreams.",
+      "Support product pilots and launches with checklists, training notes, and issue tracking.",
+      "Visit client locations when needed to understand real outlet operations.",
+      "Turn repeated rollout friction into better processes, templates, and product feedback.",
+    ],
+    requirements: [
+      "Strong written communication, follow-through, and operational organization.",
+      "Comfort speaking with founders, outlet managers, franchisees, and internal teams.",
+      "Ability to convert messy real-world requirements into clear tasks and notes.",
+      "Bias toward practical resolution instead of vague coordination.",
+      "Based in or able to work from Delhi.",
+    ],
+    niceToHave: [
+      "Experience in hospitality, SaaS onboarding, project coordination, or agency operations.",
+      "Familiarity with restaurant POS, delivery, CRM, queue, or loyalty systems.",
+      "Comfort using spreadsheets, Notion-style docs, and issue trackers.",
+    ],
+    highlights: [
+      "Work where software meets real outlet operations.",
+      "Learn across paperwork, tech, marketing, and production.",
+      "High context role with direct client and founder exposure.",
+    ],
   },
 ];
 
