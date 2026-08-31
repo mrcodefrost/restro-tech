@@ -1,8 +1,17 @@
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, FileText, TriangleAlert } from "lucide-react";
+import { ArrowLeft, CheckCircle, FileText, Warning } from "@phosphor-icons/react/ssr";
 import { servicePillars, type Service } from "@/core/site";
 import { ButtonLink } from "../shared/components/button-link";
 import { FaqAccordion } from "../shared/components/faq-accordion";
+import { StepFlow } from "../shared/components/step-flow";
+
+const pillarInterest: Record<Service["pillar"], string> = {
+  legal: "Paperwork & compliance",
+  tech: "Tech",
+  marketing: "Marketing",
+  production: "Production",
+  general: "Something else",
+};
 
 type ServiceDetailPageProps = {
   service: Service;
@@ -10,6 +19,7 @@ type ServiceDetailPageProps = {
 
 export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
   const pillar = servicePillars.find((item) => item.id === service.pillar);
+  const contactHref = `/contact?interest=${encodeURIComponent(pillarInterest[service.pillar])}&topic=${encodeURIComponent(service.title)}`;
 
   return (
     <article>
@@ -19,7 +29,7 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
             href="/services"
             className="inline-flex items-center gap-2 rounded-full bg-[#f7f8fa] px-4 py-2.5 text-sm font-medium text-[#1c1c1e]"
           >
-            <ArrowLeft size={16} />
+            <ArrowLeft size={16} weight="duotone" />
             Services
           </Link>
 
@@ -68,7 +78,7 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
             <ul className="mt-6 grid gap-3">
               {service.deliverables.map((item) => (
                 <li key={item} className="flex gap-3 rounded-xl border border-[#eef0f3] bg-white p-4">
-                  <CheckCircle2 className="mt-0.5 shrink-0 text-[#4262ff]" size={20} />
+                  <CheckCircle className="mt-0.5 shrink-0 text-[#4262ff]" size={20} weight="duotone" />
                   <span className="text-sm font-medium leading-6 text-[#1c1c1e]">
                     {item}
                   </span>
@@ -87,8 +97,8 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
                 <ul className="mt-6 grid gap-3">
                   {service.requirements.map((item) => (
                     <li key={item} className="relative flex overflow-hidden gap-3 rounded-xl bg-[#f5f3ff] p-4">
-                      <TriangleAlert className="absolute -right-4 -top-4 text-[#4262ff]/10" size={72} strokeWidth={1.5} />
-                      <FileText className="relative mt-0.5 shrink-0 text-[#4262ff]" size={20} />
+                      <Warning className="absolute -right-4 -top-4 text-[#4262ff]/10" size={72} weight="duotone" />
+                      <FileText className="relative mt-0.5 shrink-0 text-[#4262ff]" size={20} weight="duotone" />
                       <span className="relative text-sm font-medium leading-6 text-[#1c1c1e]">
                         {item}
                       </span>
@@ -106,21 +116,11 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
             <h2 className="mt-3 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e]">
               Our process
             </h2>
-            <div className="mt-6 grid gap-3">
-              {service.process.map((step, index) => (
-                <article key={step.title} className="rounded-2xl bg-[#1c1c1e] p-5 text-white">
-                  <span
-                    className="text-sm font-medium"
-                    style={{ color: pillar?.color.accent ?? "#ffd02f" }}
-                  >
-                    0{index + 1}
-                  </span>
-                  <h3 className="mt-2 text-lg font-medium">{step.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-white/70">
-                    {step.summary}
-                  </p>
-                </article>
-              ))}
+            <div className="mt-6">
+              <StepFlow
+                steps={service.process}
+                accentColor={pillar?.color.accent ?? "#ffd02f"}
+              />
             </div>
           </div>
         </div>
@@ -153,7 +153,7 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
               Bring one restaurant expansion problem to the table.
             </h2>
           </div>
-          <ButtonLink href="/contact">Book a Discovery Call</ButtonLink>
+          <ButtonLink href={contactHref}>Book a Discovery Call</ButtonLink>
         </div>
       </section>
     </article>

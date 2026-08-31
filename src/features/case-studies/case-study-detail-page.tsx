@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, CheckCircle } from "@phosphor-icons/react/ssr";
 import type { CaseStudy } from "@/core/site";
 import { ButtonLink } from "../shared/components/button-link";
 import { Placeholder } from "../shared/components/placeholder";
@@ -25,7 +25,7 @@ export function CaseStudyDetailPage({ study }: CaseStudyDetailPageProps) {
             href="/case-studies"
             className="inline-flex items-center gap-2 rounded-full bg-[#f7f8fa] px-4 py-2.5 text-sm font-medium text-[#1c1c1e]"
           >
-            <ArrowLeft size={16} />
+            <ArrowLeft size={16} weight="duotone" />
             Case studies
           </Link>
 
@@ -178,9 +178,10 @@ export function CaseStudyDetailPage({ study }: CaseStudyDetailPageProps) {
                           key={bullet}
                           className="flex gap-3 text-sm font-medium leading-6 text-[#555a6a]"
                         >
-                          <CheckCircle2
+                          <CheckCircle
                             className="mt-0.5 shrink-0 text-[#4262ff]"
                             size={18}
+                            weight="duotone"
                           />
                           <span>{bullet}</span>
                         </li>

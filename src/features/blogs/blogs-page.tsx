@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CalendarDays, Clock, UserRound } from "lucide-react";
+import { CalendarBlank, Clock, UserCircle } from "@phosphor-icons/react/ssr";
 import { blogPosts } from "@/core/site";
 import { PageHero } from "../shared/components/page-hero";
 import { Placeholder } from "../shared/components/placeholder";
@@ -45,15 +45,15 @@ export function BlogsPage() {
               <p className="mt-3 leading-7 text-[#555a6a]">{post.excerpt}</p>
               <div className="mt-6 grid gap-2 text-sm font-medium text-[#6b6f7e]">
                 <span className="flex items-center gap-2">
-                  <UserRound size={16} />
+                  <UserCircle size={16} weight="duotone" />
                   {post.author}
                 </span>
                 <span className="flex items-center gap-2">
-                  <CalendarDays size={16} />
+                  <CalendarBlank size={16} weight="duotone" />
                   {post.publishedAt}
                 </span>
                 <span className="flex items-center gap-2">
-                  <Clock size={16} />
+                  <Clock size={16} weight="duotone" />
                   {post.readTime}
                 </span>
               </div>

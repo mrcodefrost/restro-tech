@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "@phosphor-icons/react/ssr";
 import { caseStudies } from "@/core/site";
 import { Placeholder } from "../shared/components/placeholder";
 
@@ -59,7 +59,7 @@ export function CaseStudiesPage() {
                     </p>
                     <span className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-[#4262ff]">
                       Read report
-                      <ArrowUpRight size={16} />
+                      <ArrowUpRight size={16} weight="duotone" />
                     </span>
                   </div>
                 </div>

@@ -1,12 +1,12 @@
 import Link from "next/link";
 import {
   ArrowLeft,
-  CalendarDays,
-  CheckCircle2,
+  CalendarBlank,
+  CheckCircle,
   Clock,
   Tag,
-  UserRound,
-} from "lucide-react";
+  UserCircle,
+} from "@phosphor-icons/react/ssr";
 import type { BlogPost } from "@/core/site";
 import { ButtonLink } from "../shared/components/button-link";
 import { Placeholder } from "../shared/components/placeholder";
@@ -27,7 +27,7 @@ export function BlogDetailPage({ post }: BlogDetailPageProps) {
               href="/blogs"
               className="inline-flex items-center gap-2 rounded-full bg-[#f7f8fa] px-4 py-2.5 text-sm font-medium text-[#1c1c1e]"
             >
-              <ArrowLeft size={16} />
+              <ArrowLeft size={16} weight="duotone" />
               Blogs
             </Link>
             <div className="mt-6 grid gap-3 lg:grid-cols-[0.95fr_1.05fr]">
@@ -42,9 +42,9 @@ export function BlogDetailPage({ post }: BlogDetailPageProps) {
                   {post.deck}
                 </p>
                 <div className="mt-8 grid gap-2 sm:grid-cols-2">
-                  <MetaItem icon={UserRound} label={post.author} />
+                  <MetaItem icon={UserCircle} label={post.author} />
                   <MetaItem icon={Clock} label={post.readTime} />
-                  <MetaItem icon={CalendarDays} label={post.publishedAt} />
+                  <MetaItem icon={CalendarBlank} label={post.publishedAt} />
                   <MetaItem icon={Tag} label={post.tags.join(", ")} />
                 </div>
                 <p className="mt-5 text-sm font-medium text-[#6b6f7e]">
@@ -79,7 +79,7 @@ export function BlogDetailPage({ post }: BlogDetailPageProps) {
               <div className="mt-5 grid gap-3">
                 {post.keyTakeaways.map((takeaway) => (
                   <div key={takeaway} className="flex gap-3 rounded-2xl bg-[#f7f8fa] p-4">
-                    <CheckCircle2 className="mt-0.5 shrink-0 text-[#4262ff]" size={20} />
+                    <CheckCircle className="mt-0.5 shrink-0 text-[#4262ff]" size={20} weight="duotone" />
                     <p className="font-medium leading-6 text-[#1c1c1e]">
                       {takeaway}
                     </p>
@@ -111,7 +111,7 @@ export function BlogDetailPage({ post }: BlogDetailPageProps) {
                   <ul className="mt-6 grid gap-3 rounded-2xl bg-[#f7f8fa] p-6">
                     {section.bullets.map((bullet) => (
                       <li key={bullet} className="flex gap-3 font-medium leading-7 text-[#1c1c1e]">
-                        <CheckCircle2 className="mt-1 shrink-0 text-[#4262ff]" size={20} />
+                        <CheckCircle className="mt-1 shrink-0 text-[#4262ff]" size={20} weight="duotone" />
                         <span>{bullet}</span>
                       </li>
                     ))}
@@ -153,7 +153,7 @@ function MetaItem({
 }) {
   return (
     <div className="flex items-center gap-2 rounded-xl bg-[#f7f8fa] p-4 text-sm font-medium text-[#1c1c1e]">
-      <Icon className="shrink-0 text-[#4262ff]" size={18} />
+      <Icon className="shrink-0 text-[#4262ff]" size={18} weight="duotone" />
       <span>{label}</span>
     </div>
   );

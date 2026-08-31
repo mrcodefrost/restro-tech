@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
-import { CheckCircle2, Mail, MessageSquareText } from "lucide-react";
+import { CheckCircle, EnvelopeSimple } from "@phosphor-icons/react/ssr";
 import { siteConfig } from "@/core/site";
 import { SocialLinks } from "../shared/components/social-links";
 
@@ -52,6 +53,16 @@ function validate(formData: FormData) {
 }
 
 export function ContactPage() {
+  const searchParams = useSearchParams();
+  const topic = searchParams.get("topic");
+  const interestFromUrl = searchParams.get("interest");
+  const defaultInterest = interestOptions.includes(interestFromUrl ?? "")
+    ? (interestFromUrl as string)
+    : interestOptions[0];
+  const defaultMessage = topic
+    ? `I'm interested in learning more about ${topic}. `
+    : "";
+
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(false);
@@ -124,7 +135,7 @@ export function ContactPage() {
                 href={`mailto:${siteConfig.email}`}
                 className="inline-flex items-center gap-2 text-sm font-medium text-[#1c1c1e] hover:underline"
               >
-                <Mail size={18} />
+                <EnvelopeSimple size={18} weight="duotone" />
                 {siteConfig.email}
               </a>
               <SocialLinks />
@@ -140,7 +151,7 @@ export function ContactPage() {
             {submitted ? (
               <div className="flex min-h-[520px] flex-col items-start justify-center gap-4">
                 <div className="grid size-12 place-items-center rounded-full bg-[#1c1c1e] text-white">
-                  <CheckCircle2 size={26} />
+                  <CheckCircle size={26} weight="duotone" />
                 </div>
                 <h2 className="text-2xl font-medium text-[#1c1c1e]">
                   Message sent.
@@ -152,21 +163,6 @@ export function ContactPage() {
               </div>
             ) : (
               <>
-                <div className="mb-6 flex items-start gap-3">
-                  <span className="grid size-10 shrink-0 place-items-center rounded-full bg-[#fff8e0] text-[#746019]">
-                    <MessageSquareText size={20} />
-                  </span>
-                  <div>
-                    <h2 className="text-2xl font-medium text-[#1c1c1e]">
-                      Start the discovery form
-                    </h2>
-                    <p className="mt-1 text-sm leading-6 text-[#6b6f7e]">
-                      Required fields are marked. We only ask for what helps us
-                      route your request properly.
-                    </p>
-                  </div>
-                </div>
-
                 <form
                   name="contact"
                   method="POST"
@@ -228,7 +224,7 @@ export function ContactPage() {
                     <select
                       id="interest"
                       name="interest"
-                      defaultValue={interestOptions[0]}
+                      defaultValue={defaultInterest}
                       required
                       className="mt-2 w-full rounded-xl border border-[#c7cad5] bg-white px-4 py-3 text-sm font-medium text-[#1c1c1e] focus:border-[#4262ff] focus:outline-none"
                     >
@@ -253,6 +249,7 @@ export function ContactPage() {
                       required
                       minLength={20}
                       rows={5}
+                      defaultValue={defaultMessage}
                       aria-invalid={Boolean(fieldErrors.message)}
                       aria-describedby={
                         fieldErrors.message ? "message-error" : undefined

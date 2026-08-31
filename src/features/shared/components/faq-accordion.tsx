@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { CaretDown } from "@phosphor-icons/react/ssr";
 import type { FaqItem } from "@/core/site";
 
 type FaqAccordionProps = {
@@ -46,8 +46,9 @@ export function FaqAccordion({
                 className="grid size-9 shrink-0 place-items-center rounded-full border border-[#e0e2e8] bg-white transition-colors group-hover:border-[#c7cad5]"
                 style={{ color: isOpen ? accentColor : "#555a6a" }}
               >
-                <ChevronDown
+                <CaretDown
                   size={18}
+                  weight="duotone"
                   className={`transition-transform duration-300 ${
                     isOpen ? "rotate-180" : ""
                   }`}

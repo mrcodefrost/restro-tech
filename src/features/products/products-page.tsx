@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, CheckCircle2, TriangleAlert } from "lucide-react";
+import { ArrowUpRight, CheckCircle, Warning } from "@phosphor-icons/react/ssr";
 import { products } from "@/core/site";
 import { PageHero } from "../shared/components/page-hero";
 import { ButtonLink } from "../shared/components/button-link";
@@ -46,10 +46,10 @@ export function ProductsPage() {
                   className="relative mt-5 overflow-hidden rounded-xl p-4"
                   style={{ backgroundColor: product.color.soft }}
                 >
-                  <TriangleAlert
+                  <Warning
                     className="absolute -right-4 -top-4 opacity-20"
                     size={72}
-                    strokeWidth={1.5}
+                    weight="duotone"
                     style={{ color: product.color.text }}
                   />
                   <p
@@ -66,10 +66,11 @@ export function ProductsPage() {
                 <ul className="mt-5 grid flex-1 gap-2">
                   {product.features.map((feature) => (
                     <li key={feature} className="flex gap-3 text-sm leading-6 text-[#555a6a]">
-                      <CheckCircle2
+                      <CheckCircle
                         className="mt-0.5 shrink-0"
                         style={{ color: product.color.accent }}
                         size={18}
+                        weight="duotone"
                       />
                       <span>{feature}</span>
                     </li>
@@ -84,6 +85,7 @@ export function ProductsPage() {
                   Learn more
                   <ArrowUpRight
                     size={16}
+                    weight="duotone"
                     className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   />
                 </Link>
@@ -99,7 +101,7 @@ export function ProductsPage() {
             Why not just use standard POS?
           </p>
           <h2 className="mt-4 max-w-3xl text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
-            Petpooja and Restroworks solve point of sale. They weren&apos;t built for franchise management.
+            Standard POS solves point of sale. It wasn&apos;t built for franchise management.
           </h2>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-[#555a6a]">
             Standard restaurant POS platforms are built for a single

@@ -1,4 +1,4 @@
-import { ImageIcon } from "lucide-react";
+import { Image as ImageIcon } from "@phosphor-icons/react/ssr";
 import { publicAsset } from "@/core/paths";
 
 type PlaceholderProps = {
@@ -35,7 +35,7 @@ export function Placeholder({
           className={`h-full w-full object-cover ${imageClassName}`}
         />
       ) : (
-        <ImageIcon className="text-[#c7cad5]" size={28} strokeWidth={1.5} />
+        <ImageIcon className="text-[#c7cad5]" size={28} weight="duotone" />
       )}
       {label ? (
         <span className="absolute bottom-3 left-3 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-[#1c1c1e] shadow-sm">

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { ContactPage } from "@/features/contact/contact-page";
 
@@ -8,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <ContactPage />;
+  return (
+    <Suspense fallback={null}>
+      <ContactPage />
+    </Suspense>
+  );
 }

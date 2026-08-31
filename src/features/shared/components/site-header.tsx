@@ -5,19 +5,19 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowUpRight,
-  BriefcaseBusiness,
-  Building2,
+  Briefcase,
+  Buildings,
   Camera,
-  ChevronDown,
-  ClipboardCheck,
-  Mail,
-  Menu,
+  CaretDown,
+  ListChecks,
+  EnvelopeSimple,
+  List,
   Megaphone,
-  MonitorSmartphone,
+  Devices,
   Newspaper,
   Users,
   X,
-} from "lucide-react";
+} from "@phosphor-icons/react/ssr";
 import { products, servicePillars, services } from "@/core/site";
 import { ButtonLink } from "./button-link";
 import { SiteLogo } from "./site-logo";
@@ -47,7 +47,7 @@ const servicesColumns: MegaColumn[] = servicePillars.map((pillar) => ({
       label: service.title,
       href: `/services/${service.slug}`,
     })),
-  viewAllHref: `/services#${pillar.id}`,
+  viewAllHref: `/services?pillar=${pillar.id}`,
   viewAllLabel: `All ${pillar.title.toLowerCase()} services`,
 }));
 
@@ -99,7 +99,7 @@ const aboutColumn: MegaColumn = {
 type MenuKey = "services" | "products" | "about" | null;
 
 
-function ProductsMegaPanel() {
+function ProductsMegaPanel({ onNavigate }: { onNavigate: () => void }) {
   return (
     <div className="grid gap-6 lg:grid-cols-[0.78fr_1.22fr]">
       <div className="rounded-2xl bg-[#1c1c1e] p-6 text-white">
@@ -115,10 +115,11 @@ function ProductsMegaPanel() {
         </p>
         <Link
           href="/products"
+          onClick={onNavigate}
           className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-medium text-[#1c1c1e]"
         >
           See products
-          <ArrowUpRight size={16} />
+          <ArrowUpRight size={16} weight="duotone" />
         </Link>
       </div>
 
@@ -127,6 +128,7 @@ function ProductsMegaPanel() {
           <Link
             key={product.slug}
             href={`/products/${product.slug}`}
+            onClick={onNavigate}
             className="group rounded-2xl border border-[#eef0f3] p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c7cad5] hover:shadow-[0_16px_36px_-28px_rgba(5,0,56,0.4)]"
             style={{ backgroundColor: product.color.soft }}
           >
@@ -141,7 +143,7 @@ function ProductsMegaPanel() {
                 {product.name}
               </h4>
               <span className="grid size-8 shrink-0 place-items-center rounded-full bg-white text-[#1c1c1e] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                <ArrowUpRight size={16} />
+                <ArrowUpRight size={16} weight="duotone" />
               </span>
             </div>
             <p className="mt-2 text-xs leading-5 text-[#555a6a]">
@@ -155,14 +157,14 @@ function ProductsMegaPanel() {
 }
 
 const serviceIcons = {
-  legal: ClipboardCheck,
-  tech: MonitorSmartphone,
+  legal: ListChecks,
+  tech: Devices,
   marketing: Megaphone,
   production: Camera,
-  general: BriefcaseBusiness,
+  general: Briefcase,
 };
 
-function ServicesMegaPanel() {
+function ServicesMegaPanel({ onNavigate }: { onNavigate: () => void }) {
   return (
     <div className="grid gap-3 xl:grid-cols-4">
       {servicesColumns.map((column) => {
@@ -170,7 +172,7 @@ function ServicesMegaPanel() {
         return (
           <div
             key={column.id}
-            className="rounded-2xl border border-[#eef0f3] p-4"
+            className="flex h-full flex-col rounded-2xl border border-[#eef0f3] p-4"
             style={{ backgroundColor: column.soft }}
           >
             <div className="flex items-start justify-between gap-3">
@@ -178,29 +180,32 @@ function ServicesMegaPanel() {
                 className="grid size-10 place-items-center rounded-full bg-white"
                 style={{ color: column.text }}
               >
-                <Icon size={19} strokeWidth={2} />
+                <Icon size={19} weight="duotone" />
               </div>
               <Link
                 href={column.viewAllHref ?? "/services"}
+                onClick={onNavigate}
                 className="grid size-8 shrink-0 place-items-center rounded-full bg-white text-[#1c1c1e] transition-transform duration-300 hover:translate-x-0.5 hover:-translate-y-0.5"
                 aria-label={column.viewAllLabel}
               >
-                <ArrowUpRight size={16} />
+                <ArrowUpRight size={16} weight="duotone" />
               </Link>
             </div>
             <h4 className="mt-4 text-lg font-semibold text-[#1c1c1e]">
               {column.title}
             </h4>
-            <ul className="mt-4 space-y-1.5">
+            <ul className="mt-4 flex-1 space-y-1.5">
               {column.items.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
+                    onClick={onNavigate}
                     className="group/item flex items-center justify-between gap-2 rounded-lg bg-white/65 px-3 py-2 text-xs font-medium text-[#1c1c1e] transition-all duration-200 hover:bg-white"
                   >
                     <span>{item.label}</span>
                     <ArrowUpRight
                       size={13}
+                      weight="duotone"
                       className="shrink-0 opacity-45 transition-all duration-200 group-hover/item:translate-x-0.5 group-hover/item:-translate-y-0.5 group-hover/item:opacity-100"
                     />
                   </Link>
@@ -210,6 +215,7 @@ function ServicesMegaPanel() {
             {column.viewAllHref && column.viewAllLabel ? (
               <Link
                 href={column.viewAllHref}
+                onClick={onNavigate}
                 className="mt-4 inline-flex items-center gap-1 text-xs font-semibold"
                 style={{ color: column.text }}
               >
@@ -228,24 +234,25 @@ function ServicesMegaPanel() {
 
 const aboutCardTones: Record<
   string,
-  { icon: typeof Building2; soft: string; text: string }
+  { icon: typeof Buildings; soft: string; text: string }
 > = {
-  "/about": { icon: Building2, soft: "#f7f8fa", text: "#1c1c1e" },
+  "/about": { icon: Buildings, soft: "#f7f8fa", text: "#1c1c1e" },
   "/blogs": { icon: Newspaper, soft: "#c3faf5", text: "#187574" },
   "/careers": { icon: Users, soft: "#fff8e0", text: "#746019" },
-  "/contact": { icon: Mail, soft: "#ffc6c6", text: "#600000" },
+  "/contact": { icon: EnvelopeSimple, soft: "#ffc6c6", text: "#600000" },
 };
 
-function AboutMegaPanel() {
+function AboutMegaPanel({ onNavigate }: { onNavigate: () => void }) {
   return (
     <div className="grid gap-3 xl:grid-cols-4">
       {aboutColumn.items.map((item) => {
         const tone = aboutCardTones[item.href];
-        const Icon = tone?.icon ?? Building2;
+        const Icon = tone?.icon ?? Buildings;
         return (
           <Link
             key={item.href}
             href={item.href}
+            onClick={onNavigate}
             className="group rounded-2xl border border-[#eef0f3] p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c7cad5] hover:shadow-[0_16px_36px_-28px_rgba(5,0,56,0.4)]"
             style={{ backgroundColor: tone?.soft ?? "#f7f8fa" }}
           >
@@ -254,10 +261,10 @@ function AboutMegaPanel() {
                 className="grid size-10 place-items-center rounded-full bg-white"
                 style={{ color: tone?.text ?? "#1c1c1e" }}
               >
-                <Icon size={19} strokeWidth={2} />
+                <Icon size={19} weight="duotone" />
               </div>
               <span className="grid size-8 shrink-0 place-items-center rounded-full bg-white text-[#1c1c1e] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                <ArrowUpRight size={16} />
+                <ArrowUpRight size={16} weight="duotone" />
               </span>
             </div>
             <h4 className="mt-4 text-lg font-semibold text-[#1c1c1e]">
@@ -295,8 +302,9 @@ function NavTrigger({
       className="relative flex items-center gap-1 rounded-full px-4 py-2.5 text-sm font-medium text-[#1c1c1e] transition-colors"
     >
       <span className="relative z-10">{label}</span>
-      <ChevronDown
+      <CaretDown
         size={14}
+        weight="duotone"
         className={`relative z-10 transition-transform duration-300 ${active ? "rotate-180" : ""}`}
       />
       {active ? (
@@ -409,7 +417,7 @@ export function SiteHeader() {
           onClick={() => setOpen((value) => !value)}
           className="ml-auto grid size-10 shrink-0 place-items-center rounded-full text-[#1c1c1e] transition-colors hover:bg-[#f7f8fa] lg:hidden"
         >
-          {open ? <X size={22} /> : <Menu size={22} />}
+          {open ? <X size={22} weight="duotone" /> : <List size={22} weight="duotone" />}
         </button>
 
         <AnimatePresence>
@@ -425,11 +433,11 @@ export function SiteHeader() {
             >
               <div className="mx-auto max-w-7xl px-10 py-8 lg:px-12">
                 {activeMenu === "services" ? (
-                  <ServicesMegaPanel />
+                  <ServicesMegaPanel onNavigate={() => setActiveMenu(null)} />
                 ) : activeMenu === "products" ? (
-                  <ProductsMegaPanel />
+                  <ProductsMegaPanel onNavigate={() => setActiveMenu(null)} />
                 ) : (
-                  <AboutMegaPanel />
+                  <AboutMegaPanel onNavigate={() => setActiveMenu(null)} />
                 )}
               </div>
             </motion.div>
@@ -527,8 +535,9 @@ function MobileGroup({
         className="flex w-full items-center justify-between rounded-full px-4 py-2.5 text-sm font-medium text-[#1c1c1e] transition-colors hover:bg-[#f7f8fa]"
       >
         {label}
-        <ChevronDown
+        <CaretDown
           size={16}
+          weight="duotone"
           className={`transition-transform duration-300 ${expanded ? "rotate-180" : ""}`}
         />
       </button>

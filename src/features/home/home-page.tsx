@@ -6,17 +6,17 @@ import { publicAsset } from "@/core/paths";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
-  BadgeCheck,
-  BarChart3,
-  ClipboardCheck,
-  ClipboardList,
+  SealCheck,
+  ChartBar,
+  ListChecks,
+  ClipboardText,
   MapPin,
-  MessageSquareText,
+  ChatText,
   Rocket,
   Star,
-  Store,
-  TriangleAlert,
-} from "lucide-react";
+  Storefront,
+  Warning,
+} from "@phosphor-icons/react/ssr";
 import {
   clientProof,
   conversionProblems,
@@ -28,6 +28,7 @@ import {
 } from "@/core/site";
 import { ButtonLink } from "../shared/components/button-link";
 import { FaqAccordion } from "../shared/components/faq-accordion";
+import { StepFlow } from "../shared/components/step-flow";
 import {
   FloatingElement,
   ParallaxFloating,
@@ -39,8 +40,8 @@ const reveal = {
   show: { opacity: 1, y: 0 },
 };
 
-const problemIcons = [TriangleAlert, ClipboardList, Star, ClipboardCheck];
-const expertiseIcons = [ClipboardCheck, Store, BadgeCheck, Rocket];
+const problemIcons = [Warning, ClipboardText, Star, ListChecks];
+const expertiseIcons = [ListChecks, Storefront, SealCheck, Rocket];
 
 function FloatingMetricCard({
   label,
@@ -51,7 +52,7 @@ function FloatingMetricCard({
   label: string;
   value: string;
   tone: "yellow" | "teal" | "coral" | "blue";
-  icon: typeof BarChart3;
+  icon: typeof ChartBar;
 }) {
   const tones = {
     yellow: "bg-[#fff8e0] text-[#746019]",
@@ -65,7 +66,7 @@ function FloatingMetricCard({
       <div
         className={`inline-grid size-9 place-items-center rounded-full ${tones[tone]}`}
       >
-        <Icon size={18} strokeWidth={2} />
+        <Icon size={18} weight="duotone" />
       </div>
       <p className="mt-3 text-2xl font-medium leading-none text-[#1c1c1e]">
         {value}
@@ -153,7 +154,7 @@ function HeroFloatingBackground() {
       >
         <div style={{ transform: "rotate(6deg)" }}>
           <FloatingMetricCard
-            icon={BarChart3}
+            icon={ChartBar}
             tone="teal"
             value="4.8"
             label="direct feedback signal per outlet"
@@ -166,7 +167,7 @@ function HeroFloatingBackground() {
       >
         <div style={{ transform: "rotate(5deg)" }}>
           <FloatingMetricCard
-            icon={MessageSquareText}
+            icon={ChatText}
             tone="coral"
             value="Q"
             label="wait-time alerts over WhatsApp"
@@ -179,7 +180,7 @@ function HeroFloatingBackground() {
       >
         <div style={{ transform: "rotate(-5deg)" }}>
           <FloatingMetricCard
-            icon={Store}
+            icon={Storefront}
             tone="blue"
             value="200"
             label="outlet operations without generic tooling"
@@ -338,7 +339,7 @@ export function HomePage() {
               return (
                 <Reveal key={problem.title} delay={index * 0.06} className="h-full">
                   <article className="relative h-full overflow-hidden rounded-2xl border border-[#eef0f3] bg-white p-6">
-                    <Icon className="relative text-[#4262ff]" size={24} strokeWidth={2} />
+                    <Icon className="relative text-[#4262ff]" size={24} weight="duotone" />
                     <h3 className="mt-4 text-lg font-medium leading-tight text-[#1c1c1e]">
                       {problem.title}
                     </h3>
@@ -373,7 +374,7 @@ export function HomePage() {
               return (
                 <Reveal key={signal.title} delay={index * 0.05} className="h-full">
                   <article className="h-full rounded-2xl border border-[#eef0f3] bg-white p-6">
-                    <Icon className="text-[#4262ff]" size={24} strokeWidth={2} />
+                    <Icon className="text-[#4262ff]" size={24} weight="duotone" />
                     <h3 className="mt-4 text-lg font-medium text-[#1c1c1e]">
                       {signal.title}
                     </h3>
@@ -438,21 +439,14 @@ export function HomePage() {
             </h2>
           </Reveal>
 
-          <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
-            {processSteps.map((step, index) => (
-              <Reveal key={step.title} delay={index * 0.05} className="h-full">
-                <article className="h-full rounded-2xl bg-white/5 p-6">
-                  <span className="text-sm font-medium text-[#ffd02f]">
-                    0{index + 1}
-                  </span>
-                  <h3 className="mt-3 text-lg font-medium">{step.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-white/70">
-                    {step.summary}
-                  </p>
-                </article>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal className="mt-10">
+            <StepFlow
+              steps={processSteps}
+              accentColor="#ffd02f"
+              cardClassName="bg-white/5 text-white"
+              direction="horizontal"
+            />
+          </Reveal>
         </div>
       </section>
 
@@ -482,6 +476,7 @@ export function HomePage() {
                   <ArrowUpRight
                     className="absolute right-5 top-5 text-[#1c1c1e] opacity-45 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100"
                     size={20}
+                    weight="duotone"
                   />
                   <p
                     className="max-w-[calc(100%-32px)] text-xs font-semibold uppercase tracking-wide"
@@ -521,7 +516,7 @@ export function HomePage() {
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {clientProof.map((proof, index) => (
               <Reveal key={proof.brand} delay={index * 0.06} className="h-full">
-                <a
+                <Link
                   href={proof.href}
                   className="group flex h-full flex-col rounded-2xl border border-[#eef0f3] bg-white p-6"
                 >
@@ -538,10 +533,11 @@ export function HomePage() {
                     Read case study
                     <ArrowUpRight
                       size={16}
+                      weight="duotone"
                       className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                     />
                   </span>
-                </a>
+                </Link>
               </Reveal>
             ))}
           </div>

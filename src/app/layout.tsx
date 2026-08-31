@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`h-full antialiased ${jakarta.variable}`}>
+    <html lang="en" className={`h-full scroll-smooth antialiased ${jakarta.variable}`}>
       <body className="flex min-h-full flex-col bg-white font-sans text-[#1c1c1e]">
         <SiteShell>{children}</SiteShell>
       </body>

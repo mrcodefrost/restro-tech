@@ -77,7 +77,7 @@ export function SiteFooter() {
               {footerServiceColumns.map((column) => (
                 <div key={column.id}>
                   <Link
-                    href={`/services#${column.id}`}
+                    href={`/services?pillar=${column.id}`}
                     className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-white/70 hover:text-white"
                   >
                     <span
