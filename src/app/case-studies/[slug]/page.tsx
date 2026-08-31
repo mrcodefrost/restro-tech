@@ -26,7 +26,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${study.title} | RestroScale Case Study`,
+    title: `${study.title} | Restrovate Case Study`,
     description: study.summary,
   };
 }

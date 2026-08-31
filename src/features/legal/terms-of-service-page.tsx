@@ -16,8 +16,8 @@ export function TermsOfServicePage() {
           <Section title="1. Who we are">
             <p>
               This website, restro.tech, is operated by Synrad Labs Private
-              Limited under the brand name RestroScale
-              (&quot;RestroScale&quot;, &quot;we&quot;, &quot;us&quot;, or
+              Limited under the brand name Restrovate
+              (&quot;Restrovate&quot;, &quot;we&quot;, &quot;us&quot;, or
               &quot;our&quot;). By using this website, you agree to these
               Terms of Service.
             </p>
@@ -26,7 +26,7 @@ export function TermsOfServicePage() {
           <Section title="2. Website use">
             <p>
               This website is provided to give you information about
-              RestroScale&apos;s services and products, and to let you
+              Restrovate&apos;s services and products, and to let you
               contact us. You agree to use it only for lawful purposes and
               not to attempt to disrupt or compromise its operation.
             </p>
@@ -38,7 +38,7 @@ export function TermsOfServicePage() {
               informational and do not by themselves constitute a binding
               offer. Any specific engagement, including scope, timeline,
               pricing, and deliverables, is governed by a separate written
-              agreement between RestroScale and the client.
+              agreement between Restrovate and the client.
             </p>
           </Section>
 

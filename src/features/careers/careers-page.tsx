@@ -12,7 +12,7 @@ export function CareersPage() {
         ctaHref="mailto:relations@synradlabs.com"
         mockupLabel="Open roles"
         mockupSrc="/assets/about/team-collaboration-placeholder.png"
-        mockupAlt="RestroScale team workspace for F&B systems, consulting, marketing, and legal work"
+        mockupAlt="Restrovate team workspace for F&B systems, consulting, marketing, and legal work"
         mockupImageClassName="object-center"
       />
       <section className="mx-auto max-w-7xl px-6 pb-20 md:px-10 lg:px-12">

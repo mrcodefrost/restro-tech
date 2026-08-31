@@ -42,7 +42,7 @@ export function SocialLinks({ tone = "light" }: SocialLinksProps) {
           href={link.href}
           target="_blank"
           rel="noreferrer"
-          aria-label={`RestroScale on ${link.label}`}
+          aria-label={`Restrovate on ${link.label}`}
           className={`grid size-10 place-items-center rounded-full border transition-colors ${
             isDark
               ? "border-white/15 text-white/70 hover:border-white/35 hover:text-white"

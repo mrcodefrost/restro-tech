@@ -26,7 +26,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${product.name} | RestroScale Products`,
+    title: `${product.name} | Restrovate Products`,
     description: product.summary,
   };
 }

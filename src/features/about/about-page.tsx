@@ -6,14 +6,14 @@ export function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="About RestroScale"
+        eyebrow="About Restrovate"
         title="A focused agency for food & beverage (F&B) brands at every stage of the franchise journey."
         summary="We handle paperwork, tech, marketing, and production for franchise and multi-outlet restaurant teams, plus the private chefs and catering businesses building a brand of their own."
         ctaLabel="View case studies"
         ctaHref="/case-studies"
-        mockupLabel="RestroScale team"
+        mockupLabel="Restrovate team"
         mockupSrc="/assets/about/team-collaboration-placeholder.png"
-        mockupAlt="RestroScale multidisciplinary team workspace"
+        mockupAlt="Restrovate multidisciplinary team workspace"
         mockupImageClassName="object-center"
       />
       <section className="mx-auto grid max-w-7xl gap-10 px-6 py-20 md:grid-cols-2 md:px-10 lg:px-12">
@@ -27,7 +27,7 @@ export function AboutPage() {
         </div>
         <div className="space-y-5 text-lg leading-8 text-[#555a6a]">
           <p>
-            RestroScale is a specialist agency for F&B brands. We&apos;re
+            Restrovate is a specialist agency for F&B brands. We&apos;re
             agency-first, with four standalone tools on the side, queue &amp;
             reservations, feedback &amp; analytics, loyalty, and franchise
             complaint tracking, that grew out of problems we kept solving
@@ -46,7 +46,7 @@ export function AboutPage() {
         <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[0.95fr_1.05fr] md:items-center">
           <Placeholder
             src="/assets/about/team-collaboration-placeholder.png"
-            alt="RestroScale team collaboration placeholder with engineering, consulting, marketing, and legal workstreams"
+            alt="Restrovate team collaboration placeholder with engineering, consulting, marketing, and legal workstreams"
             className="aspect-[16/10] w-full"
             rounded="2xl"
             imageClassName="object-center"
@@ -60,7 +60,7 @@ export function AboutPage() {
               Engineers, consultants, marketers, and lawyers around one F&amp;B operating problem.
             </h2>
             <p className="mt-5 text-lg leading-8 text-[#555a6a]">
-              RestroScale is built as a multidisciplinary team because F&amp;B
+              Restrovate is built as a multidisciplinary team because F&amp;B
               expansion rarely fails in one department. A website affects
               enquiries, a franchise agreement affects rollout speed, a menu
               change affects production, and a marketing campaign only works

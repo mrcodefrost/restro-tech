@@ -26,7 +26,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${service.title} | RestroScale Services`,
+    title: `${service.title} | Restrovate Services`,
     description: service.summary,
   };
 }

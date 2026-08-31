@@ -45,7 +45,7 @@ export function SiteFooter() {
               <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-white/10">
                 <span className="size-2.5 rounded-full bg-[#ffd02f]" />
               </span>
-              <span className="text-lg font-semibold text-white">RestroScale</span>
+              <span className="text-lg font-semibold text-white">Restrovate</span>
             </Link>
             <p className="mt-3 max-w-sm leading-6">{siteConfig.tagline}</p>
           </div>

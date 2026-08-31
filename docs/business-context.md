@@ -1,10 +1,10 @@
 # Business context
 
-This is the source of truth for who RestroScale is and who it serves. Site copy in `src/core/site.ts` and the pages under `src/features/` should trace back to what's written here — if you're changing positioning, update this file first.
+This is the source of truth for who Restrovate is and who it serves. Site copy in `src/core/site.ts` and the pages under `src/features/` should trace back to what's written here — if you're changing positioning, update this file first.
 
-## What RestroScale is
+## What Restrovate is
 
-RestroScale is a **custom services agency** for food & beverage brands, agency-first with a small set of **standalone SaaS products as proof of what we build**. We are not a POS reseller and we are not primarily a software vendor — we take on end-to-end ownership of a brand's paperwork, tech, marketing, and content production, and where a problem is common enough across clients (queue management, feedback, loyalty, complaint tracking), we've productised it so it can be bought on its own, multi-tenant, without a full engagement.
+Restrovate is a **custom services agency** for food & beverage brands, agency-first with a small set of **standalone SaaS products as proof of what we build**. We are not a POS reseller and we are not primarily a software vendor — we take on end-to-end ownership of a brand's paperwork, tech, marketing, and content production, and where a problem is common enough across clients (queue management, feedback, loyalty, complaint tracking), we've productised it so it can be bought on its own, multi-tenant, without a full engagement.
 
 Two service lines:
 
@@ -50,7 +50,7 @@ Born out of client work, sold on their own to any restaurant regardless of engag
 
 ## Competitive position
 
-Standard restaurant POS platforms (Petpooja, Restroworks, and similar) solve point-of-sale for a single restaurant. They are not curated for franchise management, and licensing them across many outlets gets expensive without buying franchise-specific capability. RestroScale's products are scoped to the problems a franchise operator actually has — queueing, feedback, loyalty, complaint tracking — rather than being a full POS replacement.
+Standard restaurant POS platforms (Petpooja, Restroworks, and similar) solve point-of-sale for a single restaurant. They are not curated for franchise management, and licensing them across many outlets gets expensive without buying franchise-specific capability. Restrovate's products are scoped to the problems a franchise operator actually has — queueing, feedback, loyalty, complaint tracking — rather than being a full POS replacement.
 
 ## Real client portfolio
 
@@ -62,17 +62,9 @@ Standard restaurant POS platforms (Petpooja, Restroworks, and similar) solve poi
 
 These three anchor the site's case studies and public proof. Sardaar Ji and Chai Churi are the two bookends of the franchise-journey story; Aman Puri anchors the private-chef/catering line.
 
-## Rebrand: domain name wishlist
+## Brand name: Restrovate
 
-`restroscale.com` is registered by someone else (as of 2026-08-13, Hostinger) — the current "RestroScale" name cannot be used as the .com brand domain, so a rename is in play. Shortlisted candidates below all had their `.com` confirmed available via live RDAP lookup as of 2026-08-30; re-verify before actually purchasing, since availability changes daily.
-
-| Candidate | Why it works |
-|---|---|
-| **Restrovate** | "restro" + "innovate" — signals tech/innovation for restaurants |
-| **Restrowave** | modern, motion/growth connotation |
-| **Restromo** | short, punchy, easy to say |
-| **Restromize** | "restro" + "-mize" (optimize/customize), fits a platform/ops framing |
-| **Restroware** | "restro" + "-ware" — reads cleanly as software/platform |
+The brand is **Restrovate** ("restro" + "innovate" — signals tech/innovation for restaurants), with `restrovate.com` as the brand domain.
 
 Preference is clearly for **"restro" + coined suffix** combos over words borrowed from Hindi/Indian F&B vocabulary (thali, bawarchi, chowk, dabbawala, kadai, etc.) — those read as too literal/local for a premium agency brand, even though the client base is India-first.
 

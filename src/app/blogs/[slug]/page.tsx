@@ -26,7 +26,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${post.title} | RestroScale Blog`,
+    title: `${post.title} | Restrovate Blog`,
     description: post.excerpt,
     authors: [{ name: post.author }],
   };

@@ -472,14 +472,14 @@ Roobert PRO — Miro's custom display face — anchors every typographic surface
 - **Brand Pink** ({colors.brand-pink}): Pale pink for soft callouts
 - **Brand Orange Light** ({colors.brand-orange-light}): Soft orange for feature card backgrounds
 
-### RestroScale Usage: Yellow vs. Blue
+### Restrovate Usage: Yellow vs. Blue
 
-> Everything above this point is Miro-analysis (source pages, not RestroScale). RestroScale imported the same two accent tokens ({colors.brand-yellow} / {colors.brand-blue}) but splits their job on purpose. Audited against the live component set — `button-link.tsx`, `site-logo.tsx`, `site-header.tsx`, `site-footer.tsx`, the hero (`home-page.tsx`), and every service/case-study/blog detail page — usage was found consistent with the rule below across the board; no component mixes the two roles.
+> Everything above this point is Miro-analysis (source pages, not Restrovate). Restrovate imported the same two accent tokens ({colors.brand-yellow} / {colors.brand-blue}) but splits their job on purpose. Audited against the live component set — `button-link.tsx`, `site-logo.tsx`, `site-header.tsx`, `site-footer.tsx`, the hero (`home-page.tsx`), and every service/case-study/blog detail page — usage was found consistent with the rule below across the board; no component mixes the two roles.
 
-- **{colors.brand-yellow}** is the *brand* accent — reserved for "this is RestroScale," never for "click this" or "note this fact":
+- **{colors.brand-yellow}** is the *brand* accent — reserved for "this is Restrovate," never for "click this" or "note this fact":
   - The logo mark (header, footer, `site-logo.tsx`)
   - The CTA button's decorative comet-glow, present behind every `button-link.tsx` variant regardless of surface color
-  - The dedicated `yellow` button surface — RestroScale's one deliberate departure from Miro's "never on a CTA" rule; use it for a single emphasis CTA per screen, never as the default primary action
+  - The dedicated `yellow` button surface — Restrovate's one deliberate departure from Miro's "never on a CTA" rule; use it for a single emphasis CTA per screen, never as the default primary action
   - The hero-title brush-stroke highlighter and numbered index badges
   - Accents placed on dark/black surfaces (footer logo dot, dark CTA banners), where it reads clearly against {colors.primary}
 

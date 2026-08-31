@@ -184,16 +184,16 @@ export type ServiceDetail = {
 };
 
 export const siteConfig = {
-  name: "RestroScale",
+  name: "Restrovate",
   tagline:
     "Paperwork, tech, marketing, and production for F&B brands at every stage of the franchise journey.",
   email: "relations@synradlabs.com",
   legalName: "Synrad Labs Private Limited",
-  legalNote: "RestroScale is a brand owned and operated by Synrad Labs Private Limited.",
+  legalNote: "Restrovate is a brand owned and operated by Synrad Labs Private Limited.",
   socialLinks: [
-    { label: "LinkedIn", href: "https://www.linkedin.com/company/restroscale" },
-    { label: "Instagram", href: "https://www.instagram.com/restroscale" },
-    { label: "X", href: "https://x.com/restroscale" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/restrovate" },
+    { label: "Instagram", href: "https://www.instagram.com/restrovate" },
+    { label: "X", href: "https://x.com/restrovate" },
   ],
 };
 
@@ -1237,7 +1237,7 @@ export const faqItems: FaqItem[] = [
   {
     question: "Is this a SaaS product?",
     answer:
-      "Not primarily. RestroScale is a services agency first: paperwork, tech, marketing, and production for F&B brands. A few problems we saw repeatedly, like queue management, feedback, loyalty, and franchise complaint tracking, are also available as standalone products, sold on their own to any restaurant.",
+      "Not primarily. Restrovate is a services agency first: paperwork, tech, marketing, and production for F&B brands. A few problems we saw repeatedly, like queue management, feedback, loyalty, and franchise complaint tracking, are also available as standalone products, sold on their own to any restaurant.",
   },
   {
     question: "Can the first engagement be small?",
@@ -1726,7 +1726,7 @@ export const caseStudies: CaseStudy[] = [
     whyItMattered:
       "For a private chef and catering brand, the website carries the entire first impression, there's no storefront to walk past. It had to communicate the same warmth and precision as the service itself, or the brand's actual quality wouldn't land before a booking conversation even started.",
     executiveSummary:
-      "This is the clearest example of RestroScale's second service line: not a franchise chain, but a personal culinary brand that needed the same care in its digital presence that it puts into a menu for a hosted dinner.",
+      "This is the clearest example of Restrovate's second service line: not a franchise chain, but a personal culinary brand that needed the same care in its digital presence that it puts into a menu for a hosted dinner.",
     situation:
       "The brand had strong word-of-mouth demand for private dinners, hosted weekends, and catering, but no site that represented the six services on offer or made booking straightforward for a corporate or family client discovering the brand for the first time.",
     diagnosis:

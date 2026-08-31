@@ -358,7 +358,7 @@ export function HomePage() {
         <div className="mx-auto max-w-7xl">
           <Reveal className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
-              Why RestroScale
+              Why Restrovate
             </p>
             <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
               F&amp;B expansion is not ecommerce with food photos.

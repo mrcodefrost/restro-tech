@@ -10,7 +10,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "RestroScale | Paperwork, Tech, Marketing & Production for F&B Brands",
+  title: "Restrovate | Paperwork, Tech, Marketing & Production for F&B Brands",
   description:
     "Paperwork, tech, marketing, and production for food & beverage (F&B) brands at every stage of the franchise journey, plus standalone products for queueing, feedback, loyalty, and complaint tracking.",
 };

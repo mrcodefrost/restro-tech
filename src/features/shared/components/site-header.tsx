@@ -76,7 +76,7 @@ const aboutColumn: MegaColumn = {
     {
       label: "About us",
       href: "/about",
-      description: "Who RestroScale is and how we work",
+      description: "Who Restrovate is and how we work",
     },
     {
       label: "Blogs",

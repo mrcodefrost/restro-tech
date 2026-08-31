@@ -5,7 +5,7 @@ export function SiteLogo({ className = "" }: { className?: string }) {
         <span className="size-2.5 rounded-full bg-[#ffd02f]" />
       </span>
       <span className="truncate text-lg font-semibold tracking-tight text-[#1c1c1e] sm:text-xl">
-        RestroScale
+        Restrovate
       </span>
     </span>
   );

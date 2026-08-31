@@ -15,8 +15,8 @@ export function PrivacyPolicyPage() {
         <div className="prose-legal mt-10 grid gap-8 text-base leading-7 text-[#555a6a]">
           <Section title="1. Who we are">
             <p>
-              RestroScale is a brand owned and operated by Synrad Labs
-              Private Limited (&quot;RestroScale&quot;, &quot;we&quot;,
+              Restrovate is a brand owned and operated by Synrad Labs
+              Private Limited (&quot;Restrovate&quot;, &quot;we&quot;,
               &quot;us&quot;, or &quot;our&quot;). This Privacy Policy
               explains how we collect, use, and protect information when you
               visit restro.tech or engage us for services.
