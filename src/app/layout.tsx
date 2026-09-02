@@ -13,6 +13,15 @@ export const metadata: Metadata = {
   title: "Restrovate | Paperwork, Tech, Marketing & Production for F&B Brands",
   description:
     "Paperwork, tech, marketing, and production for food & beverage (F&B) brands at every stage of the franchise journey, plus standalone products for queueing, feedback, loyalty, and complaint tracking.",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({

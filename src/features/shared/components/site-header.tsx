@@ -362,9 +362,9 @@ export function SiteHeader() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[#eef0f3] bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-[#eef0f3] bg-white/95 backdrop-blur px-6 md:px-10 lg:px-12">
       <nav
-        className="relative mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 sm:px-6 md:gap-4 md:px-10 lg:px-12"
+        className="relative mx-auto flex h-16 max-w-7xl items-center gap-3 md:gap-4"
         onMouseLeave={scheduleClose}
       >
         <Link
@@ -372,7 +372,7 @@ export function SiteHeader() {
           className="flex min-w-0 items-center"
           onClick={() => setOpen(false)}
         >
-          <SiteLogo />
+          <SiteLogo size="compact" />
         </Link>
 
         <div className="ml-auto hidden items-center gap-1 lg:flex">
@@ -454,7 +454,7 @@ export function SiteHeader() {
             transition={{ duration: 0.25, ease: EASE }}
             className="overflow-hidden border-t border-[#eef0f3] bg-white lg:hidden"
           >
-            <div className="flex flex-col gap-1 px-4 py-4 sm:px-6">
+            <div className="flex flex-col gap-1 py-4">
               <MobileGroup
                 label="Services"
                 expanded={mobileExpanded === "services"}
