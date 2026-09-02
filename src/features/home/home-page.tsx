@@ -10,7 +10,10 @@ import {
   ChartBar,
   ListChecks,
   ClipboardText,
+  Camera,
+  Devices,
   MapPin,
+  Megaphone,
   ChatText,
   Rocket,
   Star,
@@ -25,9 +28,13 @@ import {
   faqItems,
   products,
   processSteps,
+  servicePillars,
+  services,
+  type ServicePillarId,
 } from "@/core/site";
 import { ButtonLink } from "../shared/components/button-link";
 import { FaqAccordion } from "../shared/components/faq-accordion";
+import { Placeholder } from "../shared/components/placeholder";
 import { StepFlow } from "../shared/components/step-flow";
 import {
   FloatingElement,
@@ -42,6 +49,36 @@ const reveal = {
 
 const problemIcons = [Warning, ClipboardText, Star, ListChecks];
 const expertiseIcons = [ListChecks, Storefront, SealCheck, Rocket];
+
+const servicePillarIcons: Record<ServicePillarId, typeof Camera> = {
+  legal: ListChecks,
+  tech: Devices,
+  marketing: Megaphone,
+  production: Camera,
+  general: ListChecks,
+};
+
+// Each pillar gets a distinct illustration so a visitor can tell the four
+// columns apart at a glance, standing in for real product screenshots
+// until there's a live product to show (see docs/business-context.md).
+const servicePillarMedia: Partial<Record<ServicePillarId, { src: string; alt: string }>> = {
+  legal: {
+    src: "/assets/home/rollout-planning.png",
+    alt: "A team reviewing a franchise rollout plan, paperwork, and outlet map together",
+  },
+  tech: {
+    src: "/assets/home/analytics-review.png",
+    alt: "Ordering and store-locator dashboards with outlet reporting on a laptop and tablet",
+  },
+  marketing: {
+    src: "/assets/home/operations-counter.png",
+    alt: "A branded outlet counter with a guest-facing ordering tablet and packaged orders",
+  },
+  production: {
+    src: "/assets/home/format-mix.png",
+    alt: "A bakery counter and kitchen set up for a menu photo and video shoot",
+  },
+};
 
 function FloatingMetricCard({
   label,
@@ -382,6 +419,90 @@ export function HomePage() {
                       {signal.summary}
                     </p>
                   </article>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-[#eef0f3] px-6 py-20 md:px-10 lg:px-12 lg:py-24">
+        <div className="mx-auto max-w-7xl">
+          <Reveal className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+              Services
+            </p>
+            <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
+              Four pillars, one team, no handoffs between vendors.
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-[#555a6a]">
+              Everything a franchise-track F&amp;B brand needs outside the
+              kitchen, grouped so you know exactly who to call for what.
+            </p>
+          </Reveal>
+
+          <div className="mt-14 flex flex-col gap-16 lg:gap-20">
+            {servicePillars.map((pillar, index) => {
+              const Icon = servicePillarIcons[pillar.id];
+              const media = servicePillarMedia[pillar.id];
+              const pillarServices = services.filter(
+                (service) => service.pillar === pillar.id,
+              );
+              const reversed = index % 2 === 1;
+
+              return (
+                <Reveal key={pillar.id} delay={index * 0.05}>
+                  <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
+                    <div className={reversed ? "lg:order-2" : "lg:order-1"}>
+                      <span
+                        className="grid size-11 place-items-center rounded-xl"
+                        style={{ backgroundColor: pillar.color.soft, color: pillar.color.text }}
+                      >
+                        <Icon size={22} weight="duotone" />
+                      </span>
+                      <h3 className="mt-4 text-2xl font-medium leading-tight text-[#1c1c1e] md:text-3xl">
+                        {pillar.title}
+                      </h3>
+                      <p className="mt-3 max-w-lg text-base leading-7 text-[#555a6a]">
+                        {pillar.description}
+                      </p>
+
+                      <div className="mt-5 flex flex-wrap gap-2">
+                        {pillarServices.map((service) => (
+                          <Link
+                            key={service.slug}
+                            href={`/services/${service.slug}`}
+                            className="rounded-full px-3.5 py-1.5 text-xs font-medium transition-opacity hover:opacity-80"
+                            style={{
+                              backgroundColor: pillar.color.soft,
+                              color: pillar.color.text,
+                            }}
+                          >
+                            {service.title}
+                          </Link>
+                        ))}
+                      </div>
+
+                      <div className="mt-6">
+                        <ButtonLink
+                          href={`/services?pillar=${pillar.id}#all-services`}
+                          variant="secondary"
+                        >
+                          View {pillar.title.toLowerCase()} services
+                          <ArrowUpRight size={16} weight="duotone" />
+                        </ButtonLink>
+                      </div>
+                    </div>
+
+                    <div className={reversed ? "lg:order-1" : "lg:order-2"}>
+                      <Placeholder
+                        src={media?.src}
+                        alt={media?.alt ?? `${pillar.title} services illustration`}
+                        rounded="2xl"
+                        className="aspect-[4/3] w-full shadow-[0_18px_48px_-24px_rgba(5,0,56,0.28)]"
+                      />
+                    </div>
+                  </div>
                 </Reveal>
               );
             })}
