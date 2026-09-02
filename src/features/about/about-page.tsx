@@ -1,6 +1,23 @@
+import Link from "next/link";
 import { values } from "@/core/site";
 import { PageHero } from "../shared/components/page-hero";
-import { Placeholder } from "../shared/components/placeholder";
+import { TeamShowcase, type TeamMember } from "../shared/components/team-showcase";
+
+// Real roster, no headshots on file yet — the showcase falls back to a
+// placeholder avatar per person until real photos exist. Add `src` per
+// member once photos are ready.
+// Order is deliberate: Daksh (founder) sits in the middle of the row,
+// flanked by the rest of the team on either side.
+const teamMembers: TeamMember[] = [
+  { name: "Derek Almeida", title: "Head of Growth & Partnerships" },
+  { name: "Sarthak Bhasin", title: "Business Development Lead" },
+  { name: "Neelansh Singh", title: "General Counsel" },
+  { name: "Mayank Tulshyan", title: "Chief of Staff" },
+  { name: "Daksh Nauni", title: "Founder & CTO" },
+  { name: "Ankit Malhotra", title: "Client Strategy & Insights Lead" },
+  { name: "Steve Vora", title: "Head of Social Media" },
+  { name: "Dhaerya", title: "Creative Director" },
+];
 
 export function AboutPage() {
   return (
@@ -42,32 +59,36 @@ export function AboutPage() {
           </p>
         </div>
       </section>
-      <section className="border-y border-[#eef0f3] px-6 py-16 md:px-10 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[0.95fr_1.05fr] md:items-center">
-          <Placeholder
-            src="/assets/about/team-collaboration-placeholder.png"
-            alt="Restrovate team collaboration placeholder with engineering, consulting, marketing, and legal workstreams"
-            className="aspect-[16/10] w-full"
-            rounded="2xl"
-            imageClassName="object-center"
-            label="Team image placeholder"
-          />
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
-              The team
-            </p>
-            <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
-              Engineers, consultants, marketers, and lawyers around one F&amp;B operating problem.
-            </h2>
-            <p className="mt-5 text-lg leading-8 text-[#555a6a]">
-              Restrovate is built as a multidisciplinary team because F&amp;B
-              expansion rarely fails in one department. A website affects
-              enquiries, a franchise agreement affects rollout speed, a menu
-              change affects production, and a marketing campaign only works
-              when the operating model can support it.
-            </p>
-          </div>
+      <section className="border-y border-[#eef0f3] py-16">
+        <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-12">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+            The team
+          </p>
+          <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
+            Our Team
+          </h2>
+          <p className="mt-4 max-w-2xl text-lg leading-8 text-[#555a6a]">
+            Restrovate is built as a multidisciplinary team because F&amp;B
+            expansion rarely fails in one department. A website affects
+            enquiries, a franchise agreement affects rollout speed, a menu
+            change affects production, and a marketing campaign only works
+            when the operating model can support it.
+          </p>
         </div>
+
+        <div className="mt-4">
+          <TeamShowcase members={teamMembers} />
+        </div>
+
+        <p className="mt-14 text-center text-base text-[#555a6a]">
+          Are you our next team member?{" "}
+          <Link
+            href="/careers"
+            className="font-semibold uppercase tracking-wide text-[#4262ff] hover:text-[#2a41b6]"
+          >
+            See openings
+          </Link>
+        </p>
       </section>
       <section className="bg-[#f7f8fa] px-6 py-20 md:px-10 lg:px-12">
         <div className="mx-auto max-w-7xl">

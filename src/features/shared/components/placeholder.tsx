@@ -6,7 +6,7 @@ type PlaceholderProps = {
   src?: string;
   alt?: string;
   className?: string;
-  rounded?: "lg" | "xl" | "2xl";
+  rounded?: "lg" | "xl" | "2xl" | "full";
   imageClassName?: string;
 };
 
@@ -14,6 +14,7 @@ const roundedClass: Record<NonNullable<PlaceholderProps["rounded"]>, string> = {
   lg: "rounded-xl",
   xl: "rounded-2xl",
   "2xl": "rounded-3xl",
+  full: "rounded-full",
 };
 
 export function Placeholder({
@@ -32,7 +33,8 @@ export function Placeholder({
         <img
           src={publicAsset(src)}
           alt={alt}
-          className={`h-full w-full object-cover ${imageClassName}`}
+          draggable={false}
+          className={`h-full w-full select-none object-cover ${imageClassName}`}
         />
       ) : (
         <ImageIcon className="text-[#c7cad5]" size={28} weight="duotone" />
