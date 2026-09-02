@@ -35,7 +35,7 @@ export function CareersPage() {
   return (
     <>
       <section className="px-6 py-16 md:px-10 lg:px-12 lg:py-20">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.98fr)_minmax(420px,0.72fr)] lg:items-end">
+        <div className="mx-auto max-w-7xl">
           <FadeIn>
             <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
               Careers
@@ -48,27 +48,6 @@ export function CareersPage() {
               together for restaurant chains, private chefs, catering teams,
               and culinary brands preparing for their next stage.
             </p>
-          </FadeIn>
-
-          <FadeIn
-            delay={0.08}
-            className="rounded-[28px] bg-[#1c1c1e] p-6 text-white"
-          >
-            <p className="text-xs font-semibold uppercase tracking-wide text-white/50">
-              Work location
-            </p>
-            <div className="mt-5 flex items-start gap-3">
-              <span className="grid size-11 shrink-0 place-items-center rounded-full bg-[#ffd02f] text-[#1c1c1e]">
-                <MapPin size={22} weight="duotone" />
-              </span>
-              <div>
-                <h2 className="text-2xl font-medium">Delhi</h2>
-                <p className="mt-2 text-sm leading-6 text-white/70">
-                  Roles are based in Delhi, with on-site collaboration and
-                  client/location visits depending on the team.
-                </p>
-              </div>
-            </div>
           </FadeIn>
         </div>
       </section>
