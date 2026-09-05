@@ -154,13 +154,6 @@ export type Role = {
   highlights: string[];
 };
 
-export type ClientProof = {
-  brand: string;
-  href: string;
-  highlight: string;
-  detail: string;
-};
-
 export type FaqItem = {
   question: string;
   answer: string;
@@ -1178,30 +1171,6 @@ export const integrationAreas: IntegrationArea[] = [
     title: "Reporting and analytics",
     summary:
       "Capture clean events for ordering, campaigns, menu performance, outlet comparison, and regional growth decisions.",
-  },
-];
-
-export const clientProof: ClientProof[] = [
-  {
-    brand: "Chai Churi",
-    href: "/case-studies/chai-churi-brand-site-and-store-locator",
-    highlight: "200+ outlets, 60+ cities",
-    detail:
-      "20 lakh+ customers served, live in the USA, Canada, India, UK, Australia, and UAE. Brand site, store locator, and franchise enquiry flow.",
-  },
-  {
-    brand: "Sardaar Ji Amritsari Kulcha",
-    href: "/case-studies/sardaar-ji-first-outlet-website-and-franchise-readiness",
-    highlight: "4.4★ from 145+ reviews",
-    detail:
-      "One outlet in Mohali, franchise enquiries open ahead of the next location.",
-  },
-  {
-    brand: "Chef Aman Puri",
-    href: "/case-studies/chef-aman-puri-personal-brand-and-catering-site",
-    highlight: "Private chef & catering",
-    detail:
-      "Hosted dinners, events, and catering across Canada and the United States.",
   },
 ];
 

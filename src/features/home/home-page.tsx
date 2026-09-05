@@ -21,7 +21,7 @@ import {
   Warning,
 } from "@phosphor-icons/react/ssr";
 import {
-  clientProof,
+  caseStudies,
   conversionProblems,
   discoveryAgenda,
   expertiseSignals,
@@ -30,6 +30,7 @@ import {
   processSteps,
   servicePillars,
   services,
+  type CaseStudy,
   type ServicePillarId,
 } from "@/core/site";
 import { ButtonLink } from "../shared/components/button-link";
@@ -225,6 +226,104 @@ function HeroFloatingBackground() {
         </div>
       </FloatingElement>
     </ParallaxFloating>
+  );
+}
+
+// Category strings in site.ts read as prose ("Brand website, store locator,
+// and franchise enquiry"); split them into short tag chips for the case
+// study bands below.
+function splitCategoryTags(category: string): string[] {
+  return category
+    .replace(/, and /g, ", ")
+    .replace(/ and /g, ", ")
+    .split(", ")
+    .map((tag) => tag.trim())
+    .filter(Boolean);
+}
+
+// Each case study screenshot is a full page capture, not standalone
+// photography. `position` crops toward the photographic region (hiding nav
+// bars); `zoom` scales the image around that same point so a screenshot
+// where the photo only fills part of the frame (e.g. a right-hand hero
+// image next to a text column) reads as full-bleed instead of showing the
+// page's own text alongside our overlay title.
+const caseStudyImageCrop: Record<string, { position: string; zoom: number }> = {
+  "chai-churi-brand-site-and-store-locator": { position: "50% 32%", zoom: 1 },
+  "sardaar-ji-first-outlet-website-and-franchise-readiness": {
+    position: "80% 32%",
+    zoom: 1.9,
+  },
+  "chef-aman-puri-personal-brand-and-catering-site": {
+    position: "84% 48%",
+    zoom: 2.2,
+  },
+};
+
+function CaseStudyBand({
+  caseStudy,
+  index,
+}: {
+  caseStudy: CaseStudy;
+  index: number;
+}) {
+  const tags = splitCategoryTags(caseStudy.category);
+  const crop = caseStudyImageCrop[caseStudy.slug] ?? { position: "50% 30%", zoom: 1 };
+
+  return (
+    <Reveal delay={index * 0.06}>
+      <Link
+        href={`/case-studies/${caseStudy.slug}`}
+        className="group relative block h-48 overflow-hidden sm:h-55 lg:h-60"
+      >
+        <img
+          src={publicAsset(caseStudy.image)}
+          alt={`${caseStudy.client} website snapshot`}
+          draggable={false}
+          className="absolute inset-0 h-full w-full select-none object-cover transition-transform duration-500 group-hover:scale-(--zoom-hover)"
+          style={{
+            objectPosition: crop.position,
+            transformOrigin: crop.position,
+            transform: `scale(${crop.zoom})`,
+            ["--zoom-hover" as string]: crop.zoom * 1.05,
+          }}
+        />
+        <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/25 to-black/5" />
+
+        <div className="relative flex h-full flex-col justify-between p-5 md:p-7">
+          <div className="flex items-start justify-between">
+            <span className="inline-flex w-fit items-center rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-white backdrop-blur">
+              {caseStudy.outletCount}
+            </span>
+            <ArrowUpRight
+              className="text-white opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
+              size={22}
+              weight="duotone"
+            />
+          </div>
+
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h3 className="text-2xl font-medium uppercase leading-none tracking-tight text-white md:text-3xl">
+                {caseStudy.client}
+              </h3>
+              <p className="mt-2 hidden max-w-md text-sm leading-6 text-white/75 sm:block">
+                {caseStudy.result}
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2 sm:justify-end">
+              {tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-white/25 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Link>
+    </Reveal>
   );
 }
 
@@ -623,45 +722,26 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#f7f8fa] px-6 py-20 md:px-10 lg:px-12 lg:py-24">
-        <div className="mx-auto max-w-7xl">
+      <section className="bg-[#f7f8fa] py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-12">
           <Reveal className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
-              Clients
+              Case studies
             </p>
             <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
               Real F&amp;B brands, real websites, from one outlet to two hundred.
             </h2>
           </Reveal>
+        </div>
 
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
-            {clientProof.map((proof, index) => (
-              <Reveal key={proof.brand} delay={index * 0.06} className="h-full">
-                <Link
-                  href={proof.href}
-                  className="group flex h-full flex-col rounded-2xl border border-[#eef0f3] bg-white p-6"
-                >
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[#4262ff]">
-                    {proof.highlight}
-                  </p>
-                  <h3 className="mt-3 text-xl font-medium text-[#1c1c1e]">
-                    {proof.brand}
-                  </h3>
-                  <p className="mt-2 flex-1 text-sm leading-6 text-[#555a6a]">
-                    {proof.detail}
-                  </p>
-                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[#4262ff]">
-                    Read case study
-                    <ArrowUpRight
-                      size={16}
-                      weight="duotone"
-                      className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    />
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
+        <div className="relative left-1/2 mt-10 w-screen -translate-x-1/2">
+          {caseStudies.map((caseStudy, index) => (
+            <CaseStudyBand
+              key={caseStudy.slug}
+              caseStudy={caseStudy}
+              index={index}
+            />
+          ))}
         </div>
       </section>
 
