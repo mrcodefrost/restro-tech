@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowLeft, CheckCircle } from "@phosphor-icons/react/ssr";
 import type { CaseStudy } from "@/core/site";
 import { ButtonLink } from "../shared/components/button-link";
+import { CaseStudyCover } from "./case-study-cover";
 import { Placeholder } from "../shared/components/placeholder";
 
 type CaseStudyDetailPageProps = {
@@ -56,12 +57,10 @@ export function CaseStudyDetailPage({ study }: CaseStudyDetailPageProps) {
 
       <section className="px-6 py-8 md:px-10 lg:px-12">
         <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
-          <Placeholder
-            src={study.image}
-            alt={`${study.client} website homepage snapshot`}
-            className="h-[260px] w-full md:h-[340px] lg:h-[380px]"
-            rounded="2xl"
-            imageClassName="object-top"
+          <CaseStudyCover
+            study={study}
+            variant="detail"
+            className="h-[260px] rounded-2xl md:h-[340px] lg:h-[380px]"
           />
 
           <aside className="rounded-2xl border border-[#eef0f3] bg-white p-6">

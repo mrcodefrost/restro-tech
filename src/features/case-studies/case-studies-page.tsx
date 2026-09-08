@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "@phosphor-icons/react/ssr";
 import { caseStudies } from "@/core/site";
-import { Placeholder } from "../shared/components/placeholder";
+import { CaseStudyCover } from "./case-study-cover";
 
 export function CaseStudiesPage() {
   return (
@@ -30,12 +30,10 @@ export function CaseStudiesPage() {
               href={`/case-studies/${study.slug}`}
               className="group flex h-full min-h-[344px] flex-col overflow-hidden rounded-2xl border border-[#eef0f3] bg-white transition-colors hover:border-[#c7cad5]"
             >
-              <Placeholder
-                src={study.image}
-                alt={`${study.client} website homepage snapshot`}
+              <CaseStudyCover
+                study={study}
+                index={index}
                 className="h-48 w-full border-0"
-                rounded="lg"
-                imageClassName="object-top"
               />
 
               <div className="flex flex-1 flex-col p-4">

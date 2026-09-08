@@ -1,5 +1,6 @@
 import { Image as ImageIcon } from "@phosphor-icons/react/ssr";
 import { publicAsset } from "@/core/paths";
+import type { CSSProperties } from "react";
 
 type PlaceholderProps = {
   label?: string;
@@ -8,6 +9,7 @@ type PlaceholderProps = {
   className?: string;
   rounded?: "lg" | "xl" | "2xl" | "full";
   imageClassName?: string;
+  imageStyle?: CSSProperties;
 };
 
 const roundedClass: Record<NonNullable<PlaceholderProps["rounded"]>, string> = {
@@ -24,6 +26,7 @@ export function Placeholder({
   className = "",
   rounded = "xl",
   imageClassName = "",
+  imageStyle,
 }: PlaceholderProps) {
   return (
     <div
@@ -34,6 +37,7 @@ export function Placeholder({
           src={publicAsset(src)}
           alt={alt}
           draggable={false}
+          style={imageStyle}
           className={`h-full w-full select-none object-cover ${imageClassName}`}
         />
       ) : (

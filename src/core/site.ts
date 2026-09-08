@@ -1,3 +1,26 @@
+export type TeamMember = {
+  name: string;
+  title: string;
+  src?: string;
+  /** Portrait focal point (% of original image) and displayed width (% of circle). */
+  portrait?: { x: number; y: number; width: number };
+};
+
+export const teamMembers: TeamMember[] = [
+  { name: "Prerika Chauhan", title: "Market Intelligence & Strategy", src: "/assets/about/prerika-chauhan.jpg", portrait: { x: 48, y: 42.97, width: 121.6 } },
+  { name: "Daksh Nauni", title: "Founder & CTO", src: "/assets/about/daksh-nauni.jpg", portrait: { x: 49, y: 48, width: 190 } },
+  { name: "Mahi Shishodia", title: "People & Culture", src: "/assets/about/mahi-shishodia.jpg", portrait: { x: 47, y: 46, width: 216 } },
+  { name: "Ankit Malhotra", title: "Client Strategy & Insights Lead", src: "/assets/about/ankit-malhotra.jpg", portrait: { x: 43.5, y: 32.13, width: 180 } },
+  { name: "Neelansh Singh", title: "General Counsel", src: "/assets/about/neelansh-singh.jpg", portrait: { x: 50, y: 41.4, width: 100 } },
+  { name: "Sarthak Bhasin", title: "Business Development Lead", src: "/assets/about/sarthak-bhasin.jpg", portrait: { x: 42, y: 23, width: 155 } },
+  { name: "Nidhi Khattar", title: "Business Development & Partnerships", src: "/assets/about/nidhi-khattar.jpg", portrait: { x: 50, y: 38, width: 100 } },
+  { name: "Mayank Tulshyan", title: "Chief of Staff", src: "/assets/about/mayank-tulshyan.jpg", portrait: { x: 58, y: 44, width: 320 } },
+  { name: "Steve Vora", title: "Head of Social Media", src: "/assets/about/steve-vora.jpg", portrait: { x: 50, y: 50, width: 100 } },
+  { name: "Derek Almeida", title: "Head of Growth & Partnerships", src: "/assets/about/derek-almeida.jpg", portrait: { x: 50, y: 35.4, width: 190 } },
+  { name: "Dhaerya", title: "Creative Director" },
+  { name: "Ritika Mehta", title: "Software Developer", src: "/assets/about/ritika-mehta.jpg", portrait: { x: 50, y: 38.6, width: 101 } },
+];
+
 export type NavItem = {
   label: string;
   href: string;
@@ -1579,7 +1602,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "Chai Churi scaled past 200 outlets and six countries on the strength of its kulhad chai and nostalgia-led brand. It needed a website that could carry that brand into a store locator, franchise enquiries, and a menu built for a chain this size, not a single-cafe template.",
     result: "Live brand site with menu, store locator, and franchise enquiry flow",
-    image: "/assets/case-studies/chai-churi-site-snapshot.png",
+    image: "/assets/case-studies/chai-churi-case-study-cover.png",
     infographicImage: "/assets/case-studies/multi-region-menu-before-after.png",
     challenge:
       "A brand operating 200+ outlets across 60+ cities and six countries needed its website to do more than describe the menu. It had to help guests find their nearest outlet, help prospective franchisees start a conversation, and represent a Punjab-born brand credibly to an international audience.",
@@ -1672,7 +1695,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "A single-outlet Amritsari kulcha brand with a strong local reputation, 4.4 stars from 145+ reviews, needed a website that looked ready to franchise before its second outlet even opened.",
     result: "Live brand site with menu, ordering info, and franchise enquiry form",
-    image: "/assets/case-studies/sardaar-ji-site-snapshot.png",
+    image: "/assets/case-studies/sardaar-ji-case-study-cover.png",
     infographicImage: "/assets/case-studies/cafe-chain-before-after.png",
     challenge:
       "Sardaar Ji had one outlet and a loyal following, built on made-to-order kulchas with no shortcuts. The brand wanted to start franchising, but a single-location business usually doesn't have a website that reads as bigger than one shop with a phone number.",
@@ -1765,7 +1788,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "Chef Aman Puri runs private dinners, hosted weekends, and full-scale catering across Canada and the US. The brand needed a site as polished and personal as the hospitality it sells, with services, philosophy, and a real path to booking.",
     result: "Live personal brand site with services, philosophy, and a booking path",
-    image: "/assets/case-studies/chef-aman-puri-site-snapshot.png",
+    image: "/assets/case-studies/chef-aman-puri-case-study-cover.png",
     infographicImage: "/assets/case-studies/rewards-crm-before-after.png",
     challenge:
       "Aman Puri's business isn't an outlet chain, it's a private chef and catering practice built on trust, personalization, and word of mouth across Mississauga, Vancouver, Calgary, and beyond. That's hard to convey through a phone number and a few photos.",

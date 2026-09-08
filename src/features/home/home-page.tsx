@@ -33,6 +33,7 @@ import {
   type CaseStudy,
   type ServicePillarId,
 } from "@/core/site";
+import { CaseStudyCover } from "../case-studies/case-study-cover";
 import { ButtonLink } from "../shared/components/button-link";
 import { FaqAccordion } from "../shared/components/faq-accordion";
 import { Placeholder } from "../shared/components/placeholder";
@@ -241,24 +242,6 @@ function splitCategoryTags(category: string): string[] {
     .filter(Boolean);
 }
 
-// Each case study screenshot is a full page capture, not standalone
-// photography. `position` crops toward the photographic region (hiding nav
-// bars); `zoom` scales the image around that same point so a screenshot
-// where the photo only fills part of the frame (e.g. a right-hand hero
-// image next to a text column) reads as full-bleed instead of showing the
-// page's own text alongside our overlay title.
-const caseStudyImageCrop: Record<string, { position: string; zoom: number }> = {
-  "chai-churi-brand-site-and-store-locator": { position: "50% 32%", zoom: 1 },
-  "sardaar-ji-first-outlet-website-and-franchise-readiness": {
-    position: "80% 32%",
-    zoom: 1.9,
-  },
-  "chef-aman-puri-personal-brand-and-catering-site": {
-    position: "84% 48%",
-    zoom: 2.2,
-  },
-};
-
 function CaseStudyBand({
   caseStudy,
   index,
@@ -267,59 +250,56 @@ function CaseStudyBand({
   index: number;
 }) {
   const tags = splitCategoryTags(caseStudy.category);
-  const crop = caseStudyImageCrop[caseStudy.slug] ?? { position: "50% 30%", zoom: 1 };
 
   return (
     <Reveal delay={index * 0.06}>
       <Link
         href={`/case-studies/${caseStudy.slug}`}
-        className="group relative block h-48 overflow-hidden sm:h-55 lg:h-60"
+        aria-label={`View ${caseStudy.client} case study`}
+        className="group relative isolate block overflow-hidden bg-[#1c1c1e] focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[#4262ff]"
       >
-        <img
-          src={publicAsset(caseStudy.image)}
-          alt={`${caseStudy.client} website snapshot`}
-          draggable={false}
-          className="absolute inset-0 h-full w-full select-none object-cover transition-transform duration-500 group-hover:scale-(--zoom-hover)"
-          style={{
-            objectPosition: crop.position,
-            transformOrigin: crop.position,
-            transform: `scale(${crop.zoom})`,
-            ["--zoom-hover" as string]: crop.zoom * 1.05,
-          }}
+        <div className="pointer-events-none absolute inset-0">
+        <CaseStudyCover
+          study={caseStudy}
+          index={index}
+          variant="band"
+          className="transition-transform duration-500 group-hover:scale-[1.015] motion-reduce:transform-none motion-reduce:transition-none"
         />
-        <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/25 to-black/5" />
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="absolute inset-0 bg-linear-to-r from-black/35 via-transparent to-black/20" />
+        </div>
 
-        <div className="relative flex h-full flex-col justify-between p-5 md:p-7">
-          <div className="flex items-start justify-between">
-            <span className="inline-flex w-fit items-center rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-white backdrop-blur">
+        <div className="relative z-10 mx-auto flex min-h-72 max-w-7xl flex-col justify-center gap-8 px-6 py-10 md:min-h-64 md:flex-row md:items-center md:justify-between md:px-10 lg:min-h-72 lg:px-12">
+          <div className="max-w-xl md:flex-1">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-white/85">
               {caseStudy.outletCount}
-            </span>
-            <ArrowUpRight
-              className="text-white opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
-              size={22}
-              weight="duotone"
-            />
-          </div>
-
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <h3 className="text-2xl font-medium uppercase leading-none tracking-tight text-white md:text-3xl">
+            </p>
+              <h3 className="text-2xl font-medium uppercase leading-tight tracking-tight text-white md:text-3xl lg:text-4xl">
                 {caseStudy.client}
               </h3>
-              <p className="mt-2 hidden max-w-md text-sm leading-6 text-white/75 sm:block">
+              <p className="mt-3 max-w-lg text-sm leading-6 text-white/90">
                 {caseStudy.result}
               </p>
             </div>
-            <div className="flex flex-wrap gap-2 sm:justify-end">
+          <div className="flex flex-col items-start gap-5 md:max-w-sm md:flex-1 md:items-end">
+            <div className="flex flex-wrap gap-2 md:justify-end">
               {tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full border border-white/25 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white"
+                  className="rounded-full border border-white/50 bg-black/20 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-white"
                 >
                   {tag}
                 </span>
               ))}
             </div>
+            <span className="inline-flex min-h-11 items-center gap-3 rounded-full bg-white px-5 py-3 text-sm font-medium text-[#1c1c1e]">
+              View case study
+              <ArrowUpRight
+                aria-hidden="true"
+                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transform-none"
+                size={18}
+              />
+            </span>
           </div>
         </div>
       </Link>

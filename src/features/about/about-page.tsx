@@ -1,23 +1,7 @@
 import Link from "next/link";
-import { values } from "@/core/site";
+import { teamMembers, values } from "@/core/site";
 import { PageHero } from "../shared/components/page-hero";
-import { TeamShowcase, type TeamMember } from "../shared/components/team-showcase";
-
-// Real roster, no headshots on file yet — the showcase falls back to a
-// placeholder avatar per person until real photos exist. Add `src` per
-// member once photos are ready.
-// Order is deliberate: Daksh (founder) sits in the middle of the row,
-// flanked by the rest of the team on either side.
-const teamMembers: TeamMember[] = [
-  { name: "Derek Almeida", title: "Head of Growth & Partnerships" },
-  { name: "Sarthak Bhasin", title: "Business Development Lead" },
-  { name: "Neelansh Singh", title: "General Counsel" },
-  { name: "Mayank Tulshyan", title: "Chief of Staff" },
-  { name: "Daksh Nauni", title: "Founder & CTO" },
-  { name: "Ankit Malhotra", title: "Client Strategy & Insights Lead" },
-  { name: "Steve Vora", title: "Head of Social Media" },
-  { name: "Dhaerya", title: "Creative Director" },
-];
+import { TeamShowcase } from "../shared/components/team-showcase";
 
 export function AboutPage() {
   return (
