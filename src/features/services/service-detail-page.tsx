@@ -23,11 +23,11 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
 
   return (
     <article>
-      <header className="border-b border-[#eef0f3] bg-white px-6 py-8 md:px-10 lg:px-12">
+      <header className="border-b border-line-soft bg-white px-6 py-8 md:px-10 lg:px-12">
         <div className="mx-auto max-w-7xl">
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 rounded-full bg-[#f7f8fa] px-4 py-2.5 text-sm font-medium text-[#1c1c1e]"
+            className="inline-flex items-center gap-2 rounded-full bg-surface px-4 py-2.5 text-sm font-medium text-ink"
           >
             <ArrowLeft size={16} weight="duotone" />
             Services
@@ -46,17 +46,17 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
                 {pillar.title}
               </p>
             )}
-            <h1 className="mt-4 text-4xl font-medium leading-[1.1] tracking-tight text-[#1c1c1e] md:text-5xl lg:text-6xl">
+            <h1 className="mt-4 text-4xl font-medium leading-[1.1] tracking-tight text-ink md:text-5xl lg:text-6xl">
               {service.title}
             </h1>
-            <p className="mt-5 max-w-3xl text-lg leading-8 text-[#555a6a]">
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-copy">
               {service.overview}
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
               {service.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full bg-[#f7f8fa] px-3 py-1.5 text-xs font-medium text-[#1c1c1e]"
+                  className="rounded-full bg-surface px-3 py-1.5 text-xs font-medium text-ink"
                 >
                   {tag}
                 </span>
@@ -69,17 +69,17 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
       <section className="px-6 py-16 md:px-10 lg:px-12">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+            <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
               What you get
             </p>
-            <h2 className="mt-3 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e]">
+            <h2 className="mt-3 text-3xl font-medium leading-tight tracking-tight text-ink">
               Deliverables
             </h2>
             <ul className="mt-6 grid gap-3">
               {service.deliverables.map((item) => (
-                <li key={item} className="flex gap-3 rounded-xl border border-[#eef0f3] bg-white p-4">
-                  <CheckCircle className="mt-0.5 shrink-0 text-[#4262ff]" size={20} weight="duotone" />
-                  <span className="text-sm font-medium leading-6 text-[#1c1c1e]">
+                <li key={item} className="flex gap-3 rounded-control border border-line-soft bg-white p-4">
+                  <CheckCircle className="mt-0.5 shrink-0 text-action" size={20} weight="duotone" />
+                  <span className="text-sm font-medium leading-6 text-ink">
                     {item}
                   </span>
                 </li>
@@ -88,18 +88,18 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
 
             {service.requirements && service.requirements.length > 0 && (
               <div className="mt-10">
-                <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+                <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
                   Before we start
                 </p>
-                <h2 className="mt-3 text-2xl font-medium leading-tight tracking-tight text-[#1c1c1e]">
+                <h2 className="mt-3 text-2xl font-medium leading-tight tracking-tight text-ink">
                   What you&apos;ll need to have ready
                 </h2>
                 <ul className="mt-6 grid gap-3">
                   {service.requirements.map((item) => (
-                    <li key={item} className="relative flex overflow-hidden gap-3 rounded-xl bg-[#f5f3ff] p-4">
-                      <Warning className="absolute -right-4 -top-4 text-[#4262ff]/10" size={72} weight="duotone" />
-                      <FileText className="relative mt-0.5 shrink-0 text-[#4262ff]" size={20} weight="duotone" />
-                      <span className="relative text-sm font-medium leading-6 text-[#1c1c1e]">
+                    <li key={item} className="relative flex overflow-hidden gap-3 rounded-control bg-action-soft p-4">
+                      <Warning className="absolute -right-4 -top-4 text-action/10" size={72} weight="duotone" />
+                      <FileText className="relative mt-0.5 shrink-0 text-action" size={20} weight="duotone" />
+                      <span className="relative text-sm font-medium leading-6 text-ink">
                         {item}
                       </span>
                     </li>
@@ -110,10 +110,10 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+            <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
               How it works
             </p>
-            <h2 className="mt-3 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e]">
+            <h2 className="mt-3 text-3xl font-medium leading-tight tracking-tight text-ink">
               Our process
             </h2>
             <div className="mt-6">
@@ -126,12 +126,12 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
         </div>
       </section>
 
-      <section className="bg-[#f7f8fa] px-6 py-16 md:px-10 lg:px-12">
+      <section className="bg-surface px-6 py-16 md:px-10 lg:px-12">
         <div className="mx-auto max-w-4xl">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+          <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
             Questions
           </p>
-          <h2 className="mt-3 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e]">
+          <h2 className="mt-3 text-3xl font-medium leading-tight tracking-tight text-ink">
             Frequently asked
           </h2>
           <div className="mt-6">
@@ -143,13 +143,13 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
         </div>
       </section>
 
-      <section className="border-t border-[#eef0f3] bg-white px-6 py-12 md:px-10 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-6 rounded-3xl bg-[#fff8e0] p-6 md:grid-cols-[1fr_auto] md:items-center md:p-10">
+      <section className="border-t border-line-soft bg-white px-6 py-12 md:px-10 lg:px-12">
+        <div className="mx-auto grid max-w-7xl gap-6 rounded-feature bg-brand-soft p-6 md:grid-cols-[1fr_auto] md:items-center md:p-10">
           <div>
             <p className="text-sm font-medium text-[#746019]">
               Discuss this service
             </p>
-            <h2 className="mt-2 text-3xl font-medium leading-tight text-[#1c1c1e]">
+            <h2 className="mt-2 text-3xl font-medium leading-tight text-ink">
               Bring one restaurant expansion problem to the table.
             </h2>
           </div>

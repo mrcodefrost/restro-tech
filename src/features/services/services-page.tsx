@@ -41,7 +41,7 @@ export function ServicesPage() {
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
             <FadeIn>
-              <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+              <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
                 Services
               </p>
             </FadeIn>
@@ -54,10 +54,10 @@ export function ServicesPage() {
               from={{ opacity: 0, y: 24 }}
               to={{ opacity: 1, y: 0 }}
               textAlign="left"
-              className="mt-4 text-4xl font-medium leading-[1.1] tracking-tight text-[#1c1c1e] sm:text-5xl lg:text-6xl"
+              className="mt-4 text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-5xl lg:text-6xl"
             />
             <FadeIn delay={0.15}>
-              <p className="mt-6 max-w-xl text-lg leading-8 text-[#555a6a]">
+              <p className="mt-6 max-w-xl text-lg leading-8 text-copy">
                 We take on the parts of running a food &amp; beverage (F&amp;B)
                 brand that generic vendors won&apos;t touch, from FSSAI
                 registration to a brand-native ordering site to the campaign
@@ -77,21 +77,21 @@ export function ServicesPage() {
                   <Link
                     key={pillar.id}
                     href={`/services?pillar=${pillar.id}#all-services`}
-                    className="rounded-2xl border border-[#eef0f3] p-5 transition-transform duration-200 hover:-translate-y-0.5"
+                    className="rounded-card border border-line-soft p-5 transition-transform duration-200 hover:-translate-y-0.5"
                     style={{ backgroundColor: pillar.color.soft }}
                   >
                     {Icon ? (
                       <span
-                        className="grid size-10 place-items-center rounded-xl bg-white"
+                        className="grid size-10 place-items-center rounded-control bg-white"
                         style={{ color: pillar.color.text }}
                       >
                         <Icon size={20} weight="duotone" />
                       </span>
                     ) : null}
-                    <h3 className="mt-3 text-base font-medium text-[#1c1c1e]">
+                    <h3 className="mt-3 text-base font-medium text-ink">
                       {pillar.title}
                     </h3>
-                    <p className="mt-1 text-xs leading-5 text-[#6b6f7e]">
+                    <p className="mt-1 text-xs leading-5 text-copy-muted">
                       {pillar.description}
                     </p>
                   </Link>
@@ -111,10 +111,10 @@ export function ServicesPage() {
           <div className="mx-auto max-w-7xl">
             <Link
               href={`/services/${generalService.slug}`}
-              className="group flex flex-col items-start justify-between gap-6 rounded-3xl bg-[#1c1c1e] p-8 text-white transition-opacity hover:opacity-90 md:flex-row md:items-center"
+              className="group flex flex-col items-start justify-between gap-6 rounded-feature bg-ink p-8 text-white transition-opacity hover:opacity-90 md:flex-row md:items-center"
             >
               <div className="flex items-start gap-4">
-                <Question size={28} weight="duotone" className="mt-1 shrink-0 text-[#ffd02f]" />
+                <Question size={28} weight="duotone" className="mt-1 shrink-0 text-brand" />
                 <div>
                   <h3 className="text-xl font-medium">
                     {generalService.title}
@@ -133,31 +133,31 @@ export function ServicesPage() {
         </section>
       )}
 
-      <section className="bg-[#f7f8fa] px-6 py-20 md:px-10 lg:px-12">
+      <section className="bg-surface px-6 py-20 md:px-10 lg:px-12">
         <div className="mx-auto max-w-7xl">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+          <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
             Who we serve
           </p>
-          <h2 className="mt-4 max-w-3xl text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
+          <h2 className="mt-4 max-w-3xl text-3xl font-medium leading-tight tracking-tight text-ink md:text-4xl">
             Two segments, one team.
           </h2>
           <div className="mt-8 grid gap-3 md:grid-cols-2">
             {segments.map((segment) => (
               <article
                 key={segment.title}
-                className="rounded-2xl border border-[#eef0f3] bg-white p-6"
+                className="rounded-card border border-line-soft bg-white p-6"
               >
-                <h3 className="text-xl font-medium text-[#1c1c1e]">
+                <h3 className="text-xl font-medium text-ink">
                   {segment.title}
                 </h3>
-                <p className="mt-3 leading-7 text-[#555a6a]">
+                <p className="mt-3 leading-7 text-copy">
                   {segment.summary}
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {segment.examples.map((example) => (
                     <span
                       key={example}
-                      className="rounded-full bg-[#f7f8fa] px-3 py-1.5 text-xs font-medium text-[#1c1c1e]"
+                      className="rounded-full bg-surface px-3 py-1.5 text-xs font-medium text-ink"
                     >
                       {example}
                     </span>
@@ -175,15 +175,15 @@ export function ServicesPage() {
             {positioningPoints.map((point) => (
               <article
                 key={point.label}
-                className="rounded-2xl border border-[#eef0f3] bg-white p-6"
+                className="rounded-card border border-line-soft bg-white p-6"
               >
-                <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+                <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
                   {point.label}
                 </p>
-                <h3 className="mt-3 text-lg font-medium leading-tight text-[#1c1c1e]">
+                <h3 className="mt-3 text-lg font-medium leading-tight text-ink">
                   {point.title}
                 </h3>
-                <p className="mt-2 text-sm leading-6 text-[#555a6a]">
+                <p className="mt-2 text-sm leading-6 text-copy">
                   {point.summary}
                 </p>
               </article>
@@ -192,26 +192,26 @@ export function ServicesPage() {
         </div>
       </section>
 
-      <section className="bg-[#f7f8fa] px-6 py-20 md:px-10 lg:px-12">
+      <section className="bg-surface px-6 py-20 md:px-10 lg:px-12">
         <div className="mx-auto max-w-7xl">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+          <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
             Tech, in depth
           </p>
-          <h2 className="mt-4 max-w-3xl text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
+          <h2 className="mt-4 max-w-3xl text-3xl font-medium leading-tight tracking-tight text-ink md:text-4xl">
             Four layers behind every ordering and brand site build.
           </h2>
           <div className="mt-8 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
             {platformPillars.map((pillar) => (
-              <article key={pillar.title} className="h-full rounded-2xl border border-[#eef0f3] bg-white p-5">
-                <h3 className="text-lg font-medium text-[#1c1c1e]">{pillar.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-[#6b6f7e]">
+              <article key={pillar.title} className="h-full rounded-card border border-line-soft bg-white p-5">
+                <h3 className="text-lg font-medium text-ink">{pillar.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-copy-muted">
                   {pillar.summary}
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {pillar.items.map((item) => (
                     <span
                       key={item}
-                      className="rounded-full bg-[#f7f8fa] px-2.5 py-1.5 text-[11px] font-medium text-[#1c1c1e]"
+                      className="rounded-full bg-surface px-2.5 py-1.5 text-[11px] font-medium text-ink"
                     >
                       {item}
                     </span>
@@ -225,10 +225,10 @@ export function ServicesPage() {
             {integrationAreas.map((area) => (
               <article
                 key={area.title}
-                className="h-full rounded-2xl border border-[#eef0f3] bg-white p-5"
+                className="h-full rounded-card border border-line-soft bg-white p-5"
               >
-                <h3 className="text-lg font-medium text-[#1c1c1e]">{area.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-[#6b6f7e]">
+                <h3 className="text-lg font-medium text-ink">{area.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-copy-muted">
                   {area.summary}
                 </p>
               </article>
@@ -240,17 +240,17 @@ export function ServicesPage() {
       <section className="px-6 py-20 md:px-10 lg:px-12">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+            <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
               Who it&apos;s for
             </p>
-            <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
+            <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-ink md:text-4xl">
               Guests, operators, and leadership all need something different.
             </h2>
             <div className="mt-6 grid gap-3">
               {serviceDetails.map((detail) => (
-                <article key={detail.title} className="rounded-2xl bg-[#f7f8fa] p-5">
-                  <h3 className="text-lg font-medium text-[#1c1c1e]">{detail.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-[#555a6a]">
+                <article key={detail.title} className="rounded-card bg-surface p-5">
+                  <h3 className="text-lg font-medium text-ink">{detail.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-copy">
                     {detail.summary}
                   </p>
                 </article>
@@ -259,17 +259,17 @@ export function ServicesPage() {
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+            <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
               What you get
             </p>
-            <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
+            <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-ink md:text-4xl">
               By the end of an engagement.
             </h2>
             <ul className="mt-6 grid gap-3">
               {outcomes.map((outcome) => (
-                <li key={outcome} className="flex gap-3 rounded-2xl bg-[#f7f8fa] p-4">
-                  <CheckCircle className="mt-0.5 shrink-0 text-[#4262ff]" size={20} weight="duotone" />
-                  <span className="text-sm font-medium leading-6 text-[#1c1c1e]">
+                <li key={outcome} className="flex gap-3 rounded-card bg-surface p-4">
+                  <CheckCircle className="mt-0.5 shrink-0 text-action" size={20} weight="duotone" />
+                  <span className="text-sm font-medium leading-6 text-ink">
                     {outcome}
                   </span>
                 </li>
@@ -280,7 +280,7 @@ export function ServicesPage() {
       </section>
 
       <section className="px-6 py-20 md:px-10 lg:px-12">
-        <div className="mx-auto max-w-7xl rounded-3xl bg-[#1c1c1e] px-6 py-12 text-white md:px-12">
+        <div className="mx-auto max-w-7xl rounded-feature bg-ink px-6 py-12 text-white md:px-12">
           <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
             <div>
               <h2 className="max-w-2xl text-3xl font-medium leading-tight md:text-4xl">

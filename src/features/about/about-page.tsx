@@ -19,14 +19,14 @@ export function AboutPage() {
       />
       <section className="mx-auto grid max-w-7xl gap-10 px-6 py-20 md:grid-cols-2 md:px-10 lg:px-12">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+          <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
             Mission
           </p>
-          <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
+          <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-ink md:text-4xl">
             Make running an F&B brand feel designed for the brand, not bolted onto generic software.
           </h2>
         </div>
-        <div className="space-y-5 text-lg leading-8 text-[#555a6a]">
+        <div className="space-y-5 text-lg leading-8 text-copy">
           <p>
             Restrovate is a specialist agency for F&B brands. We&apos;re
             agency-first, with four standalone tools on the side, queue &amp;
@@ -43,15 +43,15 @@ export function AboutPage() {
           </p>
         </div>
       </section>
-      <section className="border-y border-[#eef0f3] py-16">
+      <section className="border-y border-line-soft py-16">
         <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-12">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+          <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
             The team
           </p>
-          <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
+          <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-ink md:text-4xl">
             Our Team
           </h2>
-          <p className="mt-4 max-w-2xl text-lg leading-8 text-[#555a6a]">
+          <p className="mt-4 max-w-2xl text-lg leading-8 text-copy">
             Restrovate is built as a multidisciplinary team because F&amp;B
             expansion rarely fails in one department. A website affects
             enquiries, a franchise agreement affects rollout speed, a menu
@@ -64,29 +64,29 @@ export function AboutPage() {
           <TeamShowcase members={teamMembers} />
         </div>
 
-        <p className="mt-14 text-center text-base text-[#555a6a]">
+        <p className="mt-14 text-center text-base text-copy">
           Are you our next team member?{" "}
           <Link
             href="/careers"
-            className="font-semibold uppercase tracking-wide text-[#4262ff] hover:text-[#2a41b6]"
+            className="font-semibold uppercase tracking-wide text-action hover:text-action-deep"
           >
             See openings
           </Link>
         </p>
       </section>
-      <section className="bg-[#f7f8fa] px-6 py-20 md:px-10 lg:px-12">
+      <section className="bg-surface px-6 py-20 md:px-10 lg:px-12">
         <div className="mx-auto max-w-7xl">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+          <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
             How we operate
           </p>
-          <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
+          <h2 className="mt-4 text-3xl font-medium leading-tight tracking-tight text-ink md:text-4xl">
             Operating principles
           </h2>
           <div className="mt-8 grid gap-3 md:grid-cols-2">
             {values.map((value) => (
               <div
                 key={value}
-                className="rounded-2xl border border-[#eef0f3] bg-white p-6 text-xl font-medium text-[#1c1c1e]"
+                className="rounded-card border border-line-soft bg-white p-6 text-xl font-medium text-ink"
               >
                 {value}
               </div>

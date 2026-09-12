@@ -16,7 +16,7 @@ export function JobDetailPage({ role }: { role: Role }) {
         <div className="mx-auto max-w-7xl">
           <Link
             href="/careers"
-            className="inline-flex items-center gap-2 rounded-full border border-[#e0e2e8] px-4 py-2 text-sm font-medium text-[#1c1c1e] transition-colors hover:bg-[#f7f8fa]"
+            className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-surface"
           >
             <ArrowLeft size={16} weight="duotone" />
             All roles
@@ -24,13 +24,13 @@ export function JobDetailPage({ role }: { role: Role }) {
 
           <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(420px,0.65fr)] lg:items-start">
             <FadeIn>
-              <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+              <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
                 {role.team}
               </p>
-              <h1 className="mt-4 max-w-4xl text-5xl font-medium leading-[1.04] tracking-tight text-[#1c1c1e] md:text-6xl">
+              <h1 className="mt-4 max-w-4xl text-5xl font-medium leading-[1.04] tracking-tight text-ink md:text-6xl">
                 {role.title}
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-[#555a6a]">
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-copy">
                 {role.intro}
               </p>
 
@@ -43,7 +43,7 @@ export function JobDetailPage({ role }: { role: Role }) {
 
             <FadeIn
               delay={0.08}
-              className="rounded-[28px] bg-[#1c1c1e] p-6 text-white"
+              className="rounded-feature bg-ink p-6 text-white"
             >
               <p className="text-xs font-semibold uppercase tracking-wide text-white/50">
                 Role snapshot
@@ -59,16 +59,16 @@ export function JobDetailPage({ role }: { role: Role }) {
         </div>
       </section>
 
-      <section className="border-y border-[#eef0f3] bg-[#f7f8fa] px-6 py-12 md:px-10 lg:px-12">
+      <section className="border-y border-line-soft bg-surface px-6 py-12 md:px-10 lg:px-12">
         <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-3">
           {role.highlights.map((highlight) => (
-            <div key={highlight} className="rounded-2xl bg-white p-5">
+            <div key={highlight} className="rounded-card bg-white p-5">
               <CheckCircle
                 size={22}
                 weight="duotone"
-                className="text-[#4262ff]"
+                className="text-action"
               />
-              <p className="mt-4 text-sm font-medium leading-6 text-[#1c1c1e]">
+              <p className="mt-4 text-sm font-medium leading-6 text-ink">
                 {highlight}
               </p>
             </div>
@@ -96,13 +96,13 @@ export function JobDetailPage({ role }: { role: Role }) {
 function JobSection({ title, items }: { title: string; items: string[] }) {
   return (
     <section>
-      <h2 className="text-2xl font-medium tracking-tight text-[#1c1c1e]">
+      <h2 className="text-2xl font-medium tracking-tight text-ink">
         {title}
       </h2>
       <ul className="mt-5 grid gap-3">
         {items.map((item) => (
-          <li key={item} className="flex gap-3 leading-7 text-[#555a6a]">
-            <span className="mt-2 size-2 shrink-0 rounded-full bg-[#ffd02f]" />
+          <li key={item} className="flex gap-3 leading-7 text-copy">
+            <span className="mt-2 size-2 shrink-0 rounded-full bg-brand" />
             <span>{item}</span>
           </li>
         ))}
@@ -118,7 +118,7 @@ function ApplicationForm({ role }: { role: Role }) {
       method="POST"
       data-netlify="true"
       data-netlify-honeypot="bot-field"
-      className="rounded-[28px] border border-[#eef0f3] bg-white p-5 shadow-[0_16px_36px_-28px_rgba(5,0,56,0.28)] md:p-6"
+      className="rounded-feature border border-line-soft bg-white p-5 shadow-[0_16px_36px_-28px_rgba(5,0,56,0.28)] md:p-6"
     >
       <input type="hidden" name="form-name" value="career-application" />
       <input type="hidden" name="role" value={role.title} />
@@ -129,10 +129,10 @@ function ApplicationForm({ role }: { role: Role }) {
         </label>
       </p>
 
-      <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+      <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
         Apply for this role
       </p>
-      <h2 className="mt-3 text-2xl font-medium text-[#1c1c1e]">
+      <h2 className="mt-3 text-2xl font-medium text-ink">
         Send your profile
       </h2>
 
@@ -146,7 +146,7 @@ function ApplicationForm({ role }: { role: Role }) {
         <div>
           <label
             htmlFor="message"
-            className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]"
+            className="text-xs font-semibold uppercase tracking-wide text-copy-muted"
           >
             Why this role?
           </label>
@@ -157,13 +157,13 @@ function ApplicationForm({ role }: { role: Role }) {
             required
             minLength={40}
             placeholder="Share a few lines about your relevant work and why Restrovate is a fit."
-            className="mt-2 w-full rounded-xl border border-[#c7cad5] bg-white px-4 py-3 text-sm font-medium text-[#1c1c1e] focus:border-[#4262ff] focus:outline-none"
+            className="mt-2 w-full rounded-control border border-line-strong bg-white px-4 py-3 text-sm font-medium text-ink focus:border-action focus:outline-none"
           />
         </div>
 
         <button
           type="submit"
-          className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#1c1c1e] px-6 text-sm font-medium text-white transition-colors hover:bg-[#2c2c34]"
+          className="inline-flex min-h-12 items-center justify-center rounded-full bg-ink px-6 text-sm font-medium text-white transition-colors hover:bg-ink-soft"
         >
           Submit application
         </button>
@@ -189,7 +189,7 @@ function Field({
     <div>
       <label
         htmlFor={name}
-        className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]"
+        className="text-xs font-semibold uppercase tracking-wide text-copy-muted"
       >
         {label}
         {required ? " *" : ""}
@@ -200,7 +200,7 @@ function Field({
         type={type}
         required={required}
         autoComplete={autoComplete}
-        className="mt-2 w-full rounded-xl border border-[#c7cad5] bg-white px-4 py-3 text-sm font-medium text-[#1c1c1e] focus:border-[#4262ff] focus:outline-none"
+        className="mt-2 w-full rounded-control border border-line-strong bg-white px-4 py-3 text-sm font-medium text-ink focus:border-action focus:outline-none"
       />
     </div>
   );
@@ -214,7 +214,7 @@ function MetaPill({
   label: string;
 }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-[#e0e2e8] px-3 py-1.5 text-xs font-medium text-[#555a6a]">
+    <span className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1.5 text-xs font-medium text-copy">
       <Icon size={14} weight="duotone" />
       {label}
     </span>

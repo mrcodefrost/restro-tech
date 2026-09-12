@@ -24,7 +24,7 @@ export function ProductsPage() {
           {products.map((product) => (
             <article
               key={product.slug}
-              className="flex h-full flex-col overflow-hidden rounded-2xl border border-[#eef0f3] bg-white transition-all duration-300 hover:-translate-y-1 hover:border-[#c7cad5] hover:shadow-[0_18px_42px_-30px_rgba(5,0,56,0.45)]"
+              className="flex h-full flex-col overflow-hidden rounded-card border border-line-soft bg-white transition-all duration-300 hover:-translate-y-1 hover:border-line-strong hover:shadow-[0_18px_42px_-30px_rgba(5,0,56,0.45)]"
             >
               <div
                 className="h-1.5 w-full"
@@ -37,13 +37,13 @@ export function ProductsPage() {
                 >
                   {product.tagline}
                 </p>
-                <h2 className="mt-4 inline-flex w-fit rounded-full bg-[#1c1c1e] px-4 py-2 text-2xl font-semibold text-white">
+                <h2 className="mt-4 inline-flex w-fit rounded-full bg-ink px-4 py-2 text-2xl font-semibold text-white">
                   {product.name}
                 </h2>
-                <p className="mt-3 leading-7 text-[#555a6a]">{product.summary}</p>
+                <p className="mt-3 leading-7 text-copy">{product.summary}</p>
 
                 <div
-                  className="relative mt-5 overflow-hidden rounded-xl p-4"
+                  className="relative mt-5 overflow-hidden rounded-control p-4"
                   style={{ backgroundColor: product.color.soft }}
                 >
                   <Warning
@@ -58,14 +58,14 @@ export function ProductsPage() {
                   >
                     The problem
                   </p>
-                  <p className="relative mt-2 text-sm font-medium leading-6 text-[#1c1c1e]">
+                  <p className="relative mt-2 text-sm font-medium leading-6 text-ink">
                     {product.problem.headline}
                   </p>
                 </div>
 
                 <ul className="mt-5 grid flex-1 gap-2">
                   {product.features.map((feature) => (
-                    <li key={feature} className="flex gap-3 text-sm leading-6 text-[#555a6a]">
+                    <li key={feature} className="flex gap-3 text-sm leading-6 text-copy">
                       <CheckCircle
                         className="mt-0.5 shrink-0"
                         style={{ color: product.color.accent }}
@@ -95,15 +95,15 @@ export function ProductsPage() {
         </div>
       </section>
 
-      <section className="bg-[#f7f8fa] px-6 py-20 md:px-10 lg:px-12">
+      <section className="bg-surface px-6 py-20 md:px-10 lg:px-12">
         <div className="mx-auto max-w-7xl">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+          <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
             Why not just use standard POS?
           </p>
-          <h2 className="mt-4 max-w-3xl text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-4xl">
+          <h2 className="mt-4 max-w-3xl text-3xl font-medium leading-tight tracking-tight text-ink md:text-4xl">
             Standard POS solves point of sale. It wasn&apos;t built for franchise management.
           </h2>
-          <p className="mt-4 max-w-3xl text-lg leading-8 text-[#555a6a]">
+          <p className="mt-4 max-w-3xl text-lg leading-8 text-copy">
             Standard restaurant POS platforms are built for a single
             restaurant, and licensing them across many outlets gets expensive
             without buying franchise-specific capability. Our products are
@@ -115,7 +115,7 @@ export function ProductsPage() {
       </section>
 
       <section className="px-6 py-20 md:px-10 lg:px-12">
-        <div className="mx-auto max-w-7xl rounded-3xl bg-[#1c1c1e] px-6 py-12 text-white md:px-12">
+        <div className="mx-auto max-w-7xl rounded-feature bg-ink px-6 py-12 text-white md:px-12">
           <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
             <div>
               <p className="text-sm font-medium text-white/60">

@@ -32,11 +32,11 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
 
   return (
     <article>
-      <header className="border-b border-[#eef0f3] bg-white px-6 py-8 md:px-10 lg:px-12">
+      <header className="border-b border-line-soft bg-white px-6 py-8 md:px-10 lg:px-12">
         <div className="mx-auto max-w-7xl">
           <Link
             href="/products"
-            className="inline-flex items-center gap-2 rounded-full bg-[#f7f8fa] px-4 py-2.5 text-sm font-medium text-[#1c1c1e]"
+            className="inline-flex items-center gap-2 rounded-full bg-surface px-4 py-2.5 text-sm font-medium text-ink"
           >
             <ArrowLeft size={16} weight="duotone" />
             Products
@@ -49,10 +49,10 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
             >
               {product.tagline}
             </p>
-            <h1 className="mt-4 text-4xl font-medium leading-[1.1] tracking-tight text-[#1c1c1e] md:text-5xl lg:text-6xl">
+            <h1 className="mt-4 text-4xl font-medium leading-[1.1] tracking-tight text-ink md:text-5xl lg:text-6xl">
               {product.name}
             </h1>
-            <p className="mt-5 max-w-3xl text-lg leading-8 text-[#555a6a]">
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-copy">
               {product.overview}
             </p>
           </div>
@@ -60,7 +60,7 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
       </header>
 
       <section className="px-6 py-16 md:px-10 lg:px-12">
-        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl p-8" style={{ backgroundColor: product.color.soft }}>
+        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-feature p-8" style={{ backgroundColor: product.color.soft }}>
           <Warning
             className="absolute -right-10 -top-10 opacity-20"
             size={180}
@@ -73,26 +73,26 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
           >
             The problem
           </p>
-          <h2 className="relative mt-3 max-w-3xl text-2xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-3xl">
+          <h2 className="relative mt-3 max-w-3xl text-2xl font-medium leading-tight tracking-tight text-ink md:text-3xl">
             {product.problem.headline}
           </h2>
-          <p className="relative mt-4 max-w-3xl leading-7 text-[#2c2c34]">
+          <p className="relative mt-4 max-w-3xl leading-7 text-ink-soft">
             {product.problem.body}
           </p>
 
           <div className="relative mt-8 grid gap-4 sm:grid-cols-3">
             {product.metrics.map((metric) => (
-              <div key={metric.label} className="rounded-2xl bg-white p-5">
+              <div key={metric.label} className="rounded-card bg-white p-5">
                 <p
                   className="text-3xl font-medium tracking-tight"
                   style={{ color: product.color.text }}
                 >
                   {metric.value}
                 </p>
-                <p className="mt-1 text-sm font-medium leading-5 text-[#1c1c1e]">
+                <p className="mt-1 text-sm font-medium leading-5 text-ink">
                   {metric.label}
                 </p>
-                <p className="mt-2 text-xs leading-5 text-[#6b6f7e]">
+                <p className="mt-2 text-xs leading-5 text-copy-muted">
                   {metric.context}
                 </p>
               </div>
@@ -103,10 +103,10 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
 
       <section className="px-6 pb-16 md:px-10 lg:px-12">
         <div className="mx-auto max-w-7xl">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+          <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
             How it works
           </p>
-          <h2 className="mt-3 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e]">
+          <h2 className="mt-3 text-3xl font-medium leading-tight tracking-tight text-ink">
             The flow
           </h2>
           <div className="mt-6">
@@ -122,7 +122,7 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
       <section className="px-6 pb-16 md:px-10 lg:px-12">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div
-            className="relative overflow-hidden rounded-2xl p-6"
+            className="relative overflow-hidden rounded-card p-6"
             style={{ backgroundColor: product.color.soft }}
           >
             <Trophy
@@ -137,13 +137,13 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
             >
               Best for
             </p>
-            <p className="relative mt-2 text-sm font-medium leading-6 text-[#1c1c1e]">
+            <p className="relative mt-2 text-sm font-medium leading-6 text-ink">
               {product.audience}
             </p>
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+            <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
               Features
             </p>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -152,15 +152,15 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
                 return (
                   <div
                     key={feature}
-                    className="rounded-2xl border border-[#eef0f3] bg-white p-5"
+                    className="rounded-card border border-line-soft bg-white p-5"
                   >
                     <span
-                      className="grid size-10 place-items-center rounded-xl"
+                      className="grid size-10 place-items-center rounded-control"
                       style={{ backgroundColor: product.color.soft }}
                     >
                       <Icon size={20} weight="duotone" style={{ color: product.color.text }} />
                     </span>
-                    <p className="mt-3 text-sm font-medium leading-6 text-[#1c1c1e]">
+                    <p className="mt-3 text-sm font-medium leading-6 text-ink">
                       {feature}
                     </p>
                   </div>
@@ -177,7 +177,7 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
             <button
               type="button"
               aria-label={`Play ${product.name} demo video`}
-              className="group relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-3xl border border-[#e0e2e8] bg-[#1c1c1e]"
+              className="group relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-feature border border-line bg-ink"
             >
               <div
                 className="absolute inset-0 opacity-20"
@@ -199,7 +199,7 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
       <section className="px-6 pb-16 md:px-10 lg:px-12">
         <div className="mx-auto max-w-4xl">
           <div
-            className="relative overflow-hidden rounded-3xl border-2 p-8 sm:p-10"
+            className="relative overflow-hidden rounded-feature border-2 p-8 sm:p-10"
             style={{ backgroundColor: product.color.soft, borderColor: product.color.accent }}
           >
             <div className="relative flex flex-col items-center gap-6 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
@@ -211,17 +211,17 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
                   Simple pricing
                 </p>
                 <p className="mt-4 flex items-baseline justify-center gap-2 sm:justify-start">
-                  <span className="text-6xl font-medium tracking-tight text-[#1c1c1e]">
+                  <span className="text-6xl font-medium tracking-tight text-ink">
                     ₹2,500
                   </span>
-                  <span className="text-base font-medium text-[#2c2c34]">
+                  <span className="text-base font-medium text-ink-soft">
                     /month
                   </span>
                 </p>
-                <p className="mt-2 text-sm font-medium leading-6 text-[#2c2c34]">
+                <p className="mt-2 text-sm font-medium leading-6 text-ink-soft">
                   GST included, for 1 outlet. Scales per outlet as you grow.
                 </p>
-                <p className="mt-1 text-sm leading-6 text-[#555a6a]">
+                <p className="mt-1 text-sm leading-6 text-copy">
                   Opt in on its own, pay for just {product.name}, cancel anytime.
                 </p>
               </div>
@@ -233,12 +233,12 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
         </div>
       </section>
 
-      <section className="bg-[#f7f8fa] px-6 py-16 md:px-10 lg:px-12">
+      <section className="bg-surface px-6 py-16 md:px-10 lg:px-12">
         <div className="mx-auto max-w-4xl">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+          <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
             Questions
           </p>
-          <h2 className="mt-3 text-3xl font-medium leading-tight tracking-tight text-[#1c1c1e]">
+          <h2 className="mt-3 text-3xl font-medium leading-tight tracking-tight text-ink">
             Frequently asked
           </h2>
           <div className="mt-6">
@@ -250,16 +250,16 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
         </div>
       </section>
 
-      <section className="border-t border-[#eef0f3] bg-white px-6 py-12 md:px-10 lg:px-12">
+      <section className="border-t border-line-soft bg-white px-6 py-12 md:px-10 lg:px-12">
         <div
-          className="mx-auto grid max-w-7xl gap-6 rounded-3xl p-6 md:grid-cols-[1fr_auto] md:items-center md:p-10"
+          className="mx-auto grid max-w-7xl gap-6 rounded-feature p-6 md:grid-cols-[1fr_auto] md:items-center md:p-10"
           style={{ backgroundColor: product.color.soft }}
         >
           <div>
             <p className="text-sm font-medium" style={{ color: product.color.text }}>
               Ask about {product.name}
             </p>
-            <h2 className="mt-2 text-3xl font-medium leading-tight text-[#1c1c1e]">
+            <h2 className="mt-2 text-3xl font-medium leading-tight text-ink">
               Available standalone, no full engagement required.
             </h2>
           </div>

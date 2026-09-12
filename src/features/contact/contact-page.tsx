@@ -118,13 +118,13 @@ export function ContactPage() {
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             className="lg:sticky lg:top-24"
           >
-            <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+            <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
               Contact
             </p>
-            <h1 className="mt-4 text-4xl font-medium leading-[1.08] tracking-tight text-[#1c1c1e] md:text-5xl">
+            <h1 className="mt-4 text-4xl font-medium leading-[1.08] tracking-tight text-ink md:text-5xl">
               Tell us what is blocking the next stage of your F&amp;B brand.
             </h1>
-            <p className="mt-5 max-w-xl text-lg leading-8 text-[#555a6a]">
+            <p className="mt-5 max-w-xl text-lg leading-8 text-copy">
               Use the form and give us the practical details: outlet count,
               cities, paperwork status, website or app gaps, and the launch
               timeline you are trying to protect.
@@ -133,7 +133,7 @@ export function ContactPage() {
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <a
                 href={`mailto:${siteConfig.email}`}
-                className="inline-flex items-center gap-2 text-sm font-medium text-[#1c1c1e] hover:underline"
+                className="inline-flex items-center gap-2 text-sm font-medium text-ink hover:underline"
               >
                 <EnvelopeSimple size={18} weight="duotone" />
                 {siteConfig.email}
@@ -146,17 +146,17 @@ export function ContactPage() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="rounded-2xl border border-[#eef0f3] bg-white p-5 shadow-[0_16px_36px_-28px_rgba(5,0,56,0.28)] md:p-7"
+            className="rounded-card border border-line-soft bg-white p-5 shadow-[0_16px_36px_-28px_rgba(5,0,56,0.28)] md:p-7"
           >
             {submitted ? (
               <div className="flex min-h-[520px] flex-col items-start justify-center gap-4">
-                <div className="grid size-12 place-items-center rounded-full bg-[#1c1c1e] text-white">
+                <div className="grid size-12 place-items-center rounded-full bg-ink text-white">
                   <CheckCircle size={26} weight="duotone" />
                 </div>
-                <h2 className="text-2xl font-medium text-[#1c1c1e]">
+                <h2 className="text-2xl font-medium text-ink">
                   Message sent.
                 </h2>
-                <p className="max-w-md leading-7 text-[#555a6a]">
+                <p className="max-w-md leading-7 text-copy">
                   We have received your message and will reply from{" "}
                   {siteConfig.email} within one business day.
                 </p>
@@ -217,7 +217,7 @@ export function ContactPage() {
                   <div>
                     <label
                       htmlFor="interest"
-                      className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]"
+                      className="text-xs font-semibold uppercase tracking-wide text-copy-muted"
                     >
                       What are you interested in? *
                     </label>
@@ -226,7 +226,7 @@ export function ContactPage() {
                       name="interest"
                       defaultValue={defaultInterest}
                       required
-                      className="mt-2 w-full rounded-xl border border-[#c7cad5] bg-white px-4 py-3 text-sm font-medium text-[#1c1c1e] focus:border-[#4262ff] focus:outline-none"
+                      className="mt-2 w-full rounded-control border border-line-strong bg-white px-4 py-3 text-sm font-medium text-ink focus:border-action focus:outline-none"
                     >
                       {interestOptions.map((option) => (
                         <option key={option} value={option}>
@@ -239,7 +239,7 @@ export function ContactPage() {
                   <div>
                     <label
                       htmlFor="message"
-                      className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]"
+                      className="text-xs font-semibold uppercase tracking-wide text-copy-muted"
                     >
                       Tell us about your brand *
                     </label>
@@ -255,16 +255,16 @@ export function ContactPage() {
                         fieldErrors.message ? "message-error" : undefined
                       }
                       placeholder="Outlet count, cities or regions, and the problem you are trying to solve."
-                      className={`mt-2 w-full rounded-xl border bg-white px-4 py-3 text-sm font-medium text-[#1c1c1e] focus:border-[#4262ff] focus:outline-none ${
+                      className={`mt-2 w-full rounded-control border bg-white px-4 py-3 text-sm font-medium text-ink focus:border-action focus:outline-none ${
                         fieldErrors.message
-                          ? "border-[#c0392b]"
-                          : "border-[#c7cad5]"
+                          ? "border-danger"
+                          : "border-line-strong"
                       }`}
                     />
                     {fieldErrors.message ? (
                       <p
                         id="message-error"
-                        className="mt-2 text-xs font-medium text-[#c0392b]"
+                        className="mt-2 text-xs font-medium text-danger"
                       >
                         {fieldErrors.message}
                       </p>
@@ -272,7 +272,7 @@ export function ContactPage() {
                   </div>
 
                   {error ? (
-                    <p className="text-sm font-medium text-[#c0392b]">
+                    <p className="text-sm font-medium text-danger">
                       Something went wrong sending your message. Please email{" "}
                       {siteConfig.email} directly.
                     </p>
@@ -281,7 +281,7 @@ export function ContactPage() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#1c1c1e] px-6 text-sm font-medium text-white transition-colors hover:bg-[#2c2c34] disabled:opacity-60"
+                    className="inline-flex min-h-12 items-center justify-center rounded-full bg-ink px-6 text-sm font-medium text-white transition-colors hover:bg-ink-soft disabled:opacity-60"
                   >
                     {submitting ? "Sending..." : "Send message"}
                   </button>
@@ -292,7 +292,7 @@ export function ContactPage() {
         </div>
       </section>
 
-      <section className="border-t border-[#eef0f3] bg-[#f7f8fa] px-6 py-12 md:px-10 lg:px-12">
+      <section className="border-t border-line-soft bg-surface px-6 py-12 md:px-10 lg:px-12">
         <div className="mx-auto grid max-w-7xl gap-3 md:grid-cols-3">
           {[
             "We reply within one business day.",
@@ -301,12 +301,12 @@ export function ContactPage() {
           ].map((item, index) => (
             <div
               key={item}
-              className="rounded-2xl border border-[#eef0f3] bg-white p-5"
+              className="rounded-card border border-line-soft bg-white p-5"
             >
-              <span className="text-sm font-medium text-[#4262ff]">
+              <span className="text-sm font-medium text-action">
                 0{index + 1}
               </span>
-              <p className="mt-3 text-sm font-medium leading-6 text-[#1c1c1e]">
+              <p className="mt-3 text-sm font-medium leading-6 text-ink">
                 {item}
               </p>
             </div>
@@ -338,7 +338,7 @@ function Field({
     <div>
       <label
         htmlFor={name}
-        className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]"
+        className="text-xs font-semibold uppercase tracking-wide text-copy-muted"
       >
         {label}
         {required ? " *" : ""}
@@ -351,12 +351,12 @@ function Field({
         autoComplete={autoComplete}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : undefined}
-        className={`mt-2 w-full rounded-xl border bg-white px-4 py-3 text-sm font-medium text-[#1c1c1e] focus:border-[#4262ff] focus:outline-none ${
-          error ? "border-[#c0392b]" : "border-[#c7cad5]"
+        className={`mt-2 w-full rounded-control border bg-white px-4 py-3 text-sm font-medium text-ink focus:border-action focus:outline-none ${
+          error ? "border-danger" : "border-line-strong"
         }`}
       />
       {error ? (
-        <p id={errorId} className="mt-2 text-xs font-medium text-[#c0392b]">
+        <p id={errorId} className="mt-2 text-xs font-medium text-danger">
           {error}
         </p>
       ) : null}

@@ -4,15 +4,15 @@ export function PrivacyPolicyPage() {
   return (
     <article className="bg-white px-6 py-16 md:px-10 lg:px-12">
       <div className="mx-auto max-w-3xl">
-        <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">Legal</p>
-        <h1 className="mt-4 text-4xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-5xl">
+        <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">Legal</p>
+        <h1 className="mt-4 text-4xl font-medium leading-tight tracking-tight text-ink md:text-5xl">
           Privacy Policy
         </h1>
-        <p className="mt-4 text-sm font-medium text-[#6b6f7e]">
+        <p className="mt-4 text-sm font-medium text-copy-muted">
           Last updated: {lastUpdated}
         </p>
 
-        <div className="prose-legal mt-10 grid gap-8 text-base leading-7 text-[#555a6a]">
+        <div className="prose-legal mt-10 grid gap-8 text-base leading-7 text-copy">
           <Section title="1. Who we are">
             <p>
               Restrovate is a brand owned and operated by Synrad Labs
@@ -92,7 +92,7 @@ export function PrivacyPolicyPage() {
           <Section title="9. Contact us">
             <p>
               If you have questions about this Privacy Policy, contact us at{" "}
-              <a href="mailto:relations@synradlabs.com" className="font-medium text-[#4262ff]">
+              <a href="mailto:relations@synradlabs.com" className="font-medium text-action">
                 relations@synradlabs.com
               </a>
               .
@@ -113,7 +113,7 @@ function Section({
 }) {
   return (
     <section>
-      <h2 className="text-2xl font-medium text-[#1c1c1e]">{title}</h2>
+      <h2 className="text-2xl font-medium text-ink">{title}</h2>
       <div className="mt-3">{children}</div>
     </section>
   );

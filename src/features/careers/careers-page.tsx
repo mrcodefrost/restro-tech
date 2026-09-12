@@ -37,13 +37,13 @@ export function CareersPage() {
       <section className="px-6 py-16 md:px-10 lg:px-12 lg:py-20">
         <div className="mx-auto max-w-7xl">
           <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+            <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
               Careers
             </p>
-            <h1 className="mt-4 max-w-4xl text-5xl font-medium leading-[1.04] tracking-tight text-[#1c1c1e] md:text-6xl">
+            <h1 className="mt-4 max-w-4xl text-5xl font-medium leading-[1.04] tracking-tight text-ink md:text-6xl">
               Build the operating layer for ambitious F&amp;B brands.
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-[#555a6a]">
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-copy">
               Restrovate brings paperwork, tech, marketing, and production
               together for restaurant chains, private chefs, catering teams,
               and culinary brands preparing for their next stage.
@@ -52,19 +52,19 @@ export function CareersPage() {
         </div>
       </section>
 
-      <section className="border-y border-[#eef0f3] bg-[#f7f8fa] px-6 py-12 md:px-10 lg:px-12">
+      <section className="border-y border-line-soft bg-surface px-6 py-12 md:px-10 lg:px-12">
         <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-3">
           {workNotes.map((note) => {
             const Icon = note.icon;
             return (
-              <FadeIn key={note.title} className="rounded-2xl bg-white p-5">
-                <div className="grid size-10 place-items-center rounded-full bg-[#fff8e0] text-[#746019]">
+              <FadeIn key={note.title} className="rounded-card bg-white p-5">
+                <div className="grid size-10 place-items-center rounded-full bg-brand-soft text-[#746019]">
                   <Icon size={20} weight="duotone" />
                 </div>
-                <h2 className="mt-5 text-xl font-medium text-[#1c1c1e]">
+                <h2 className="mt-5 text-xl font-medium text-ink">
                   {note.title}
                 </h2>
-                <p className="mt-3 text-sm leading-6 text-[#555a6a]">
+                <p className="mt-3 text-sm leading-6 text-copy">
                   {note.summary}
                 </p>
               </FadeIn>
@@ -77,14 +77,14 @@ export function CareersPage() {
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+              <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
                 Open roles
               </p>
-              <h2 className="mt-3 text-3xl font-medium tracking-tight text-[#1c1c1e] md:text-4xl">
+              <h2 className="mt-3 text-3xl font-medium tracking-tight text-ink md:text-4xl">
                 Current openings
               </h2>
             </div>
-            <p className="max-w-lg text-sm leading-6 text-[#555a6a]">
+            <p className="max-w-lg text-sm leading-6 text-copy">
               We look for people who can work with ambiguity, document clearly,
               and care about how a system behaves in the real world.
             </p>
@@ -95,18 +95,18 @@ export function CareersPage() {
             <Link
               key={role.slug}
               href={`/careers/${role.slug}`}
-              className="group grid gap-5 rounded-2xl border border-[#eef0f3] bg-white p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c7cad5] hover:shadow-[0_16px_36px_-28px_rgba(5,0,56,0.35)] md:grid-cols-[1fr_auto] md:p-6"
+              className="group grid gap-5 rounded-card border border-line-soft bg-white p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[0_16px_36px_-28px_rgba(5,0,56,0.35)] md:grid-cols-[1fr_auto] md:p-6"
             >
               <div>
-                <div className="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+                <div className="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-wide text-copy-muted">
                   <span>{role.team}</span>
                   <span aria-hidden>/</span>
                   <span>{role.type}</span>
                 </div>
-                <h3 className="mt-3 text-2xl font-medium text-[#1c1c1e]">
+                <h3 className="mt-3 text-2xl font-medium text-ink">
                   {role.title}
                 </h3>
-                <p className="mt-3 max-w-3xl leading-7 text-[#555a6a]">
+                <p className="mt-3 max-w-3xl leading-7 text-copy">
                   {role.summary}
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -115,7 +115,7 @@ export function CareersPage() {
                   <RolePill icon={Clock} label={role.experience} />
                 </div>
               </div>
-              <span className="inline-flex items-center gap-2 self-end rounded-full bg-[#1c1c1e] px-5 py-3 text-sm font-medium text-white transition-colors group-hover:bg-[#2c2c34] md:self-center">
+              <span className="inline-flex items-center gap-2 self-end rounded-full bg-ink px-5 py-3 text-sm font-medium text-white transition-colors group-hover:bg-ink-soft md:self-center">
                 View role
                 <ArrowRight size={16} weight="duotone" />
               </span>
@@ -125,7 +125,7 @@ export function CareersPage() {
         </div>
       </section>
 
-      <section className="bg-[#1c1c1e] px-6 py-16 text-white md:px-10 lg:px-12">
+      <section className="bg-ink px-6 py-16 text-white md:px-10 lg:px-12">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.7fr_1.3fr]">
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-white/50">
@@ -137,8 +137,8 @@ export function CareersPage() {
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
             {values.map((value, index) => (
-              <div key={value} className="rounded-2xl bg-white/8 p-5">
-                <span className="text-sm font-medium text-[#ffd02f]">
+              <div key={value} className="rounded-card bg-white/8 p-5">
+                <span className="text-sm font-medium text-brand">
                   0{index + 1}
                 </span>
                 <p className="mt-3 text-sm font-medium leading-6 text-white/85">
@@ -161,7 +161,7 @@ function RolePill({
   label: string;
 }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-[#e0e2e8] px-3 py-1.5 text-xs font-medium text-[#555a6a]">
+    <span className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1.5 text-xs font-medium text-copy">
       <Icon size={14} weight="duotone" />
       {label}
     </span>

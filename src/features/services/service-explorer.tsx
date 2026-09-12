@@ -73,37 +73,37 @@ export function ServiceExplorer({ services, servicePillars }: ServiceExplorerPro
   return (
     <section
       id="all-services"
-      className="scroll-mt-20 border-b border-[#eef0f3] bg-white px-6 py-14 md:px-10 lg:px-12"
+      className="scroll-mt-20 border-b border-line-soft bg-white px-6 py-14 md:px-10 lg:px-12"
     >
       <div className="mx-auto max-w-7xl">
-        <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6f7e]">
+        <p className="text-xs font-semibold uppercase tracking-wide text-copy-muted">
           All services
         </p>
-        <h2 className="mt-3 max-w-2xl text-2xl font-medium leading-tight tracking-tight text-[#1c1c1e] md:text-3xl">
+        <h2 className="mt-3 max-w-2xl text-2xl font-medium leading-tight tracking-tight text-ink md:text-3xl">
           Search or filter to find the right service.
         </h2>
 
-        <div className="sticky top-16 z-30 -mx-6 mt-6 border-b border-[#eef0f3] bg-white/95 px-6 py-4 backdrop-blur md:-mx-10 md:px-10 lg:-mx-12 lg:px-12">
+        <div className="sticky top-16 z-30 -mx-6 mt-6 border-b border-line-soft bg-white/95 px-6 py-4 backdrop-blur md:-mx-10 md:px-10 lg:-mx-12 lg:px-12">
           <div className="mx-auto flex max-w-7xl flex-col gap-4 md:flex-row md:items-center">
             <div className="relative w-full md:max-w-xl md:flex-1">
               <MagnifyingGlass
                 size={18}
                 weight="duotone"
-                className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-[#8e91a0]"
+                className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-copy-subtle"
               />
               <input
                 type="text"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder='Search services, e.g. "FSSAI" or "video shoot"'
-                className="h-13 w-full rounded-full border border-[#c7cad5] bg-white pl-12 pr-11 text-sm font-medium text-[#1c1c1e] focus:border-[#4262ff] focus:outline-none"
+                className="h-13 w-full rounded-full border border-line-strong bg-white pl-12 pr-11 text-sm font-medium text-ink focus:border-action focus:outline-none"
               />
               {query ? (
                 <button
                   type="button"
                   onClick={() => setQuery("")}
                   aria-label="Clear search"
-                  className="absolute right-3 top-1/2 grid size-7 -translate-y-1/2 cursor-pointer place-items-center rounded-full text-[#8e91a0] transition-colors hover:bg-[#f7f8fa]"
+                  className="absolute right-3 top-1/2 grid size-7 -translate-y-1/2 cursor-pointer place-items-center rounded-full text-copy-subtle transition-colors hover:bg-surface"
                 >
                   <X size={14} weight="duotone" />
                 </button>
@@ -154,7 +154,7 @@ export function ServiceExplorer({ services, servicePillars }: ServiceExplorerPro
         </div>
 
         {matched.length === 0 && query ? (
-          <p className="mt-8 text-sm font-medium leading-6 text-[#6b6f7e]">
+          <p className="mt-8 text-sm font-medium leading-6 text-copy-muted">
             No services match &quot;{query}&quot;. Try a different term, or talk to us below.
           </p>
         ) : null}
@@ -170,25 +170,25 @@ export function ServiceExplorer({ services, servicePillars }: ServiceExplorerPro
                 <Link
                   key={service.slug}
                   href={`/services/${service.slug}`}
-                  className={`group flex h-full flex-col rounded-2xl p-5 transition-opacity hover:opacity-90 ${
-                    isGeneral ? "border border-dashed border-[#c7cad5]" : ""
+                  className={`group flex h-full flex-col rounded-card p-5 transition-opacity hover:opacity-90 ${
+                    isGeneral ? "border border-dashed border-line-strong" : ""
                   }`}
                   style={{ backgroundColor: soft }}
                 >
                   <div className="flex items-start justify-between gap-3">
-                    <h3 className="flex items-center gap-2 text-base font-medium text-[#1c1c1e]">
+                    <h3 className="flex items-center gap-2 text-base font-medium text-ink">
                       {isGeneral ? (
-                        <Question size={18} weight="duotone" className="shrink-0 text-[#ffd02f]" />
+                        <Question size={18} weight="duotone" className="shrink-0 text-brand" />
                       ) : null}
                       {service.title}
                     </h3>
                     <ArrowUpRight
                       size={16}
                       weight="duotone"
-                      className="mt-1 shrink-0 text-[#1c1c1e] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      className="mt-1 shrink-0 text-ink transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                     />
                   </div>
-                  <p className="mt-2 flex-1 text-sm leading-6 text-[#2c2c34]">
+                  <p className="mt-2 flex-1 text-sm leading-6 text-ink-soft">
                     {service.summary}
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2">
