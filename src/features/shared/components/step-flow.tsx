@@ -1,6 +1,3 @@
-import { Fragment } from "react";
-import { CaretDoubleDown, CaretDoubleRight } from "@phosphor-icons/react/ssr";
-
 type Step = {
   title: string;
   summary: string;
@@ -10,65 +7,37 @@ type StepFlowProps = {
   steps: Step[];
   accentColor?: string;
   cardClassName?: string;
-  /**
-   * "vertical" always stacks with down-arrow connectors (for narrow columns).
-   * "horizontal" stacks on mobile and lays out left-to-right with
-   * right-arrow connectors from md up (for full-width sections).
-   */
   direction?: "vertical" | "horizontal";
 };
-
-function Chip({ accentColor, icon: Icon }: { accentColor: string; icon: typeof CaretDoubleRight }) {
-  return (
-    <span
-      className="grid size-7 shrink-0 place-items-center rounded-full"
-      style={{ backgroundColor: accentColor }}
-    >
-      <Icon size={14} weight="bold" className="text-[#1c1c1e]" />
-    </span>
-  );
-}
 
 export function StepFlow({
   steps,
   accentColor = "#ffd02f",
-  cardClassName = "border border-[#eef0f3] bg-white text-[#1c1c1e]",
+  cardClassName = "text-ink",
   direction = "vertical",
 }: StepFlowProps) {
   return (
-    <div
-      className={`flex flex-col ${
-        direction === "horizontal" ? "md:flex-row md:items-stretch" : ""
+    <ol
+      className={`grid gap-8 ${
+        direction === "horizontal" ? "md:grid-cols-2 lg:grid-cols-4" : ""
       }`}
     >
       {steps.map((step, index) => (
-        <Fragment key={step.title}>
-          <article className={`flex-1 rounded-2xl p-5 ${cardClassName}`}>
-            <span className="text-sm font-medium" style={{ color: accentColor }}>
-              0{index + 1}
-            </span>
-            <h3 className="mt-2 text-lg font-medium">{step.title}</h3>
-            <p className="mt-2 text-sm leading-6 opacity-70">{step.summary}</p>
-          </article>
-
-          {index < steps.length - 1 ? (
-            <>
-              {direction === "horizontal" ? (
-                <div className="hidden shrink-0 items-center justify-center md:flex md:w-10">
-                  <Chip accentColor={accentColor} icon={CaretDoubleRight} />
-                </div>
-              ) : null}
-              <div
-                className={`flex items-center justify-center py-1.5 ${
-                  direction === "horizontal" ? "md:hidden" : ""
-                }`}
-              >
-                <Chip accentColor={accentColor} icon={CaretDoubleDown} />
-              </div>
-            </>
-          ) : null}
-        </Fragment>
+        <li
+          key={step.title}
+          className={`relative border-t pt-5 ${cardClassName}`}
+          style={{ borderColor: `${accentColor}66` }}
+        >
+          <span
+            className="font-mono text-xs font-semibold tracking-[0.14em]"
+            style={{ color: accentColor }}
+          >
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <h3 className="mt-5 text-lg font-medium leading-snug">{step.title}</h3>
+          <p className="mt-2 text-sm leading-6 opacity-70">{step.summary}</p>
+        </li>
       ))}
-    </div>
+    </ol>
   );
 }

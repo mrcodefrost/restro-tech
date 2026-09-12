@@ -102,7 +102,7 @@ type MenuKey = "services" | "products" | "about" | null;
 function ProductsMegaPanel({ onNavigate }: { onNavigate: () => void }) {
   return (
     <div className="grid gap-6 lg:grid-cols-[0.78fr_1.22fr]">
-      <div className="rounded-2xl bg-[#1c1c1e] p-6 text-white">
+      <div className="rounded-card bg-ink p-6 text-white">
         <p className="text-xs font-semibold uppercase tracking-wide text-white/50">
           Software suite
         </p>
@@ -116,7 +116,7 @@ function ProductsMegaPanel({ onNavigate }: { onNavigate: () => void }) {
         <Link
           href="/products"
           onClick={onNavigate}
-          className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-medium text-[#1c1c1e]"
+          className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-medium text-ink"
         >
           See products
           <ArrowUpRight size={16} weight="duotone" />
@@ -129,7 +129,7 @@ function ProductsMegaPanel({ onNavigate }: { onNavigate: () => void }) {
             key={product.slug}
             href={`/products/${product.slug}`}
             onClick={onNavigate}
-            className="group rounded-2xl border border-[#eef0f3] p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c7cad5] hover:shadow-[0_16px_36px_-28px_rgba(5,0,56,0.4)]"
+            className="group rounded-card border border-line-soft p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[0_16px_36px_-28px_rgba(5,0,56,0.4)]"
             style={{ backgroundColor: product.color.soft }}
           >
             <p
@@ -139,14 +139,14 @@ function ProductsMegaPanel({ onNavigate }: { onNavigate: () => void }) {
               {product.tagline}
             </p>
             <div className="mt-2 flex items-center justify-between gap-3">
-              <h4 className="text-lg font-semibold text-[#1c1c1e]">
+              <h4 className="text-lg font-semibold text-ink">
                 {product.name}
               </h4>
-              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-white text-[#1c1c1e] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-white text-ink transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                 <ArrowUpRight size={16} weight="duotone" />
               </span>
             </div>
-            <p className="mt-2 text-xs leading-5 text-[#555a6a]">
+            <p className="mt-2 text-xs leading-5 text-copy">
               {product.summary}
             </p>
           </Link>
@@ -172,7 +172,7 @@ function ServicesMegaPanel({ onNavigate }: { onNavigate: () => void }) {
         return (
           <div
             key={column.id}
-            className="flex h-full flex-col rounded-2xl border border-[#eef0f3] p-4"
+            className="flex h-full flex-col rounded-card border border-line-soft p-4"
             style={{ backgroundColor: column.soft }}
           >
             <div className="flex items-start justify-between gap-3">
@@ -185,13 +185,13 @@ function ServicesMegaPanel({ onNavigate }: { onNavigate: () => void }) {
               <Link
                 href={column.viewAllHref ?? "/services"}
                 onClick={onNavigate}
-                className="grid size-8 shrink-0 place-items-center rounded-full bg-white text-[#1c1c1e] transition-transform duration-300 hover:translate-x-0.5 hover:-translate-y-0.5"
+                className="grid size-8 shrink-0 place-items-center rounded-full bg-white text-ink transition-transform duration-300 hover:translate-x-0.5 hover:-translate-y-0.5"
                 aria-label={column.viewAllLabel}
               >
                 <ArrowUpRight size={16} weight="duotone" />
               </Link>
             </div>
-            <h4 className="mt-4 text-lg font-semibold text-[#1c1c1e]">
+            <h4 className="mt-4 text-lg font-semibold text-ink">
               {column.title}
             </h4>
             <ul className="mt-4 flex-1 space-y-1.5">
@@ -200,7 +200,7 @@ function ServicesMegaPanel({ onNavigate }: { onNavigate: () => void }) {
                   <Link
                     href={item.href}
                     onClick={onNavigate}
-                    className="group/item flex items-center justify-between gap-2 rounded-lg bg-white/65 px-3 py-2 text-xs font-medium text-[#1c1c1e] transition-all duration-200 hover:bg-white"
+                    className="group/item flex items-center justify-between gap-2 rounded-lg bg-white/65 px-3 py-2 text-xs font-medium text-ink transition-all duration-200 hover:bg-white"
                   >
                     <span>{item.label}</span>
                     <ArrowUpRight
@@ -253,7 +253,7 @@ function AboutMegaPanel({ onNavigate }: { onNavigate: () => void }) {
             key={item.href}
             href={item.href}
             onClick={onNavigate}
-            className="group rounded-2xl border border-[#eef0f3] p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c7cad5] hover:shadow-[0_16px_36px_-28px_rgba(5,0,56,0.4)]"
+            className="group rounded-card border border-line-soft p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[0_16px_36px_-28px_rgba(5,0,56,0.4)]"
             style={{ backgroundColor: tone?.soft ?? "#f7f8fa" }}
           >
             <div className="flex items-start justify-between gap-3">
@@ -263,14 +263,14 @@ function AboutMegaPanel({ onNavigate }: { onNavigate: () => void }) {
               >
                 <Icon size={19} weight="duotone" />
               </div>
-              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-white text-[#1c1c1e] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-white text-ink transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                 <ArrowUpRight size={16} weight="duotone" />
               </span>
             </div>
-            <h4 className="mt-4 text-lg font-semibold text-[#1c1c1e]">
+            <h4 className="mt-4 text-lg font-semibold text-ink">
               {item.label}
             </h4>
-            <p className="mt-2 text-xs leading-5 text-[#555a6a]">
+            <p className="mt-2 text-xs leading-5 text-copy">
               {item.description}
             </p>
           </Link>
@@ -299,18 +299,18 @@ function NavTrigger({
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       onClick={onClick}
-      className="relative flex items-center gap-1 rounded-full px-4 py-2.5 text-sm font-medium text-[#1c1c1e] transition-colors"
+      className="relative flex items-center gap-1 rounded-full px-4 py-2.5 text-sm font-medium text-ink transition-colors"
     >
       <span className="relative z-10">{label}</span>
       <CaretDown
         size={14}
         weight="duotone"
-        className={`relative z-10 transition-all duration-300 ${active ? "rotate-180 text-[#ffd02f]" : ""}`}
+        className={`relative z-10 transition-all duration-300 ${active ? "rotate-180 text-brand" : ""}`}
       />
       {active ? (
         <motion.span
           layoutId="nav-hover-pill"
-          className="absolute inset-0 rounded-full bg-[#f7f8fa]"
+          className="absolute inset-0 rounded-full bg-surface"
           transition={{ type: "spring", stiffness: 500, damping: 35 }}
         />
       ) : null}
@@ -325,13 +325,13 @@ function NavLink({ href, label }: { href: string; label: string }) {
       href={href}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative rounded-full px-4 py-2.5 text-sm font-medium text-[#1c1c1e] transition-colors"
+      className="relative rounded-full px-4 py-2.5 text-sm font-medium text-ink transition-colors"
     >
       <span className="relative z-10">{label}</span>
       {hovered ? (
         <motion.span
           layoutId="nav-hover-pill"
-          className="absolute inset-0 rounded-full bg-[#f7f8fa]"
+          className="absolute inset-0 rounded-full bg-surface"
           transition={{ type: "spring", stiffness: 500, damping: 35 }}
         />
       ) : null}
@@ -362,7 +362,7 @@ export function SiteHeader() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[#eef0f3] bg-white/95 backdrop-blur px-6 md:px-10 lg:px-12">
+    <header className="sticky top-0 z-50 border-b border-line-soft bg-white/95 backdrop-blur px-6 md:px-10 lg:px-12">
       <nav
         className="relative mx-auto flex h-16 max-w-7xl items-center gap-3 md:gap-4"
         onMouseLeave={scheduleClose}
@@ -415,7 +415,7 @@ export function SiteHeader() {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((value) => !value)}
-          className="ml-auto grid size-10 shrink-0 place-items-center rounded-full text-[#1c1c1e] transition-colors hover:bg-[#f7f8fa] lg:hidden"
+          className="ml-auto grid size-10 shrink-0 place-items-center rounded-full text-ink transition-colors hover:bg-surface lg:hidden"
         >
           {open ? <X size={22} weight="duotone" /> : <List size={22} weight="duotone" />}
         </button>
@@ -429,7 +429,7 @@ export function SiteHeader() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.99 }}
               transition={{ duration: 0.22, ease: EASE }}
-              className="absolute left-0 right-0 top-full hidden origin-top border-t border-[#eef0f3] bg-white shadow-[0_24px_48px_-16px_rgba(5,0,56,0.12)] lg:block"
+              className="absolute left-0 right-0 top-full hidden origin-top border-t border-line-soft bg-white shadow-[0_24px_48px_-16px_rgba(5,0,56,0.12)] lg:block"
             >
               <div className="mx-auto max-w-7xl px-10 py-8 lg:px-12">
                 {activeMenu === "services" ? (
@@ -452,7 +452,7 @@ export function SiteHeader() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25, ease: EASE }}
-            className="overflow-hidden border-t border-[#eef0f3] bg-white lg:hidden"
+            className="overflow-hidden border-t border-line-soft bg-white lg:hidden"
           >
             <div className="flex flex-col gap-1 py-4">
               <MobileGroup
@@ -484,7 +484,7 @@ export function SiteHeader() {
               <Link
                 href="/case-studies"
                 onClick={() => setOpen(false)}
-                className="rounded-full px-4 py-2.5 text-sm font-medium text-[#1c1c1e] transition-colors hover:bg-[#f7f8fa]"
+                className="rounded-full px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-surface"
               >
                 Case Studies
               </Link>
@@ -532,13 +532,13 @@ function MobileGroup({
       <button
         type="button"
         onClick={onToggle}
-        className="flex w-full items-center justify-between rounded-full px-4 py-2.5 text-sm font-medium text-[#1c1c1e] transition-colors hover:bg-[#f7f8fa]"
+        className="flex w-full items-center justify-between rounded-full px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-surface"
       >
         {label}
         <CaretDown
           size={16}
           weight="duotone"
-          className={`transition-all duration-300 ${expanded ? "rotate-180 text-[#ffd02f]" : ""}`}
+          className={`transition-all duration-300 ${expanded ? "rotate-180 text-brand" : ""}`}
         />
       </button>
       <AnimatePresence>
@@ -550,13 +550,13 @@ function MobileGroup({
             transition={{ duration: 0.2, ease: EASE }}
             className="overflow-hidden pl-4"
           >
-            <div className="flex flex-col gap-0.5 border-l border-[#eef0f3] py-1 pl-4">
+            <div className="flex flex-col gap-0.5 border-l border-line-soft py-1 pl-4">
               {links.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={onNavigate}
-                  className="rounded-lg px-3 py-2 text-sm text-[#555a6a] transition-colors hover:bg-[#f7f8fa] hover:text-[#1c1c1e]"
+                  className="rounded-lg px-3 py-2 text-sm text-copy transition-colors hover:bg-surface hover:text-ink"
                 >
                   {item.label}
                 </Link>
@@ -565,7 +565,7 @@ function MobileGroup({
                 <Link
                   href={viewAllHref}
                   onClick={onNavigate}
-                  className="rounded-lg px-3 py-2 text-sm font-semibold text-[#2a41b6] transition-colors hover:bg-[#f7f8fa]"
+                  className="rounded-lg px-3 py-2 text-sm font-semibold text-action-deep transition-colors hover:bg-surface"
                 >
                   {viewAllLabel}
                 </Link>

@@ -46,7 +46,7 @@ export function SocialLinks({ tone = "light" }: SocialLinksProps) {
           className={`grid size-10 place-items-center rounded-full border transition-colors ${
             isDark
               ? "border-white/15 text-white/70 hover:border-white/35 hover:text-white"
-              : "border-[#e0e2e8] text-[#555a6a] hover:border-[#c7cad5] hover:text-[#1c1c1e]"
+              : "border-line text-copy hover:border-line-strong hover:text-ink"
           }`}
         >
           {icons[link.label as keyof typeof icons]}

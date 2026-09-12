@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`h-full scroll-smooth antialiased ${jakarta.variable}`}>
-      <body className="flex min-h-full flex-col bg-white font-sans text-[#1c1c1e]">
+      <body className="flex min-h-full flex-col bg-white font-sans text-ink">
         <SiteShell>{children}</SiteShell>
       </body>
     </html>

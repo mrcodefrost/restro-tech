@@ -8,12 +8,13 @@ import {
 } from "@/core/site";
 import { SiteLogo } from "./site-logo";
 import { SocialLinks } from "./social-links";
+import { FooterWave } from "./footer-wave";
 
 const footerServiceColumns = servicePillars.map((pillar) => ({
   id: pillar.id,
   title: pillar.title,
   accent: pillar.color.accent,
-  items: services.filter((service) => service.pillar === pillar.id).slice(0, 4),
+  items: services.filter((service) => service.pillar === pillar.id),
 }));
 
 const companyColumn = {
@@ -38,7 +39,9 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#1c1c1e] px-6 py-16 text-sm text-[#a5a8b5] md:px-10 lg:px-12">
+    <>
+      <FooterWave />
+      <footer className="bg-ink px-6 py-16 text-sm text-muted md:px-10 lg:px-12">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-6 border-b border-white/10 pb-10 sm:flex-row sm:items-end sm:justify-between">
           <div>
@@ -152,6 +155,7 @@ export function SiteFooter() {
           </div>
         </div>
       </div>
-    </footer>
+      </footer>
+    </>
   );
 }

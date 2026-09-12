@@ -1,8 +1,9 @@
 import Link from "next/link";
+import type { CSSProperties, ReactNode } from "react";
 
 type ButtonLinkProps = {
   href: string;
-  children: React.ReactNode;
+  children: ReactNode;
   variant?:
     | "primary"
     | "secondary"
@@ -13,27 +14,78 @@ type ButtonLinkProps = {
   className?: string;
 };
 
-const surfaces: Record<NonNullable<ButtonLinkProps["variant"]>, string> = {
-  primary: "bg-[#1c1c1e] text-white group-hover:bg-white group-hover:text-[#1c1c1e]",
-  secondary:
-    "bg-white text-[#1c1c1e] border border-[#c7cad5] group-hover:bg-[#f7f8fa]",
-  yellow: "bg-[#ffd02f] text-[#1c1c1e] group-hover:bg-[#fcb900]",
-  "on-dark": "bg-white text-[#1c1c1e] group-hover:bg-[#f7f8fa]",
-  "outline-on-dark":
-    "bg-transparent text-white border border-white/30 group-hover:bg-white/10",
-  ghost: "bg-transparent text-[#1c1c1e] group-hover:bg-[#f7f8fa]",
+type ButtonTheme = CSSProperties & {
+  "--cta-border": string;
+  "--cta-base": string;
+  "--cta-fill": string;
+  "--cta-text": string;
+  "--cta-hover-text": string;
 };
 
-// Brand yellow everywhere; the "yellow" surface itself uses the deeper
-// yellow-deep token instead so the comet reads against its own background.
-const glowColors: Record<NonNullable<ButtonLinkProps["variant"]>, string> = {
-  primary: "#ffd02f",
-  secondary: "#ffd02f",
-  yellow: "#fcb900",
-  "on-dark": "#ffd02f",
-  "outline-on-dark": "#ffd02f",
-  ghost: "#ffd02f",
+const themes: Record<NonNullable<ButtonLinkProps["variant"]>, ButtonTheme> = {
+  primary: {
+    "--cta-border": "#1c1c1e",
+    "--cta-base": "transparent",
+    "--cta-fill": "#1c1c1e",
+    "--cta-text": "#1c1c1e",
+    "--cta-hover-text": "#ffffff",
+  },
+  secondary: {
+    "--cta-border": "#c7cad5",
+    "--cta-base": "#ffffff",
+    "--cta-fill": "#eef0f3",
+    "--cta-text": "#1c1c1e",
+    "--cta-hover-text": "#1c1c1e",
+  },
+  yellow: {
+    "--cta-border": "#ffd02f",
+    "--cta-base": "#ffd02f",
+    "--cta-fill": "#fcb900",
+    "--cta-text": "#1c1c1e",
+    "--cta-hover-text": "#1c1c1e",
+  },
+  "on-dark": {
+    "--cta-border": "#ffffff",
+    "--cta-base": "transparent",
+    "--cta-fill": "#ffffff",
+    "--cta-text": "#ffffff",
+    "--cta-hover-text": "#1c1c1e",
+  },
+  "outline-on-dark": {
+    "--cta-border": "rgba(255, 255, 255, 0.42)",
+    "--cta-base": "transparent",
+    "--cta-fill": "#ffffff",
+    "--cta-text": "#ffffff",
+    "--cta-hover-text": "#1c1c1e",
+  },
+  ghost: {
+    "--cta-border": "transparent",
+    "--cta-base": "transparent",
+    "--cta-fill": "#f7f8fa",
+    "--cta-text": "#1c1c1e",
+    "--cta-hover-text": "#1c1c1e",
+  },
 };
+
+function AnimatedLabel({ children, duplicate = false }: { children: ReactNode; duplicate?: boolean }) {
+  const characters = typeof children === "string" ? Array.from(children) : null;
+
+  return (
+    <span className={`era-cta__label-layer${duplicate ? " era-cta__label-layer--enter" : ""}`}>
+      {characters
+        ? characters.map((character, index) => (
+            <span
+              key={`${character}-${index}`}
+              className="era-cta__character"
+              style={{ "--cta-character": index } as CSSProperties}
+            >
+              {character === " " ? "\u00a0" : character}
+            </span>
+          ))
+        : children}
+    </span>
+  );
+}
 
 export function ButtonLink({
   href,
@@ -42,33 +94,14 @@ export function ButtonLink({
   className = "",
 }: ButtonLinkProps) {
   return (
-    <Link
-      href={href}
-      className={`group relative inline-block whitespace-nowrap rounded-full p-[2px] transition-transform duration-200 hover:scale-[1.02] ${className}`}
-    >
-      <span
-        aria-hidden
-        className="absolute inset-0 z-0 overflow-hidden rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-      >
-        <span
-          className="animate-star-movement-top absolute left-[-250%] top-1/2 h-[140%] w-[300%] -translate-y-1/2 rounded-full"
-          style={{
-            background: `radial-gradient(circle, ${glowColors[variant]}, transparent 22%)`,
-            animationDuration: "3.2s",
-          }}
-        />
-        <span
-          className="animate-star-movement-bottom absolute right-[-250%] top-1/2 h-[140%] w-[300%] -translate-y-1/2 rounded-full"
-          style={{
-            background: `radial-gradient(circle, ${glowColors[variant]}, transparent 22%)`,
-            animationDuration: "3.2s",
-          }}
-        />
+    <Link href={href} className={`era-cta ${className}`} style={themes[variant]}>
+      <span className="sr-only">{children}</span>
+      <span className="era-cta__background" aria-hidden="true">
+        <span className="era-cta__fill" />
       </span>
-      <span
-        className={`relative z-10 flex min-h-10 items-center justify-center gap-1.5 rounded-full px-6 py-2.5 text-sm font-medium leading-tight transition-colors ${surfaces[variant]}`}
-      >
-        {children}
+      <span className="era-cta__label" aria-hidden="true">
+        <AnimatedLabel>{children}</AnimatedLabel>
+        <AnimatedLabel duplicate>{children}</AnimatedLabel>
       </span>
     </Link>
   );
