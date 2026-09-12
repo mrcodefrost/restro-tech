@@ -2,7 +2,7 @@ import Link from "next/link";
 import { CalendarBlank, Clock, UserCircle } from "@phosphor-icons/react/ssr";
 import { blogPosts } from "@/core/site";
 import { PageHero } from "../shared/components/page-hero";
-import { Placeholder } from "../shared/components/placeholder";
+import { MediaFrame } from "../shared/components/media-frame";
 
 export function BlogsPage() {
   return (
@@ -21,29 +21,29 @@ export function BlogsPage() {
           <Link
             href={`/blogs/${post.slug}`}
             key={post.slug}
-            className="overflow-hidden rounded-2xl border border-[#eef0f3] bg-white transition-transform hover:-translate-y-1"
+            className="overflow-hidden rounded-card border border-line-soft bg-white transition-transform hover:-translate-y-1"
           >
-            <Placeholder
+            <MediaFrame
               src={post.image}
               alt={`${post.title} cover image`}
               className="aspect-[16/10] w-full"
-              rounded="xl"
+              rounded="card"
               imageClassName="object-center"
             />
             <div className="p-6">
               <div className="flex flex-wrap gap-2">
-                <span className="rounded-full bg-[#fff8e0] px-3 py-1.5 text-xs font-semibold text-[#746019]">
+                <span className="rounded-full bg-brand-soft px-3 py-1.5 text-xs font-semibold text-[#746019]">
                   {post.category}
                 </span>
-                <span className="rounded-full bg-[#f7f8fa] px-3 py-1.5 text-xs font-semibold text-[#1c1c1e]">
+                <span className="rounded-full bg-surface px-3 py-1.5 text-xs font-semibold text-ink">
                   {post.readTime}
                 </span>
               </div>
-              <h2 className="mt-5 text-2xl font-medium leading-tight text-[#1c1c1e]">
+              <h2 className="mt-5 text-2xl font-medium leading-tight text-ink">
                 {post.title}
               </h2>
-              <p className="mt-3 leading-7 text-[#555a6a]">{post.excerpt}</p>
-              <div className="mt-6 grid gap-2 text-sm font-medium text-[#6b6f7e]">
+              <p className="mt-3 leading-7 text-copy">{post.excerpt}</p>
+              <div className="mt-6 grid gap-2 text-sm font-medium text-copy-muted">
                 <span className="flex items-center gap-2">
                   <UserCircle size={16} weight="duotone" />
                   {post.author}

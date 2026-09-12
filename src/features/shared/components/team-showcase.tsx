@@ -2,7 +2,7 @@
 
 import { useId, useRef, useState, type PointerEvent } from "react";
 import type { TeamMember } from "@/core/site";
-import { Placeholder } from "./placeholder";
+import { MediaFrame } from "./media-frame";
 
 export function TeamShowcase({ members }: { members: TeamMember[] }) {
   const id = useId();
@@ -62,7 +62,7 @@ export function TeamShowcase({ members }: { members: TeamMember[] }) {
             const { scrollLeft, scrollWidth, clientWidth } = track.current;
             scrollTo(scrollLeft >= scrollWidth - clientWidth - 2 ? 0 : scrollLeft + clientWidth * 0.75);
           }}
-          className={`inline-flex min-h-11 touch-none select-none items-center gap-4 rounded-full bg-[#1c1c1e] px-6 py-3 text-xs font-semibold tracking-[0.16em] text-white transition-colors hover:bg-[#2c2c34] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4262ff] ${dragging ? "cursor-grabbing" : "cursor-grab"}`}
+          className={`inline-flex min-h-11 touch-none select-none items-center gap-4 rounded-full bg-ink px-6 py-3 text-xs font-semibold tracking-[0.16em] text-white transition-colors hover:bg-ink-soft focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-action ${dragging ? "cursor-grabbing" : "cursor-grab"}`}
         >
           <span aria-hidden="true">&larr;</span>
           DRAG
@@ -95,7 +95,7 @@ export function TeamShowcase({ members }: { members: TeamMember[] }) {
             scrollTo(destinations[event.key]);
           }
         }}
-        className={`overflow-x-auto overscroll-x-contain select-none px-6 pb-4 pt-2 [scrollbar-width:none] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#4262ff] md:px-10 lg:px-12 [&::-webkit-scrollbar]:hidden ${dragging ? "cursor-grabbing" : "cursor-grab"}`}
+        className={`overflow-x-auto overscroll-x-contain select-none px-6 pb-4 pt-2 [scrollbar-width:none] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-action md:px-10 lg:px-12 [&::-webkit-scrollbar]:hidden ${dragging ? "cursor-grabbing" : "cursor-grab"}`}
       >
         <ul className="flex w-max min-w-full list-none justify-between gap-8 md:gap-12">
           {members.map((member, index) => (
@@ -103,7 +103,7 @@ export function TeamShowcase({ members }: { members: TeamMember[] }) {
               key={member.name}
               className={`flex w-32 shrink-0 flex-col items-center text-center md:w-40 xl:w-44 ${index % 2 === 1 ? "mt-10 md:mt-12" : ""}`}
             >
-              <Placeholder
+              <MediaFrame
                 src={member.src}
                 alt={member.src ? member.name : ""}
                 rounded="full"
@@ -118,10 +118,10 @@ export function TeamShowcase({ members }: { members: TeamMember[] }) {
                   transform: `translate(-${member.portrait.x}%, -${member.portrait.y}%)`,
                 } : undefined}
               />
-              <p className="mt-4 text-sm font-medium leading-5 text-[#1c1c1e]">
+              <p className="mt-4 text-sm font-medium leading-5 text-ink">
                 {member.name}
               </p>
-              <p className="mt-1 text-xs leading-5 text-[#6b6f7e]">
+              <p className="mt-1 text-xs leading-5 text-copy-muted">
                 {member.title}
               </p>
             </li>

@@ -1,0 +1,67 @@
+.menu {
+  overflow: hidden;
+  background: var(--ink);
+  color: white;
+}
+
+.row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  min-height: clamp(144px, 14vw, 210px);
+  padding: 32px 80px;
+  overflow: hidden;
+  border-top: 1px solid rgb(255 255 255 / 20%);
+  text-decoration: none;
+}
+
+.row:first-child { border-top: 0; }
+.row:focus-visible { outline: 3px solid var(--action); outline-offset: -5px; }
+.title {
+  max-width: 1100px;
+  font-size: clamp(28px, 3.3vw, 54px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  text-align: center;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.arrow { position: absolute; right: 32px; flex-shrink: 0; }
+.overlay {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--brand);
+  color: var(--ink);
+  transform: translateY(101%);
+}
+.inner { height: 100%; transform: translateY(-101%); }
+.track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  animation: flow 30s linear infinite;
+  animation-play-state: paused;
+}
+.row:hover .track, .row:focus-visible .track { animation-play-state: running; }
+.group { display: flex; flex-shrink: 0; min-width: 100vw; }
+.part { display: flex; align-items: center; flex-shrink: 0; justify-content: space-around; gap: 24px; padding-inline: 12px; }
+.part span { white-space: nowrap; font-size: clamp(20px, 2vw, 32px); font-weight: 500; line-height: 1.2; letter-spacing: -0.025em; text-transform: uppercase; }
+.image { width: clamp(96px, 9vw, 136px); height: clamp(56px, 5vw, 76px); border-radius: 999px; background-size: cover; background-position: center; flex-shrink: 0; }
+@keyframes flow { to { transform: translateX(-50%); } }
+
+@media (max-width: 639px) {
+  .row { min-height: 156px; padding: 28px 52px 28px 24px; }
+  .title { font-size: clamp(24px, 6.5vw, 34px); text-align: left; width: 100%; }
+  .arrow { right: 18px; width: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce), (hover: none) {
+  .overlay { display: none; }
+  .track { animation: none; }
+  .row:hover, .row:focus-visible { background: var(--brand); color: var(--ink); }
+}

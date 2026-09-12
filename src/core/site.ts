@@ -13,6 +13,7 @@ export const teamMembers: TeamMember[] = [
   { name: "Ankit Malhotra", title: "Client Strategy & Insights Lead", src: "/assets/about/ankit-malhotra.jpg", portrait: { x: 43.5, y: 32.13, width: 180 } },
   { name: "Neelansh Singh", title: "General Counsel", src: "/assets/about/neelansh-singh.jpg", portrait: { x: 50, y: 41.4, width: 100 } },
   { name: "Sarthak Bhasin", title: "Business Development Lead", src: "/assets/about/sarthak-bhasin.jpg", portrait: { x: 42, y: 23, width: 155 } },
+  { name: "Moumita", title: "Business Development", src: "/assets/about/moumita.jpg", portrait: { x: 51, y: 32, width: 228 } },
   { name: "Nidhi Khattar", title: "Business Development & Partnerships", src: "/assets/about/nidhi-khattar.jpg", portrait: { x: 50, y: 38, width: 100 } },
   { name: "Mayank Tulshyan", title: "Chief of Staff", src: "/assets/about/mayank-tulshyan.jpg", portrait: { x: 58, y: 44, width: 320 } },
   { name: "Steve Vora", title: "Head of Social Media", src: "/assets/about/steve-vora.jpg", portrait: { x: 50, y: 50, width: 100 } },
@@ -1080,26 +1081,165 @@ export const serviceDetails: ServiceDetail[] = [
   },
 ];
 
-export const conversionProblems = [
+export const brandGrowthQuestions = [
+  "How do you grow your F&B brand without losing what makes it special?",
+  "How do you make every outlet an experience guests remember?",
+  "How do you stand out as the F&B market gets more competitive?",
+];
+
+export const brandGrowthSolutions = [
   {
-    title: "Your guest experience changes outlet by outlet",
+    title: "Build a brand people remember",
     summary:
-      "F&B chains often enter each city with different menus, prices, combos, hours, and fulfillment rules. Customers still expect one polished brand.",
+      "Clear positioning, campaigns, and premium content give guests a reason to notice you, choose you, and come back.",
   },
   {
-    title: "Paperwork and compliance eat founder time",
+    title: "Design a better guest experience",
     summary:
-      "FSSAI registration, franchise agreements, and franchise model setup pull attention away from actually running the brand, and most agencies won't touch them.",
+      "From your website and ordering journey to queues, feedback, and loyalty, every interaction feels intentional and unmistakably yours.",
   },
   {
-    title: "No system for queues, feedback, or loyalty",
+    title: "Expand with less friction",
     summary:
-      "Guests wait without a queue number, feedback disappears into aggregator reviews, and there's rarely a structured reason for a first-time guest to come back.",
+      "Franchise planning, market readiness, paperwork, and compliance move together so each new outlet opens with greater clarity.",
   },
   {
-    title: "Generic software blocks premium brand design and franchise fit",
+    title: "Keep one team accountable",
     summary:
-      "Standard POS platforms and templated sites aren't built for a franchise rolling out city by city, and they cost more than a curated alternative built for the job.",
+      "Brand, marketing, production, technology, and rollout execution stay coordinated around the same growth ambition.",
+  },
+];
+
+export const homePageCopy = {
+  startingPoints: {
+    title: "Find your starting point.",
+    summary: "From your first food business to an established brand that needs a stronger presence. Start with the ambition closest to yours.",
+  },
+  engagements: {
+    title: "Ways to work together.",
+    summary: "Bring us one brief, connect several disciplines, or choose a standalone tool for your outlet.",
+    note: "Project scope, timelines, pricing, and deliverables are agreed for each engagement.",
+  },
+  solutions: {
+    eyebrow: "How Restrovate helps",
+    title: "Everything your brand needs to grow with confidence.",
+  },
+  services: {
+    title: "Four disciplines, coordinated around one brand.",
+    summary:
+      "Legal, technology, marketing, and production work as one team, so every touchpoint feels consistent as the business grows.",
+  },
+  process: {
+    title: "Pilot first. Then expand region by region.",
+    summary:
+      "A focused first move gives the brand room to learn before each new outlet, city, or market.",
+  },
+  products: {
+    eyebrow: "Products",
+    title: "Practical tools built around the way F&B teams already work.",
+    summary:
+      "Use one product for a specific need or bring several together as the brand grows. Each one supports the operation without getting in the way of the guest experience.",
+  },
+  caseStudies: {
+    title: "Brand experiences made for real F&B businesses.",
+    summary:
+      "See how strategy, design, and technology come together for brands at different stages of growth.",
+  },
+  faq: {
+    eyebrow: "Questions",
+    title: "Clear answers before a discovery call.",
+    showMore: "Show more questions",
+    showLess: "Show fewer questions",
+  },
+  closing: {
+    title: "Ready to grow without juggling five different partners?",
+    summary:
+      "Tell us where the brand is today and what you want the next outlet, market, or guest experience to become.",
+  },
+};
+
+type HomeRoute = {
+  title: string;
+  summary: string;
+  detail: string;
+  label: string;
+  href: string;
+};
+
+export const homeStartingPoints: (HomeRoute & { image: string; phrases: string[] })[] = [
+  {
+    title: "Starting an F&B business",
+    phrases: ["Brand positioning", "Launch planning", "Business paperwork", "Brand Website", "Launch marketing"],
+    image: "/assets/home/rollout-planning.png",
+    summary: "Opening a restaurant, cafe, or your first food business?",
+    detail: "Build your foundation with brand positioning, launch planning, paperwork, and a website.",
+    label: "Plan your launch",
+    href: "/contact?topic=Starting%20an%20F%26B%20business&interest=Something%20else",
+  },
+  {
+    title: "Growing your F&B brand",
+    phrases: ["Brand building", "Franchise planning", "Digital marketing", "Online presence", "Social media"],
+    image: "/assets/home/operations-counter.png",
+    summary: "Build your brand, prepare to franchise, or improve your marketing and online presence.",
+    detail: "For existing businesses and established brands: positioning, franchise planning, websites, campaigns, and social media built around your next priority.",
+    label: "Grow your brand",
+    href: "/contact?topic=Growing%20an%20F%26B%20brand%2C%20franchising%20or%20marketing&interest=Something%20else",
+  },
+  {
+    title: "Building a chef or catering brand",
+    phrases: ["Personal branding", "Recipe shoots", "Recipe Website", "YouTube Instagram", "Catering paperwork"],
+    image: "/assets/case-studies/chef-aman-puri-site-snapshot.png",
+    summary: "Personal branding for chefs. Branding, websites, and paperwork for caterers.",
+    detail: "For chefs: recipe studio shoots, a personal website, newsletters, and YouTube and Instagram growth. For catering businesses: brand positioning, a website that captures enquiries, and business paperwork.",
+    label: "Shape your culinary brand",
+    href: "/contact?topic=Building%20a%20chef%20or%20catering%20brand&interest=Something%20else",
+  },
+];
+
+export const homeEngagements: HomeRoute[] = [
+  {
+    title: "A focused project",
+    summary: "You have a specific gap to close.",
+    detail: "Start with a defined brief, such as a brand website, franchise paperwork, or a content shoot.",
+    label: "Discuss a project",
+    href: "/contact?topic=A%20focused%20project&interest=Something%20else",
+  },
+  {
+    title: "A coordinated engagement",
+    summary: "Your next move needs several disciplines.",
+    detail: "Bring paperwork, tech, marketing, and production into one scope around your brand's priorities.",
+    label: "Discuss an engagement",
+    href: "/contact?topic=A%20coordinated%20engagement&interest=Something%20else",
+  },
+  {
+    title: "A standalone product",
+    summary: "You need a tool for an everyday outlet problem.",
+    detail: "Explore queue management, feedback, loyalty, or complaint tracking without a full agency engagement.",
+    label: "Explore products",
+    href: "/products",
+  },
+];
+
+export const homeAdditionalFaqItems: FaqItem[] = [
+  {
+    question: "How are project costs and timelines decided?",
+    answer: "They depend on the brief, deliverables, and dependencies, including content, outlet requirements, and integrations. Scope, timeline, pricing, and deliverables are covered in a separate written agreement for your engagement.",
+  },
+  {
+    question: "What should I bring to the first conversation?",
+    answer: "Share your website or social profile, the problem you want to solve, and any launch date you are working toward. Restaurant teams can add outlet locations and existing systems; chefs and caterers can share their services, booking process, and available content.",
+  },
+  {
+    question: "Can I engage you for just one service?",
+    answer: "Yes. You can start with a specific need, such as a website, paperwork, or production brief. Tell us what you need delivered so we can discuss a focused scope.",
+  },
+  {
+    question: "How should we plan handover and support after launch?",
+    answer: "Include your handover and ongoing support needs in the brief, such as team training, website updates, or campaign support. Confirm what is included in your engagement before work begins rather than assuming every service includes the same support.",
+  },
+  {
+    question: "What about ownership and access to the finished work?",
+    answer: "Raise any requirements for source files, website accounts, content rights, and third-party licenses during scoping. Ownership and access should be confirmed in your project agreement for the specific work commissioned.",
   },
 ];
 
